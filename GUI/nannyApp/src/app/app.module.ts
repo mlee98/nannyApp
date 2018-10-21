@@ -12,7 +12,7 @@ import { CreateAccountModule } from '../create-account/create-account.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CreateAccountModule
+    CreateAccountModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

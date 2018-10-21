@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PersonalInfo } from '../models/personalinfo';
 
 @Component({
   selector: 'app-personal-info',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonalInfoComponent implements OnInit {
 
+  personalinfo: PersonalInfo;
+
   constructor() { }
 
   ngOnInit() {
+    this.personalinfo = {};
   }
 
 }

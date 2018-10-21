@@ -1,7 +1,10 @@
 <div class="row justify-content-center">
+    <div class="col-md-4">
+        <pre>{{userpass|json}}</pre>
+      </div>
   <div class="col-md-8">
     <div class="card">
-      <div class="card-header bg-info text-light">
+      <div class="card-header bg-info large-text text-light">
         Login Info
       </div>
       <div class="card-body bg-light">
@@ -13,7 +16,7 @@
                 <label for="account_username" class="large-text">
                   Username
                 </label>
-                <input type="text" id="account_username" class="form-control" placeholder="Username" />
+                <input type="text" id="account_username" class="form-control" placeholder="Username" [(ngModel)]='userpass.username' />
               </div>
             </div>
             <div class="col-md-4">
@@ -27,7 +30,7 @@
                 <label for="account_password" class="large-text">
                   Password
                 </label>
-                <input type="password" id="account_pasword" class="form-control" placeholder="Password" />
+                <input type="password" id="account_pasword" class="form-control" placeholder="Password" [(ngModel)]='userpass.password' />
               </div>
             </div>
             <div class="col-md-4">
@@ -46,16 +49,18 @@
             </div>
           </div>
           <div class="row large-text mt-3">
-            <div class="col-md-4 text-right">I am a: </div>
-            <div class="col-md-6">
-              <input type="radio" name="parentNanny" id="parent" value="parent">
-              <label for="parent" class="ml-3 mr-4">Parent</label>
-              <input type="radio" name="parentNanny" id="nanny" value="nanny">
-              <label for="parent" class="ml-3">Nanny</label>
+            <div class="col-md-5 text-right">I am a: </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <select id="account_state" class="form-control" [(ngModel)]='userpass.type'>
+                  <option value="nanny">Nanny</option>
+                  <option value="parent">Parent</option>
+                </select>
+              </div>
             </div>
           </div>
           <div class="row justify-content-center">
-            <button type="button" class="btn btn-info mt-3">Next</button>
+            <button type="submit" id="next_btn" class="btn btn-info mt-3 ml-2">Next</button>
           </div>
         </div>
       </div>
