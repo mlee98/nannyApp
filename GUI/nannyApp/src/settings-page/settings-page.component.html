@@ -23,17 +23,18 @@
     <h1 class="m-4 text-dark">My Profile</h1>
     <div class="container rounded bg-info mb-3">
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Years of Experience: 3</div>
-        <div class="col h5 font-weight-light">Work with Ages: 8-14</div>
+        <div class="col h5 font-weight-light">Years of Experience: {{account.yearsExp}}</div>
+        <div class="col h5 font-weight-light">Work with Ages: {{account.workWithAges}}</div>
       </div>
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Skills: CPR certified, cooking, transportation</div>
-      </div>
-      <div class="row m-2">
-        <div class="col h5 font-weight-light">
-          Bio: I love working with all ages, though I have the most experience working with ages 8-14.
-          I can cook almost any meal, and I don't mind taking care of a couple of pets if needed!
+        <div class="col h5 font-weight-light">Skills:
+          <span *ngFor="let skill of account.skills; let isLast = last">
+            {{skill}}{{isLast ? '' : ','}}
+          </span>
         </div>
+      </div>
+      <div class="row m-2">
+        <div class="col h5 font-weight-light">Bio: {{account.bio}}</div>
       </div>
     </div>
   </div>

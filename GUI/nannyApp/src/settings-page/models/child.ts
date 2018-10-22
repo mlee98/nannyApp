@@ -1,7 +1,7 @@
 export class Child {
-  name?: string;
-  gender?: string;
-  age?: number;
+  name: string;
+  gender: string;
+  age: number;
   likes?: string;
   allergies?: string;
   medications?: string;
