@@ -4,60 +4,64 @@
     <h1 class="m-4 text-dark">My Account</h1>
     <div class="container rounded bg-info mb-3">
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Name: account.name</div>
-        <div class="col h5 font-weight-light">Email: account.email</div>
+        <div class="col h5 font-weight-light">Name: {{account.name}}</div>
+        <div class="col h5 font-weight-light">Email: {{account.email}}</div>
       </div>
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Gender: account.gender</div>
-        <div class="col h5 font-weight-light">Phone: account.phone</div>
+        <div class="col h5 font-weight-light">Gender: {{account.gender}}</div>
+        <div class="col h5 font-weight-light">Phone: {{account.phone}}</div>
       </div>
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Age: account.age</div>
-        <div class="col h5 font-weight-light">Address: account.address</div>
+        <div class="col h5 font-weight-light">Age: {{account.age}}</div>
+        <div class="col h5 font-weight-light">Address: {{account.address}}</div>
       </div>
     </div>
   </div>
 
   <!-- show if nanny account -->
-  <div class="row text-light">
+  <div class="row text-light" *ngIf="account.type === 'nanny'">
     <h1 class="m-4 text-dark">My Profile</h1>
     <div class="container rounded bg-info mb-3">
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Years of Experience: account.yearsExp</div>
-        <div class="col h5 font-weight-light">Work with Ages: account.workAges</div>
+        <div class="col h5 font-weight-light">Years of Experience: 3</div>
+        <div class="col h5 font-weight-light">Work with Ages: 8-14</div>
       </div>
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Skills: account.skills</div>
+        <div class="col h5 font-weight-light">Skills: CPR certified, cooking, transportation</div>
       </div>
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Bio: account.bio</div>
+        <div class="col h5 font-weight-light">
+          Bio: I love working with all ages, though I have the most experience working with ages 8-14.
+          I can cook almost any meal, and I don't mind taking care of a couple of pets if needed!
+        </div>
       </div>
     </div>
   </div>
 
   <!-- show if parent account -->
-  <div class="row text-light">
+  <div class="row text-light" *ngIf="account.type === 'parent'">
     <h1 class="m-4 text-dark">My Kids</h1>
-    <div class="container rounded bg-info mb-3">
+    <!-- One container per child -->
+    <div class="container rounded bg-info mb-3" *ngFor="let child of account.children">
       <div class="row m-2">
-        <div class="col h5 text-center font-weight-light">Name: account.name</div>
-        <div class="col h5 text-center font-weight-light">Gender: account.gender</div>
-        <div class="col h5 text-center font-weight-light">Age: account.age</div>
+        <div class="col h5 text-center font-weight-light">Name: {{child.name}}</div>
+        <div class="col h5 text-center font-weight-light">Gender: {{child.gender}}</div>
+        <div class="col h5 text-center font-weight-light">Age: {{child.age}} years old</div>
       </div>
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Likes: account.likes</div>
+        <div class="col h5 font-weight-light">Likes: {{child.likes}}</div>
         <div class="col h5 font-weight-light"></div>
       </div>
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Allergies: account.allergies</div>
+        <div class="col h5 font-weight-light">Allergies: {{child.allergies}}</div>
         <div class="col h5 font-weight-light"></div>
       </div>
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Medications: account.medications</div>
+        <div class="col h5 font-weight-light">Medications: {{child.medications}}</div>
         <div class="col h5 font-weight-light"></div>
       </div>
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Special Requirements: account.specialReqs</div>
+        <div class="col h5 font-weight-light">Special Requirements: {{child.specialReqs}}</div>
       </div>
     </div>
   </div>
