@@ -51,6 +51,18 @@ export class SettingsPageComponent implements OnInit {
       skills: ['CPR certified', 'cooking', 'transportation'],
       bio: 'I love working with all ages, though I have the most experience working with ages 8-14.' +
           ' I can cook almost any meal, and I don\'t mind taking care of a couple of pets if needed!',
+      references: [
+        {
+          name: 'Ryan Reynolds',
+          phone: 5124687344,
+          email: 'rreynolds@gmail.com',
+        },
+        {
+          name: 'Hilary Duff',
+          phone: 2146723541,
+          email: 'hilaryduff@gmail.com',
+        }
+      ]
     };
   }
 

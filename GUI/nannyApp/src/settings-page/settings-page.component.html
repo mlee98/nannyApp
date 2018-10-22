@@ -28,13 +28,24 @@
       </div>
       <div class="row m-2">
         <div class="col h5 font-weight-light">Skills:
-          <span *ngFor="let skill of account.skills; let isLast = last">
-            {{skill}}{{isLast ? '' : ','}}
-          </span>
+          <div>
+            <span *ngFor="let skill of account.skills; let isLast = last">
+              {{skill}}{{isLast ? '' : ','}}
+            </span>
+          </div>
+
         </div>
       </div>
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Bio: {{account.bio}}</div>
+        <div class="col h5 font-weight-light">Bio:
+          <div>{{account.bio}}</div>
+        </div>
+      </div>
+      <div class="row m-2">
+        <div class="col h5 font-weight-light">References:
+          <div *ngFor="let ref of account.references">{{ref.name}}
+            (phone: {{ref.phone}}, email: {{ref.email}})</div>
+        </div>
       </div>
     </div>
   </div>
