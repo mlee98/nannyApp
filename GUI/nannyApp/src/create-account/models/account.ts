@@ -1,4 +1,5 @@
-import { Reference } from './reference';
+import { NannyRef } from './reference';
+import { Child } from './child';
 export class Account {
   type?: string;
   username?: string;
@@ -13,5 +14,6 @@ export class Account {
   zip?: number;
   email?: string;
   phone?: string;
-  references?: Reference[];
+  references?: NannyRef[];
+  children?: Child[];
 }

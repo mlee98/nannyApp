@@ -112,7 +112,7 @@
                   <label class="large-text" for="account_state">
                     Gender
                   </label>
-                  <select id="account_state" class="form-control" [(ngModel)]='account.gender'>
+                  <select id="account_gender" class="form-control" [(ngModel)]='account.gender'>
                     <option></option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -189,17 +189,89 @@
         </div>
         <div class="card-body bg-light" *ngIf="account.type == 'nanny'">
           <div class="container">
-
+            <div class="row justify-content-center" *ngIf="!referenceForm">
+              <button type="button" id="showRef_btn" (click)="showReferenceForm()" class="btn btn-secondary">Add
+                Another
+                Reference</button>
+            </div>
+            <div class="row" *ngIf="referenceForm">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="reference_name" class="large-text">
+                    Name
+                  </label>
+                  <input type="text" id="reference_firstname" class="form-control" placeholder="Name" [(ngModel)]='tempRef.refname' />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="reference_email" class="large-text">
+                    Email
+                  </label>
+                  <input type="email" id="reference_email" class="form-control" placeholder="you@example.com"
+                    [(ngModel)]='tempRef.refemail' />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="reference_phone" class="large-text">
+                    Phone
+                  </label>
+                  <input type="text" id="reference_phone" class="form-control" placeholder="Phone" [(ngModel)]='tempRef.refphone' />
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center" *ngIf="referenceForm">
+              <button type="button" id="addRef_btn" (click)="addReference()" class="btn btn-secondary">Add</button>
+            </div>
           </div>
         </div>
 
 
-
-
+        <div class="card-body bg-light" *ngIf="account.type == 'parent'">
+          <div class="container">
+            <div class="row justify-content-center" *ngIf="!childForm">
+              <button type="button" id="showRef_btn" (click)="showChildForm()" class="btn btn-secondary">Add
+                Another
+                Child</button>
+            </div>
+            <div class="row" *ngIf="childForm">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="reference_name" class="large-text">
+                    Name
+                  </label>
+                  <input type="text" id="reference_firstname" class="form-control" placeholder="Name" [(ngModel)]='tempChild.chname' />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="large-text" for="account_state">
+                    Gender
+                  </label>
+                  <select id="child_gender" class="form-control" [(ngModel)]='tempChild.chgender'>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="child_age" class="large-text">
+                    Age
+                  </label>
+                  <input type="number" id="child_age" class="form-control" placeholder="Age" [(ngModel)]='tempChild.chage' />
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center" *ngIf="referenceForm">
+              <button type="button" id="addRef_btn" (click)="addReference()" class="btn btn-secondary">Add</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
 
 
 
