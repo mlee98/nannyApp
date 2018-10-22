@@ -1,3 +1,4 @@
+import { Reference } from './reference';
 export class Account {
   type?: string;
   username?: string;
@@ -12,4 +13,5 @@ export class Account {
   zip?: number;
   email?: string;
   phone?: string;
+  references?: Reference[];
 }

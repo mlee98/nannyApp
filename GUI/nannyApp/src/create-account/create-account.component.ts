@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Account } from './models/account';
 
 @Component({
@@ -9,25 +9,44 @@ import { Account } from './models/account';
 export class CreateAccountComponent implements OnInit {
 
   account: Account;
-  showUserPass: boolean;
-  showPersonalInfo: boolean;
+  stepHideController: boolean[];
+  currentStep: number;
+  nextBtn: string;
+  finalStepName: string;
 
   constructor() { }
 
   ngOnInit() {
     this.account = {};
-    this.showUserPass = true;
-    this.showPersonalInfo = false;
+    this.stepHideController = [false, true, true];
+    this.nextBtn = 'Next';
+    this.currentStep = 0;
+    this.finalStepName = '';
+    this.account.type = 'nanny';
   }
 
-  userpass() {
-    this.showUserPass = true;
-    this.showPersonalInfo = false;
+  next() {
+    if (this.currentStep === 2) {
+      this.generateAccount();
+    } else {
+      if (this.currentStep === 1) {
+        this.nextBtn = 'Finish';
+      }
+      this.stepHideController[this.currentStep] = true;
+      this.currentStep++;
+      this.stepHideController[this.currentStep] = false;
+    }
   }
 
-  personalinfo() {
-    this.showUserPass = false;
-    this.showPersonalInfo = true;
+  back() {
+    this.nextBtn = 'Next';
+    this.stepHideController[this.currentStep] = true;
+    this.currentStep--;
+    this.stepHideController[this.currentStep] = false;
+  }
+
+  generateAccount() {
+    // Make the thing
   }
 
 }
