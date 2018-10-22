@@ -1,34 +1,56 @@
 <div class="container">
   <!-- Show no matter what account -->
-  <div class="row text-light">
-    <h1 class="m-4 text-dark">My Account</h1>
-    <div class="container rounded bg-info mb-3">
+  <div class="row border border-info mb-5 mt-3">
+    <div class="container d-flex justify-content-between bg-info mb-3">
+      <h1 class="m-4 text-light">My Account</h1>
+      <!-- <button class="btn btn-link text-light">Edit Info</button> -->
+    </div>
+    <div class="container mb text-info">
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Name: {{account.name}}</div>
-        <div class="col h5 font-weight-light">Email: {{account.email}}</div>
+        <div class="col h5 font-weight-light">Name:
+          <span class="text-dark">{{account.name}}</span>
+        </div>
+        <div class="col h5 font-weight-light">Email:
+          <span class="text-dark">{{account.email}}</span>
+        </div>
       </div>
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Gender: {{account.gender}}</div>
-        <div class="col h5 font-weight-light">Phone: {{account.phone}}</div>
+        <div class="col h5 font-weight-light">Gender:
+          <span class="text-dark">{{account.gender}}</span>
+        </div>
+        <div class="col h5 font-weight-light">Phone:
+          <span class="text-dark">{{account.phone}}</span>
+        </div>
       </div>
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Age: {{account.age}}</div>
-        <div class="col h5 font-weight-light">Address: {{account.address}}</div>
+        <div class="col h5 font-weight-light">Age:
+            <span class="text-dark">{{account.age}}</span>
+        </div>
+        <div class="col h5 font-weight-light">Address:
+            <span class="text-dark">{{account.address}}</span>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- show if nanny account -->
-  <div class="row text-light" *ngIf="account.type === 'nanny'">
-    <h1 class="m-4 text-dark">My Profile</h1>
-    <div class="container rounded bg-info mb-3">
+  <div class="row border border-info mb-3" *ngIf="account.type === 'nanny'">
+    <div class="container d-flex justify-content-between bg-info mb-3">
+      <h1 class="m-4 text-light">My Profile</h1>
+      <!-- <button class="btn btn-link text-light">Edit Info</button> -->
+    </div>
+    <div class="container mb-3 text-info">
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Years of Experience: {{account.yearsExp}}</div>
-        <div class="col h5 font-weight-light">Work with Ages: {{account.workWithAges}}</div>
+        <div class="col h5 font-weight-light">Years of Experience:
+          <span class="text-dark">{{account.yearsExp}}</span>
+        </div>
+        <div class="col h5 font-weight-light">Work with Ages:
+          <span class="text-dark">{{account.workWithAges}}</span>
+        </div>
       </div>
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Skills:
-          <div>
+        <div class="col h5 font-weight-light text-info">Skills:
+          <div class="text-dark">
             <span *ngFor="let skill of account.skills; let isLast = last">
               {{skill}}{{isLast ? '' : ','}}
             </span>
@@ -38,12 +60,12 @@
       </div>
       <div class="row m-2">
         <div class="col h5 font-weight-light">Bio:
-          <div>{{account.bio}}</div>
+          <div class="text-dark">{{account.bio}}</div>
         </div>
       </div>
       <div class="row m-2">
         <div class="col h5 font-weight-light">References:
-          <div *ngFor="let ref of account.references">{{ref.name}}
+          <div class="text-dark" *ngFor="let ref of account.references">{{ref.name}}
             (phone: {{ref.phone}}, email: {{ref.email}})</div>
         </div>
       </div>
@@ -51,29 +73,46 @@
   </div>
 
   <!-- show if parent account -->
-  <div class="row text-light" *ngIf="account.type === 'parent'">
-    <h1 class="m-4 text-dark">My Kids</h1>
+  <div class="row" *ngIf="account.type === 'parent'">
+    <div class="container d-flex justify-content-between bg-info mb-3">
+      <h1 class="m-4 text-light">My Kids</h1>
+      <!-- <button class="btn btn-link text-light">Edit Info</button> -->
+    </div>
     <!-- One container per child -->
-    <div class="container rounded bg-info mb-3" *ngFor="let child of account.children">
+    <div class="container border border-info mb-3 text-info" *ngFor="let child of account.children">
       <div class="row m-2">
-        <div class="col h5 text-center font-weight-light">Name: {{child.name}}</div>
-        <div class="col h5 text-center font-weight-light">Gender: {{child.gender}}</div>
-        <div class="col h5 text-center font-weight-light">Age: {{child.age}} years old</div>
+        <div class="col h5 text-center font-weight-light">Name:
+          <span class="text-dark">{{child.name}}</span>
+        </div>
+        <div class="col h5 text-center font-weight-light">Gender:
+            <span class="text-dark">{{child.gender}}</span>
+        </div>
+        <div class="col h5 text-center font-weight-light">Age:
+          <span class="text-dark">{{child.age}} years old</span>
+        </div>
       </div>
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Likes: {{child.likes}}</div>
+        <div class="col h5 font-weight-light">Likes:
+            <span class="text-dark">{{child.likes}}</span>
+        </div>
         <div class="col h5 font-weight-light"></div>
       </div>
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Allergies: {{child.allergies}}</div>
+        <div class="col h5 font-weight-light">Allergies:
+            <span class="text-dark">{{child.allergies}}</span>
+        </div>
         <div class="col h5 font-weight-light"></div>
       </div>
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Medications: {{child.medications}}</div>
+        <div class="col h5 font-weight-light">Medications:
+            <span class="text-dark">{{child.medications}}</span>
+        </div>
         <div class="col h5 font-weight-light"></div>
       </div>
       <div class="row m-2">
-        <div class="col h5 font-weight-light">Special Requirements: {{child.specialReqs}}</div>
+        <div class="col h5 font-weight-light">Special Requirements:
+            <span class="text-dark">{{child.specialReqs}}</span>
+        </div>
       </div>
     </div>
   </div>

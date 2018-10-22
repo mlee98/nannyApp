@@ -20,32 +20,31 @@ export class SettingsPageComponent implements OnInit {
       address: '32 Sunshine Ave, Dallas TX 75275',
       gender: 'Male',
       age: 27,
+      type: 'parent',
 
       // PARENT account info
-      // type: 'parent',
-      // children: [
-      //   {
-      //     name: 'Jenny',
-      //     gender: 'Female',
-      //     age: 4,
-      //     likes: 'Hello Kitty, Teletubbies, Bananas, Pocahontas',
-      //     allergies: 'Peanut butter',
-      //     medications: 'Benadryl',
-      //     specialReqs: 'No TV 2 hours before bedtime',
-      //   },
-      //   {
-      //     name: 'Max',
-      //     gender: 'Male',
-      //     age: 3,
-      //     likes: 'Teletubbies, Bionicles, Rabbits',
-      //     allergies: 'None',
-      //     medications: 'None',
-      //     specialReqs: 'No TV 2 hours before bedtime',
-      //   }
-      // ]
+      children: [
+        {
+          name: 'Jenny',
+          gender: 'Female',
+          age: 4,
+          likes: 'Hello Kitty, Teletubbies, Bananas, Pocahontas',
+          allergies: 'Peanut butter',
+          medications: 'Benadryl',
+          specialReqs: 'No TV 2 hours before bedtime',
+        },
+        {
+          name: 'Max',
+          gender: 'Male',
+          age: 3,
+          likes: 'Teletubbies, Bionicles, Rabbits',
+          allergies: 'None',
+          medications: 'None',
+          specialReqs: 'No TV 2 hours before bedtime',
+        }
+      ],
 
       // NANNY account info
-      type: 'nanny',
       yearsExp: 3,
       workWithAges: '8-14',
       skills: ['CPR certified', 'cooking', 'transportation'],
