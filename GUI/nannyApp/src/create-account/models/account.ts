@@ -2,7 +2,8 @@ export class Account {
   type?: string;
   username?: string;
   password?: string;
-  name?: string;
+  firstname?: string;
+  lastname?: string;
   age?: number;
   gender?: string;
   address?: string;

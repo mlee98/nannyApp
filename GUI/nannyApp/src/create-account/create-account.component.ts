@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
-import {UserPassComponent } from './user-pass/user-pass.component';
-import { PersonalInfoComponent  } from './personal-info/personal-info.component';
 import { Account } from './models/account';
 
 @Component({
@@ -11,13 +9,25 @@ import { Account } from './models/account';
 export class CreateAccountComponent implements OnInit {
 
   account: Account;
-  firstname: String;
-  lastname: String;
+  showUserPass: boolean;
+  showPersonalInfo: boolean;
 
   constructor() { }
 
   ngOnInit() {
     this.account = {};
+    this.showUserPass = true;
+    this.showPersonalInfo = false;
+  }
+
+  userpass() {
+    this.showUserPass = true;
+    this.showPersonalInfo = false;
+  }
+
+  personalinfo() {
+    this.showUserPass = false;
+    this.showPersonalInfo = true;
   }
 
 }
