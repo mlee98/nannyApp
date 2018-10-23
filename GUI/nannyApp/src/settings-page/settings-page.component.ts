@@ -20,7 +20,7 @@ export class SettingsPageComponent implements OnInit {
       address: '32 Sunshine Ave, Dallas TX 75275',
       gender: 'Male',
       age: 27,
-      type: 'nanny',
+      type: 'parent',
 
       // PARENT account info
       children: [
