@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SettingsPageComponent } from './settings-page.component';
+import { AccountDetailsComponent } from './account-details/account-details.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
   ],
   declarations: [
-    SettingsPageComponent
+    SettingsPageComponent,
+    AccountDetailsComponent
   ],
   exports: [
     SettingsPageComponent
