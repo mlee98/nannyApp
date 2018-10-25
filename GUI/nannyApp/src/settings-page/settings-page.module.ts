@@ -4,6 +4,9 @@ import { SettingsPageComponent } from './settings-page.component';
 import { AccountDetailsComponent } from './account-details/account-details.component';
 import { ChildDetailsComponent } from './child-details/child-details.component';
 import { FormsModule } from '@angular/forms';
+import { ChildDetailsContainerComponent } from './child-details-container/child-details-container.component';
+import { ChildDetailsUpdateComponent } from './child-details-update/child-details-update.component';
+
 
 @NgModule({
   imports: [
@@ -13,7 +16,9 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     SettingsPageComponent,
     AccountDetailsComponent,
-    ChildDetailsComponent
+    ChildDetailsComponent,
+    ChildDetailsContainerComponent,
+    ChildDetailsUpdateComponent,
   ],
   exports: [
     SettingsPageComponent

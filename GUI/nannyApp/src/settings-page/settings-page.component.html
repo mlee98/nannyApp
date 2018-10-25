@@ -6,7 +6,7 @@
   <div class="row border border-info mb-3" *ngIf="account.type === 'nanny'">
     <div class="container d-flex justify-content-between bg-info mb-3">
       <h1 class="m-4 text-light">My Profile</h1>
-      <!-- <button class="btn btn-link text-light">Edit Info</button> -->
+      <button class="btn btn-link text-light">Edit Info</button>
     </div>
     <div class="container mb-3 text-info">
       <div class="row m-2">
@@ -43,13 +43,8 @@
 
   <!-- show if parent account -->
   <div class="row" *ngIf="account.type === 'parent'">
-    <div class="container d-flex justify-content-between bg-info mb-3">
-      <h1 class="m-4 text-light">My Kids</h1>
-      <!-- <button class="btn btn-link text-light">Edit Info</button> -->
-    </div>
-    <!-- One container per child -->
     <div class="container pr-0 pl-0">
-      <app-child-details *ngFor="let child of account.children" [child]="child"></app-child-details>
+      <app-child-details-container [account]="account"></app-child-details-container>
     </div>
   </div>
 </div>
