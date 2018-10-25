@@ -10,9 +10,20 @@ export class AccountDetailsComponent implements OnInit {
 
   constructor() { }
 
+  isEditMode: Boolean = false;
+
   @Input() account: Account;
+  updateAccount: Account = {};
 
   ngOnInit() {
+    this.updateAccount = { ...this.account };
+  }
+
+  clickInfo() {
+    if (this.isEditMode) {
+      this.account = { ...this.updateAccount };
+    }
+    this.isEditMode = !this.isEditMode;
   }
 
 }
