@@ -1,0 +1,77 @@
+<div class="container border border-info mb-3 text-info">
+  <form class="mb-4">
+    <div class="form-group row m-4">
+      <div class="col d-flex align-items-center">
+        <label for="inputName" class="col-form-label mr-4">Name</label>
+        <input
+          type="text"
+          [(ngModel)]="child.name"
+          name="name"
+          class="form-control"
+          id="inputName">
+      </div>
+      <div class="col d-flex align-items-center">
+        <label for="inputGender" class="col-form-label mr-4">Gender</label>
+        <input
+          type="text"
+          [(ngModel)]="child.gender"
+          name="gender"
+          class="form-control"
+          id="inputGender">
+      </div>
+      <div class="col d-flex align-items-center">
+          <label for="inputAge" class="col-form-label mr-4">Age</label>
+          <input
+            type="text"
+            [(ngModel)]="child.age"
+            name="age"
+            class="form-control"
+            id="inputAge">
+        </div>
+    </div>
+    <div class="form-group row m-2">
+        <label for="inputLikes" class="col-sm-2 col-form-label">Likes</label>
+        <div class="col-sm-10">
+          <input
+          type="text"
+          [(ngModel)]="child.likes"
+          name="likes"
+          class="form-control"
+          id="inputLikes">
+        </div>
+    </div>
+    <div class="form-group row m-2">
+      <label for="inputAllergies" class="col-sm-2 col-form-label">Allergies</label>
+      <div class="col-sm-10">
+        <input
+          type="text"
+          [(ngModel)]="child.allergies"
+          name="allergies"
+          class="form-control"
+          id="inputAllergies">
+      </div>
+    </div>
+    <div class="form-group row m-2">
+      <label for="inputMedications" class="col-sm-2 col-form-label">Medications</label>
+      <div class="col-sm-10">
+        <input
+          type="text"
+          [(ngModel)]="child.medications"
+          name="medications"
+          class="form-control"
+          id="inputMedications">
+      </div>
+    </div>
+    <div class="form-group row m-2">
+      <label for="inputSpecial" class="col-sm-3 col-form-label">Special Requirements</label>
+        <div class="col-sm-9">
+        <input
+          type="text"
+          [(ngModel)]="child.specialReqs"
+          name="special"
+          class="form-control"
+          id="inputSpecial">
+      </div>
+    </div>
+  </form>
+</div>

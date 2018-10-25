@@ -1,0 +1,102 @@
+<div class="row border border-info mb-5 mt-3">
+  <div class="container d-flex justify-content-between bg-info mb-3">
+    <h1 class="m-4 text-light">My Account</h1>
+    <button (click)="clickInfo()" class="btn btn-link text-light" >
+      {{ isEditMode ? 'Save Info' : 'Edit Info'}}
+    </button>
+  </div>
+
+  <!-- Display Info -->
+  <div [hidden]="isEditMode" class="container text-info">
+    <div class="row m-2">
+      <div class="col h5 font-weight-light">Name:
+        <span class="text-dark">{{account.name}}</span>
+      </div>
+      <div class="col h5 font-weight-light">Email:
+        <span class="text-dark">{{account.email}}</span>
+      </div>
+    </div>
+    <div class="row m-2">
+      <div class="col h5 font-weight-light">Gender:
+        <span class="text-dark">{{account.gender}}</span>
+      </div>
+      <div class="col h5 font-weight-light">Phone:
+        <span class="text-dark">{{account.phone}}</span>
+      </div>
+    </div>
+    <div class="row m-2">
+      <div class="col h5 font-weight-light">Age:
+          <span class="text-dark">{{account.age}}</span>
+      </div>
+      <div class="col h5 font-weight-light">Address:
+          <span class="text-dark">{{account.address}}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Info -->
+  <div [hidden]="!isEditMode" class="container">
+    <form>
+      <div class="form-group row m-4">
+        <div class="col d-flex align-items-center">
+          <label for="inputName" class="col-form-label mr-4">Name</label>
+          <input
+            type="text"
+            [(ngModel)]="updateAccount.name"
+            name="name"
+            class="form-control"
+            id="inputName">
+        </div>
+        <div class="col d-flex align-items-center">
+          <label for="inputEmail" class="col-form-label mr-4">Email</label>
+          <input
+            type="text"
+            [(ngModel)]="updateAccount.email"
+            name="email"
+            class="form-control"
+            id="inputEmail">
+        </div>
+      </div>
+      <div class="form-group row m-4">
+        <div class="col d-flex align-items-center">
+          <label for="inputGender" class="col-form-label mr-4">Gender</label>
+          <input
+            type="text"
+            [(ngModel)]="updateAccount.gender"
+            name="gender"
+            class="form-control"
+            id="inputGender">
+        </div>
+        <div class="col d-flex align-items-center">
+          <label for="inputPhone" class="col-form-label mr-4">Phone</label>
+          <input
+            type="text"
+            [(ngModel)]="updateAccount.phone"
+            name="phone"
+            class="form-control"
+            id="inputPhone">
+        </div>
+      </div>
+      <div class="form-group row m-4">
+        <div class="col d-flex align-items-center">
+          <label for="inputAge" class="col-form-label mr-4">Age</label>
+          <input
+            type="text"
+            [(ngModel)]="updateAccount.age"
+            name="age"
+            class="form-control"
+            id="inputAge">
+        </div>
+        <div class="col d-flex align-items-center">
+          <label for="inputAddress" class="col-form-label mr-4">Address</label>
+          <input
+            type="text"
+            [(ngModel)]="updateAccount.address"
+            name="address"
+            class="form-control"
+            id="inputAddress">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

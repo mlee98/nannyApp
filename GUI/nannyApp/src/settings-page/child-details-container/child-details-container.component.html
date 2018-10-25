@@ -1,0 +1,20 @@
+<div class="container d-flex justify-content-between bg-info mb-3">
+  <h1 class="m-4 text-light">My Kids</h1>
+  <button (click)="clickInfo()" class="btn btn-link text-light">
+    {{isEditMode ? 'Save Info' : 'Edit Info'}}
+  </button>
+</div>
+<!-- One container per child -->
+<app-child-details
+  [hidden]="isEditMode"
+  *ngFor="let child of account.children"
+  [child]="child">
+</app-child-details>
+<app-child-details-update
+  [hidden]="!isEditMode"
+  *ngFor="let child of updateChildren"
+  [child]="child">
+</app-child-details-update>
+<div class="d-flex justify-content-end mb-4">
+  <button [hidden]="!isEditMode" (click)="addChild()" class="btn btn-info">Add Child</button>
+</div>
