@@ -1,0 +1,279 @@
+<div class="container mt-5 ">
+  <h1 class="text-center mb-5 display-3">Create Your Account</h1>
+  <div class="row justify-content-center containter">
+    <div class="row col-md-8 justify-content-center">
+      <div class="col-md-10 pl-1 mb-2">
+        <button type="button" id="back_btn" (click)="back()" class="btn btn-sm btn-secondary" [hidden]="!stepHideController[0]">Back</button>
+      </div>
+      <div class="col-md-2 pr-1 mb-2 clearfix">
+        <button type="button" id="next_btn" (click)="next()" class="btn btn-sm float-right btn-secondary">{{nextBtn}}</button>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center" [hidden]="stepHideController[0]">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header bg-info large-text text-light">
+          Login Info
+        </div>
+        <div class="card-body bg-light">
+          <div class="container">
+            <!-- Username and Password -->
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label for="account_username" class="large-text">
+                    Username
+                  </label>
+                  <input type="text" id="account_username" class="form-control" placeholder="Username" [(ngModel)]='account.username' />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <br>
+                Username check
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label for="account_password" class="large-text">
+                    Password
+                  </label>
+                  <input type="password" id="account_pasword" class="form-control" placeholder="Password" [(ngModel)]='account.password' />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <br>
+                Password Strength
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label for="confirm_password" class="large-text">
+                    Confirm Password
+                  </label>
+                  <input type="password" id="confirm_pasword" class="form-control" placeholder="Confirm Password" />
+                </div>
+              </div>
+            </div>
+            <div class="row large-text mt-3">
+              <div class="col-md-5 text-right">I am a: </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <select id="account_state" class="form-control" [(ngModel)]='account.type'>
+                    <option value="nanny" selected>Nanny</option>
+                    <option value="parent">Parent</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center" [hidden]="stepHideController[1]">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header bg-info large-text text-light">
+          Personal Info
+        </div>
+        <div class="card-body bg-light">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="account_firstname" class="large-text">
+                    First Name
+                  </label>
+                  <input type="text" id="account_firstname" class="form-control" placeholder="First Name" [(ngModel)]='account.firstname' />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="account_lastname" class="large-text">
+                    Last Name
+                  </label>
+                  <input type="text" id="account_lastname" class="form-control" placeholder="Last Name" [(ngModel)]='account.lastname' />
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label for="account_age" class="large-text">
+                    Age
+                  </label>
+                  <input type="number" id="account_age" class="form-control" placeholder="Age" [(ngModel)]='account.age' />
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label class="large-text" for="account_state">
+                    Gender
+                  </label>
+                  <select id="account_gender" class="form-control" [(ngModel)]='account.gender'>
+                    <option></option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="account_staddress" class="large-text">
+                    Street Address
+                  </label>
+                  <input type="text" id="account_address" class="form-control" placeholder="Street Address" [(ngModel)]='account.address' />
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="account_city" class="large-text">
+                    City
+                  </label>
+                  <input type="text" id="account_city" class="form-control" placeholder="City" [(ngModel)]='account.city' />
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label class="large-text" for="account-state">
+                    State
+                  </label>
+                  <select id="account-state" class="form-control" [(ngModel)]='account.state'>
+                    <option></option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="account_zip" class="large-text">
+                    Zip Code
+                  </label>
+                  <input type="text" id="account_zip" class="form-control" placeholder="Zip Code" [(ngModel)]='account.zip' />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="account_email" class="large-text">
+                    Email
+                  </label>
+                  <input type="email" id="account_email" class="form-control" placeholder="you@example.com" [(ngModel)]='account.email' />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="account_phone" class="large-text">
+                    Phone Number
+                  </label>
+                  <input type="text" id="account_phone" class="form-control" placeholder="(111)-222-3334" [(ngModel)]='account.phone' />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row justify-content-center" [hidden]="stepHideController[2]">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header bg-info large-text text-light">
+          {{(account.type == 'nanny')? 'References': 'Children'}}
+        </div>
+        <div class="card-body bg-light" *ngIf="account.type == 'nanny'">
+          <div class="container">
+            <div class="row justify-content-center" *ngIf="!referenceForm">
+              <button type="button" id="showRef_btn" (click)="showReferenceForm()" class="btn btn-secondary">Add
+                Another
+                Reference</button>
+            </div>
+            <div class="row" *ngIf="referenceForm">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="reference_name" class="large-text">
+                    Name
+                  </label>
+                  <input type="text" id="reference_firstname" class="form-control" placeholder="Name" [(ngModel)]='tempRef.refname' />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="reference_email" class="large-text">
+                    Email
+                  </label>
+                  <input type="email" id="reference_email" class="form-control" placeholder="you@example.com"
+                    [(ngModel)]='tempRef.refemail' />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="reference_phone" class="large-text">
+                    Phone
+                  </label>
+                  <input type="text" id="reference_phone" class="form-control" placeholder="Phone" [(ngModel)]='tempRef.refphone' />
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center" *ngIf="referenceForm">
+              <button type="button" id="addRef_btn" (click)="addReference()" class="btn btn-secondary">Add</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="card-body bg-light" *ngIf="account.type == 'parent'">
+          <div class="container">
+            <div class="row justify-content-center" *ngIf="!childForm">
+              <button type="button" id="showRef_btn" (click)="showChildForm()" class="btn btn-secondary">Add
+                Another
+                Child</button>
+            </div>
+            <div class="row" *ngIf="childForm">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="reference_name" class="large-text">
+                    Name
+                  </label>
+                  <input type="text" id="reference_firstname" class="form-control" placeholder="Name" [(ngModel)]='tempChild.chname' />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="large-text" for="account_state">
+                    Gender
+                  </label>
+                  <select id="child_gender" class="form-control" [(ngModel)]='tempChild.chgender'>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="child_age" class="large-text">
+                    Age
+                  </label>
+                  <input type="number" id="child_age" class="form-control" placeholder="Age" [(ngModel)]='tempChild.chage' />
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center" *ngIf="childForm">
+              <button type="button" id="addRef_btn" (click)="addReference()" class="btn btn-secondary">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div>

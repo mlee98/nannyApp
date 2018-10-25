@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SettingsPageModule } from '../settings-page/settings-page.module';
+import { CreateAccountModule } from '../create-account/create-account.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { SettingsPageModule } from '../settings-page/settings-page.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SettingsPageModule
+    SettingsPageModule,
+    CreateAccountModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
