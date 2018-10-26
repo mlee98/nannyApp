@@ -59,22 +59,22 @@ export class CreateAccountComponent implements OnInit {
 
   showReferenceForm() {
     this.referenceForm = true;
-    this.tempRef = new NannyRef();
   }
 
   addReference() {
     this.account.references.push(this.tempRef);
     this.referenceForm = false;
+    this.tempRef = {refname: ''};
   }
 
   showChildForm() {
     this.childForm = true;
-    this.tempChild = new Child();
   }
 
   addChild() {
     this.account.children.push(this.tempChild);
     this.childForm = false;
+    this.tempChild = {chname: ''};
   }
 
 
