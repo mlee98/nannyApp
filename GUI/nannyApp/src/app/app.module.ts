@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SettingsPageModule } from '../settings-page/settings-page.module';
 import { CreateAccountModule } from '../create-account/create-account.module';
+import { NannyProfilePageModule } from 'src/nanny-profile-page/nanny-profile-page.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { CreateAccountModule } from '../create-account/create-account.module';
     AppRoutingModule,
     SettingsPageModule,
     CreateAccountModule,
+    NannyProfilePageModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
