@@ -19,7 +19,8 @@ export class Account {
 
   // NANNY
   yearsExp?: number;
-  workWithAges?: string;
+  minAge?: number;
+  maxAge?: number;
   cpr?: boolean;
   petFriendly?: boolean;
   canDrive?: boolean;

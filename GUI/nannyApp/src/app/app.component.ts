@@ -49,7 +49,8 @@ export class AppComponent implements OnInit {
 
       // NANNY account info
       yearsExp: 3,
-      workWithAges: '8-14',
+      minAge: 8,
+      maxAge: 14,
       cpr: true,
       canDrive: false,
       canCook: true,

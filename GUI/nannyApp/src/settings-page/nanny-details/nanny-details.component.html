@@ -40,7 +40,7 @@
               class="form-control short-input"
               id="inputAge">
           </div>
-          <div class="col d-flex align-items-center">
+          <div class="col d-flex align-items-center work-with-container">
             <label
               for="inputWorkWith"
               class="col-form-label long-label mr-4">
@@ -48,8 +48,15 @@
               </label>
             <input
               type="text"
-              [(ngModel)]="updateAccount.workWithAges"
-              name="workWith"
+              [(ngModel)]="updateAccount.minAge"
+              name="workWithMin"
+              class="form-control"
+              id="inputWorkWith">
+            <div class="mr-1 ml-1">-</div>
+            <input
+              type="text"
+              [(ngModel)]="updateAccount.maxAge"
+              name="workWithMax"
               class="form-control"
               id="inputWorkWith">
           </div>
