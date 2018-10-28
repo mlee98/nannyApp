@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
       zip: 75275,
       gender: 'Male',
       age: 27,
-      type: 'parent',
+      type: 'nanny',
 
       // PARENT account info
       children: [
