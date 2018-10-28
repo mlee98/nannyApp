@@ -1,0 +1,11 @@
+.long-label {
+  min-width: 8em;
+}
+
+.short-input {
+  max-width: 4em;
+}
+
+.work-with-container {
+  min-width: 19em;
+}

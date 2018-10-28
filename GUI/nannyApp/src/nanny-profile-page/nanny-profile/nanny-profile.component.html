@@ -1,0 +1,22 @@
+<h1 class="mb-3">{{account.firstName}} {{account.lastName}}</h1>
+<div class="container d-flex justify-content-between">
+  <h5>Years Experience: {{account.yearsExp}}</h5>
+  <h5>Age: {{account.age}}</h5>
+  <h5>Works with Ages {{account.minAge}}-{{account.maxAge}}</h5>
+</div>
+<div class="container">
+  <h5>{{account.gender}} Nanny in {{account.city}}, {{account.state}}</h5>
+  <hr>
+  <ul class="skills-list">
+    <li [hidden]="!account.cpr" class="mr-6">CPR Certified</li>
+    <li [hidden]="!account.canCook" class="mr-6">Enjoys Cooking</li>
+    <li [hidden]="!account.canDrive" class="mr-6">Has Transportation</li>
+    <li [hidden]="!account.petFriendly" class="mr-6">Pet Friendly</li>
+  </ul>
+  <hr>
+  <h5>Hey! I'm {{account.firstName}}</h5>
+  {{account.bio}}
+  <hr>
+  <h5>References:</h5>
+  <div *ngFor="let ref of account.references">{{ref.name}} ({{ref.email}})</div>
+</div>

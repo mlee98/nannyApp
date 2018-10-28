@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SettingsPageModule } from '../settings-page/settings-page.module';
 import { CreateAccountModule } from '../create-account/create-account.module';
 import { MyJobsModule } from '../my-jobs/my-jobs.module';
+import { NannyProfilePageModule } from 'src/nanny-profile-page/nanny-profile-page.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MyJobsModule } from '../my-jobs/my-jobs.module';
     AppRoutingModule,
     SettingsPageModule,
     CreateAccountModule,
-    MyJobsModule
+    MyJobsModule,
+    NannyProfilePageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
