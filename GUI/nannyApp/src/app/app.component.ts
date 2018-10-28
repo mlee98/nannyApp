@@ -50,13 +50,11 @@ export class AppComponent implements OnInit {
       // NANNY account info
       yearsExp: 3,
       workWithAges: '8-14',
-      skills: [
-        'CPR certified',
-        'Enjoys cooking',
-        'Has transportation',
-        'Comfortable with pets',
-        'Flexible schedule',
-      ],
+      cpr: true,
+      canDrive: false,
+      canCook: true,
+      petFriendly: true,
+
       bio: 'I love working with all ages, though I have the most experience working with ages 8-14.' +
           ' I can cook almost any meal, and I don\'t mind taking care of a couple of pets if needed!' +
           ' Along with my years of experience working as a nanny, I\'ve spent the last 2 years' +

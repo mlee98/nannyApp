@@ -20,7 +20,10 @@ export class Account {
   // NANNY
   yearsExp?: number;
   workWithAges?: string;
-  skills?: string[];
+  cpr?: boolean;
+  petFriendly?: boolean;
+  canDrive?: boolean;
+  canCook?: boolean;
   bio?: string;
   references?: NannyReference[];
 }

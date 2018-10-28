@@ -26,14 +26,6 @@ export class NannyDetailsComponent implements OnInit {
     this.isEditMode = !this.isEditMode;
   }
 
-  addSkill() {
-    this.updateAccount.skills.push('');
-  }
-
-  removeSkill(index) {
-    this.updateAccount.skills.splice(index, 1);
-  }
-
   addReference() {
     this.updateAccount.references.push(new NannyReference);
   }
