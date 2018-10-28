@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Account } from '../models/account';
 
 @Component({
   selector: 'app-nanny-profile-page',
@@ -8,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class NannyProfilePageComponent implements OnInit {
 
   constructor() { }
+
+  @Input() account: Account;
 
   ngOnInit() {
   }

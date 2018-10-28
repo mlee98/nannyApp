@@ -1,3 +1,29 @@
-<p>
-  nanny-profile-page works!
-</p>
+<div class="container row m-4">
+  <div class="col col-lg-9">
+    <h1 class="mb-3">{{account.name}}</h1>
+    <div class="container d-flex justify-content-between">
+      <h5>Years Experience: {{account.yearsExp}}</h5>
+      <h5>Age: {{account.age}}</h5>
+      <h5>Works with Ages {{account.workWithAges}}</h5>
+    </div>
+    <div class="container">
+      <h5>{{account.gender}} Nanny in {{account.city}}, {{account.state}}</h5>
+      <hr>
+      <ul class="skills-list">
+        <li class="mr-6" *ngFor="let skill of account.skills; let i = index">{{skill}}</li>
+      </ul>
+      <hr>
+      <h5>Hey! I'm {{account.name}}</h5>
+      {{account.bio}}
+      <hr>
+      <h5>References:</h5>
+      <div *ngFor="let ref of account.references">{{ref.name}} ({{ref.email}})</div>
+    </div>
+  </div>
+  <div class="col col-sm-2">
+    <div class="position-fixed fixed-contact">
+      <app-nanny-contact-card></app-nanny-contact-card>
+    </div>
+  </div>
+</div>
+

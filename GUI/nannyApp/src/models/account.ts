@@ -6,6 +6,9 @@ export class Account {
   email?: string;
   phone?: number;
   address?: string;
+  city?: string;
+  state?: string;
+  zip?: number;
   gender?: string;
   age?: number;
   type?: string; // parent or nanny
