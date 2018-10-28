@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row bg-info display-4">
+    TEMP NAVBAR
+  </div>
+  <div class="row align-content-start">
+    <div class="col-md-2 container background-gray">
+      <div class="row">
+        <h1 class="text-truncate">Jobs</h1>
+      </div>
+      <div class="row">
+        <div class="list-group text-truncate">
+          <button type="button" (click)="clickJob(job)" class="list-group-item list-group-item-action large-text "
+            *ngFor="let job of jobs">
+            <div class="text-truncate">
+              {{job.familyName}}
+            </div>
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <h1 class="text-truncate">Requests</h1>
+      </div>
+      <div class="row">
+        <div class="list-group text-truncate">
+          <button type="button" (click)="clickJob(job)" class="list-group-item list-group-item-action large-text "
+            *ngFor="let job of jobs">
+            <div class="text-truncate">
+              {{job.familyName}}
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <h1 class="display-3">{{dispJob.familyName}}</h1>
+      <h2 class="diosplay-4">{{dispJob.schedule}}</h2>
+      <p>
+        {{dispJob.description}}
+      </p>
+
+    </div>
+    <div class="col-md-3">
+
+    </div>
+  </div>
+</div>
