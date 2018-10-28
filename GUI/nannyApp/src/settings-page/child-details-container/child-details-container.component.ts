@@ -28,7 +28,6 @@ export class ChildDetailsContainerComponent implements OnInit {
   }
 
   addChild() {
-    console.log('called addchild');
     this.updateChildren.push(new Child);
   }
 
