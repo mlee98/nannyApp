@@ -31,4 +31,8 @@ export class ChildDetailsContainerComponent implements OnInit {
     this.updateChildren.push(new Child);
   }
 
+  removeChild(index) {
+    this.updateChildren.splice(index, 1);
+  }
+
 }

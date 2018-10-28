@@ -10,11 +10,15 @@
   *ngFor="let child of account.children"
   [child]="child">
 </app-child-details>
-<app-child-details-update
-  [hidden]="!isEditMode"
-  *ngFor="let child of updateChildren"
-  [child]="child">
-</app-child-details-update>
+<div class="position-relative" [hidden]="!isEditMode" *ngFor="let child of updateChildren; let i = index">
+    <app-child-details-update [child]="child"></app-child-details-update>
+    <button
+      class="btn btn-link text-dark position-absolute remove-button"
+      (click)="removeChild(i)">
+        X
+    </button>
+</div>
 <div class="d-flex justify-content-end mb-4">
   <button [hidden]="!isEditMode" (click)="addChild()" class="btn btn-info">Add Child</button>
 </div>
+
