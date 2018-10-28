@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Account } from '../models/account';
+import { Account } from '../../models/account';
 
 @Component({
   selector: 'app-account-details',

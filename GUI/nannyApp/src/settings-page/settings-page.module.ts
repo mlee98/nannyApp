@@ -6,12 +6,15 @@ import { ChildDetailsComponent } from './child-details/child-details.component';
 import { FormsModule } from '@angular/forms';
 import { ChildDetailsContainerComponent } from './child-details-container/child-details-container.component';
 import { ChildDetailsUpdateComponent } from './child-details-update/child-details-update.component';
+import { NannyProfilePageModule } from 'src/nanny-profile-page/nanny-profile-page.module';
+import { NannyDetailsComponent } from './nanny-details/nanny-details.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    NannyProfilePageModule
   ],
   declarations: [
     SettingsPageComponent,
@@ -19,6 +22,7 @@ import { ChildDetailsUpdateComponent } from './child-details-update/child-detail
     ChildDetailsComponent,
     ChildDetailsContainerComponent,
     ChildDetailsUpdateComponent,
+    NannyDetailsComponent
   ],
   exports: [
     SettingsPageComponent

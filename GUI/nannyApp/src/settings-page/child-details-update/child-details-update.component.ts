@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Child } from '../models/child';
+import { Child } from '../../models/child';
 
 @Component({
   selector: 'app-child-details-update',

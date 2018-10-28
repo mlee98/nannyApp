@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Account } from '../models/account';
-import { Child } from '../models/child';
+import { Account } from '../../models/account';
+import { Child } from '../../models/child';
 
 @Component({
   selector: 'app-child-details-container',
@@ -28,8 +28,11 @@ export class ChildDetailsContainerComponent implements OnInit {
   }
 
   addChild() {
-    console.log('called addchild');
     this.updateChildren.push(new Child);
+  }
+
+  removeChild(index) {
+    this.updateChildren.splice(index, 1);
   }
 
 }

@@ -1,0 +1,11 @@
+.long-label {
+  min-width: 8em;
+}
+
+.short-input {
+  max-width: 5em;
+}
+
+.skill-label {
+  min-width: 3em;
+}
