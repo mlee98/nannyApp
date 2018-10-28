@@ -1,4 +1,4 @@
-<h1 class="mb-3">{{account.name}}</h1>
+<h1 class="mb-3">{{account.firstName}} {{account.lastName}}</h1>
 <div class="container d-flex justify-content-between">
   <h5>Years Experience: {{account.yearsExp}}</h5>
   <h5>Age: {{account.age}}</h5>
@@ -11,7 +11,7 @@
     <li class="mr-6" *ngFor="let skill of account.skills; let i = index">{{skill}}</li>
   </ul>
   <hr>
-  <h5>Hey! I'm {{account.name}}</h5>
+  <h5>Hey! I'm {{account.firstName}}</h5>
   {{account.bio}}
   <hr>
   <h5>References:</h5>

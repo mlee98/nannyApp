@@ -13,7 +13,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.account = {
-      name: 'Bob Johnson',
+      firstName: 'Bob',
+      lastName: 'Johnson',
       email: 'bobjohnson@gmail.com',
       phone: 5125436733,
       address: '32 Sunshine Ave',
@@ -22,7 +23,7 @@ export class AppComponent implements OnInit {
       zip: 75275,
       gender: 'Male',
       age: 27,
-      type: 'parent',
+      type: 'nanny',
 
       // PARENT account info
       children: [
