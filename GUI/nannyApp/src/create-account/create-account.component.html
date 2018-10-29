@@ -1,6 +1,5 @@
 <div class="container mt-5 ">
   <h1 class="text-center mb-5 display-3">Create Your Account</h1>
-  <pre>{{account | json}}</pre>
   <div class="row justify-content-center containter">
     <div class="row col-md-8 justify-content-center">
       <div class="col-md-10 pl-1 mb-2">
@@ -189,60 +188,76 @@
         <div class="card-body bg-light" *ngIf="account.type == 'nanny'">
           <div class="container">
             <div class="row">
-              <div class="col-md-3">
-                <label for="nanny_experience" class="large-text">
-                  Experience
-                </label>
-                <input type="number" id="nanny_experience" class="form-control" placeholder="Years" [(ngModel)]='account.yearsExp' />
+              <div class="col-md-6">
+                <div class="container pr-0 pl-0">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="nanny_experience" class="large-text">
+                        Experience
+                      </label>
+                      <input type="number" id="nanny_experience" class="form-control" placeholder="Years" [(ngModel)]='account.yearsExp' />
+                    </div>
+                    <div class="col-md-8 container mr-0 ml-0">
+                      <label for="nanny_minAge" class="large-text">
+                        Preferred Child Age
+                      </label>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <input type="number" id="nanny_minAge" class="form-control" placeholder="Min" [(ngModel)]='account.minAge' />
+                        </div>
+                        <div class="col-md-6">
+                          <input type="number" id="nanny_maxAge" class="form-control" placeholder="Max" [(ngModel)]='account.maxAge' />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <p class="large-text mt-2">
+                        Check All That Apply:
+                      </p>
+                      <div class="container">
+                        <div class="mt-2 row">
+                          <div class="col-md-6">
+                            <input class="form-check-input" type="checkbox" value="" id="cprTrained" [(ngModel)]="account.cpr">
+                            <label class="form-check-label" for="cprTrained">
+                              CPR Certified
+                            </label>
+                          </div>
+                          <div class="col-md-6">
+                            <input class="form-check-input" type="checkbox" value="" id="petFriendly" [(ngModel)]="account.petFriendly">
+                            <label class="form-check-label" for="petFriendly">
+                              Pet Friendly
+                            </label>
+                          </div>
+                        </div>
+                        <div class="mt-2 row">
+                          <div class="col-md-6">
+                            <input class="form-check-input" type="checkbox" value="" id="drive" [(ngModel)]="account.canDrive">
+                            <label class="form-check-label mr-3" for="drive">
+                              Willing to Drive
+                            </label>
+                          </div>
+                          <div class="col-md-6">
+                            <input class="form-check-input" type="checkbox" value="" id="cook" [(ngModel)]="account.canCook">
+                            <label class="form-check-label mr-3" for="cook">
+                              Willing to Cook
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-4">
-                <div class="large-text mt-2">
-                  Check All That Apply:
-                </div>
-                <div class="form-check mt-2">
-                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                  <label class="form-check-label" for="defaultCheck1">
-                    Default checkbox
-                  </label>
-                </div>
-                <div class="form-check mt-2">
-                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                  <label class="form-check-label" for="defaultCheck1">
-                    Default checkbox
-                  </label>
-                </div>
-                <div class="form-check mt-2">
-                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                  <label class="form-check-label" for="defaultCheck1">
-                    Default checkbox
-                  </label>
-                </div>
-                <div class="form-check mt-2">
-                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                  <label class="form-check-label" for="defaultCheck1">
-                    Default checkbox
-                  </label>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="nanny_bio" class="large-text">Bio</label>
+                  <textarea class="form-control" id="nanny_bio" rows="6" [(ngModel)]="account.bio"></textarea>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">
-                <label for="nanny_experience" class="large-text">
-                  Experience
-                </label>
-                <input type="number" id="nanny_experience" class="form-control" placeholder="Years" [(ngModel)]='account.yearsExp' />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">
-                <label for="nanny_experience" class="large-text">
-                  Experience
-                </label>
-                <input type="number" id="nanny_experience" class="form-control" placeholder="Years" [(ngModel)]='account.yearsExp' />
-              </div>
-            </div>
 
-
+            </div>
             <div class="row justify-content-center">
               <p class="large-text text-center">References</p>
               <table class="table">
@@ -337,6 +352,14 @@
               </div>
               <div class="col-md-4">
                 <div class="form-group">
+                  <label for="child_age" class="large-text">
+                    Age
+                  </label>
+                  <input type="number" id="child_age" class="form-control" placeholder="Age" [(ngModel)]='tempChild.age' />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
                   <label class="large-text" for="account_state">
                     Gender
                   </label>
@@ -346,34 +369,32 @@
                   </select>
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="child_age" class="large-text">
-                    Age
-                  </label>
-                  <input type="number" id="child_age" class="form-control" placeholder="Age" [(ngModel)]='tempChild.age' />
-                </div>
-              </div>
             </div>
             <div class="row" *ngIf="childForm">
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="form-group">
                   <label for="child_allergies" class="large-text">Allergies</label>
                   <textarea class="form-control" id="child_allergies" rows="3" [(ngModel)]="tempChild.allergies"></textarea>
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="form-group">
                   <label for="child_medications" class="large-text">Medications</label>
                   <textarea class="form-control" id="child_medications" rows="3" [(ngModel)]="tempChild.medications"></textarea>
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="form-group">
-                  <label for="child_specialReq" class="large-text">Special Requirements</label>
-                  <textarea class="form-control" id="child_specialReq" rows="3" [(ngModel)]="tempChild.specialReqs"></textarea>
+                  <label for="child_specialReq" class="large-text">Likes</label>
+                  <textarea class="form-control" id="child_specialReq" rows="3" [(ngModel)]="tempChild.likes"></textarea>
                 </div>
               </div>
+              <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="child_specialReq" class="large-text">Other</label>
+                    <textarea class="form-control" id="child_specialReq" rows="3" [(ngModel)]="tempChild.specialReqs"></textarea>
+                  </div>
+                </div>
             </div>
             <div class="row justify-content-center" *ngIf="childForm">
               <button type="button" id="addRef_btn" (click)="addChild()" class="btn btn-secondary">Add</button>

@@ -8,6 +8,11 @@
         <h1 class="text-truncate">Jobs</h1>
       </div>
       <div class="row">
+        <div class="list-group text-truncate mb-5" *ngIf="noJobs">
+          <button type="button" disabled class="list-group-item list-group-item-action large-text ">
+            No Jobs
+          </button>
+        </div>
         <div class="list-group text-truncate">
           <button type="button" (click)="clickJob(job)" class="list-group-item list-group-item-action large-text "
             *ngFor="let job of jobs">
@@ -21,26 +26,70 @@
         <h1 class="text-truncate">Requests</h1>
       </div>
       <div class="row">
-        <div class="list-group text-truncate">
-          <button type="button" (click)="clickJob(job)" class="list-group-item list-group-item-action large-text "
-            *ngFor="let job of jobs">
+        <div class="list-group text-truncate mb-5" *ngIf="noReqs">
+          <button type="button" disabled class="list-group-item list-group-item-action large-text ">
+            No Requests
+          </button>
+        </div>
+        <div class="list-group text-truncate mb-5" *ngIf="!noReqs">
+          <button type="button" (click)="clickRequest(req)" class="list-group-item list-group-item-action large-text "
+            *ngFor="let req of requests">
             <div class="text-truncate">
-              {{job.familyName}}
+              {{req.familyName}}
             </div>
           </button>
         </div>
       </div>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-7 container">
       <h1 class="display-3">{{dispJob.familyName}}</h1>
-      <h2 class="diosplay-4">{{dispJob.schedule}}</h2>
+      <h2>{{dispJob.schedule}}</h2>
+      <h4 *ngIf='isJob' class="d-inline">{{dispJob.address}} {{dispJob.city}}</h4>
+      <h4 class="d-inline">{{dispJob.state}} {{dispJob.zip}}</h4>
       <p>
         {{dispJob.description}}
       </p>
-
+      <h4 *ngIf='isJob && !noJobs'>Schedule</h4>
+      <table class="table" *ngIf='isJob && !noJobs'>
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Time</th>
+            <th scope="col">Location</th>
+            <th scope="col">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of dispJob.tasks">
+            <td>{{task.name}}</td>
+            <td>{{task.time}}</td>
+            <td>{{task.location}}</td>
+            <td>{{task.description}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row" *ngIf="!isJob">
+        <div class="col-md-2">
+          <button type="button" (click)='acceptRequest()' id="acceptReq" class="btn btn-success">Accept</button>
+        </div>
+        <div class="col-md-2">
+          <button type="button" (click)='declineRequest()' id="declineReq" class="btn btn-secondary">Decline</button>
+        </div>
+      </div>
     </div>
-    <div class="col-md-3">
-
+    <div class="col-md-3" *ngIf='!isJob'></div>
+    <div class="col-md-3" *ngIf='isJob'>
+      <div class="card mb-3" *ngFor="let child of dispJob.children">
+        <div class="card-header bg-success large-text text-light">
+          {{child.name}} - {{child.age}}
+        </div>
+        <div class="card-body bg-light">
+          <b>Allergies:</b> {{child.allergies}}<br>
+          <b>Medications:</b> {{child.medications}}<br>
+          <b>Likes:</b> {{child.likes}}<br>
+          <b>Other:</b> {{child.specialReqs}}
+        </div>
+      </div>
     </div>
   </div>
 </div>

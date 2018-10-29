@@ -3,5 +3,4 @@ export class Task {
   time: string;
   description?: string;
   location?: string;
-  bob?: string;
 }
