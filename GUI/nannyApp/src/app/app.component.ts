@@ -51,6 +51,8 @@ export class AppComponent implements OnInit {
       yearsExp: 3,
       minAge: 8,
       maxAge: 14,
+      minWage: 15,
+      maxWage: 20,
       cpr: true,
       canDrive: false,
       canCook: true,

@@ -23,6 +23,8 @@ export class Account {
   yearsExp?: number;
   minAge?: number;
   maxAge?: number;
+  minWage?: number;
+  maxWage?: number;
   cpr?: boolean;
   petFriendly?: boolean;
   canDrive?: boolean;

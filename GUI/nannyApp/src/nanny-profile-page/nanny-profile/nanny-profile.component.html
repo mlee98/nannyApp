@@ -1,10 +1,13 @@
 <h1 class="mb-3">{{account.firstName}} {{account.lastName}}</h1>
-<div class="container d-flex justify-content-between">
-  <h5>Years Experience: {{account.yearsExp}}</h5>
-  <h5>Age: {{account.age}}</h5>
-  <h5>Works with Ages {{account.minAge}}-{{account.maxAge}}</h5>
-</div>
 <div class="container">
+  <div class="d-flex justify-content-between">
+    <h5>Age: {{account.age}}</h5>
+    <h5>${{account.minWage}}-{{account.maxWage}}/hour</h5>
+  </div>
+  <div class="d-flex justify-content-between">
+    <h5>Years Experience: {{account.yearsExp}}</h5>
+    <h5>Works with Ages {{account.minAge}}-{{account.maxAge}}</h5>
+  </div>
   <h5>{{account.gender}} Nanny in {{account.city}}, {{account.state}}</h5>
   <hr>
   <ul class="skills-list">
