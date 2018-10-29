@@ -1,5 +1,6 @@
 <div class="container mt-5 ">
   <h1 class="text-center mb-5 display-3">Create Your Account</h1>
+  <pre>{{account | json}}</pre>
   <div class="row justify-content-center containter">
     <div class="row col-md-8 justify-content-center">
       <div class="col-md-10 pl-1 mb-2">
@@ -88,7 +89,7 @@
                   <label for="account_firstname" class="large-text">
                     First Name
                   </label>
-                  <input type="text" id="account_firstname" class="form-control" placeholder="First Name" [(ngModel)]='account.firstname'/>
+                  <input type="text" id="account_firstname" class="form-control" placeholder="First Name" [(ngModel)]='account.firstName' />
                 </div>
               </div>
               <div class="col-md-4">
@@ -96,7 +97,7 @@
                   <label for="account_lastname" class="large-text">
                     Last Name
                   </label>
-                  <input type="text" id="account_lastname" class="form-control" placeholder="Last Name" [(ngModel)]='account.lastname' />
+                  <input type="text" id="account_lastname" class="form-control" placeholder="Last Name" [(ngModel)]='account.lastName' />
                 </div>
               </div>
               <div class="col-md-2">
@@ -139,12 +140,10 @@
               </div>
               <div class="col-md-2">
                 <div class="form-group">
-                  <label class="large-text" for="account-state">
+                  <label class="large-text" for="account_state">
                     State
                   </label>
-                  <select id="account-state" class="form-control" [(ngModel)]='account.state'>
-                    <option></option>
-                  </select>
+                  <input type="text" id="account_state" class="form-control" placeholder="State" [(ngModel)]='account.state' />
                 </div>
               </div>
               <div class="col-md-3">
@@ -185,10 +184,84 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-header bg-info large-text text-light">
-          {{(account.type == 'nanny')? 'References': 'Children'}}
+          {{(account.type == 'nanny')? 'Experience': 'Children'}}
         </div>
         <div class="card-body bg-light" *ngIf="account.type == 'nanny'">
           <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <label for="nanny_experience" class="large-text">
+                  Experience
+                </label>
+                <input type="number" id="nanny_experience" class="form-control" placeholder="Years" [(ngModel)]='account.yearsExp' />
+              </div>
+              <div class="col-md-4">
+                <div class="large-text mt-2">
+                  Check All That Apply:
+                </div>
+                <div class="form-check mt-2">
+                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Default checkbox
+                  </label>
+                </div>
+                <div class="form-check mt-2">
+                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Default checkbox
+                  </label>
+                </div>
+                <div class="form-check mt-2">
+                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Default checkbox
+                  </label>
+                </div>
+                <div class="form-check mt-2">
+                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Default checkbox
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <label for="nanny_experience" class="large-text">
+                  Experience
+                </label>
+                <input type="number" id="nanny_experience" class="form-control" placeholder="Years" [(ngModel)]='account.yearsExp' />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <label for="nanny_experience" class="large-text">
+                  Experience
+                </label>
+                <input type="number" id="nanny_experience" class="form-control" placeholder="Years" [(ngModel)]='account.yearsExp' />
+              </div>
+            </div>
+
+
+            <div class="row justify-content-center">
+              <p class="large-text text-center">References</p>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let ref of account.references">
+                    <td>{{ref.name}}</td>
+                    <td>{{ref.phone}}</td>
+                    <td>{{ref.email}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <div class="row justify-content-center" *ngIf="!referenceForm">
               <button type="button" id="showRef_btn" (click)="showReferenceForm()" class="btn btn-secondary">Add
                 Another
@@ -200,7 +273,7 @@
                   <label for="reference_name" class="large-text">
                     Name
                   </label>
-                  <input type="text" id="reference_firstname" class="form-control" placeholder="Name" [(ngModel)]='tempRef.refname' />
+                  <input type="text" id="reference_firstname" class="form-control" placeholder="Name" [(ngModel)]='tempRef.name' />
                 </div>
               </div>
               <div class="col-md-4">
@@ -209,7 +282,7 @@
                     Email
                   </label>
                   <input type="email" id="reference_email" class="form-control" placeholder="you@example.com"
-                    [(ngModel)]='tempRef.refemail' />
+                    [(ngModel)]='tempRef.email' />
                 </div>
               </div>
               <div class="col-md-4">
@@ -217,7 +290,7 @@
                   <label for="reference_phone" class="large-text">
                     Phone
                   </label>
-                  <input type="text" id="reference_phone" class="form-control" placeholder="Phone" [(ngModel)]='tempRef.refphone' />
+                  <input type="text" id="reference_phone" class="form-control" placeholder="Phone" [(ngModel)]='tempRef.phone' />
                 </div>
               </div>
             </div>
@@ -230,6 +303,24 @@
 
         <div class="card-body bg-light" *ngIf="account.type == 'parent'">
           <div class="container">
+            <div class="row">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Gender</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let child of account.children">
+                    <td>{{child.name}}</td>
+                    <td>{{child.age}}</td>
+                    <td>{{child.gender}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <div class="row justify-content-center" *ngIf="!childForm">
               <button type="button" id="showRef_btn" (click)="showChildForm()" class="btn btn-secondary">Add
                 Another
@@ -241,7 +332,7 @@
                   <label for="reference_name" class="large-text">
                     Name
                   </label>
-                  <input type="text" id="reference_firstname" class="form-control" placeholder="Name" [(ngModel)]='tempChild.chname' />
+                  <input type="text" id="reference_firstname" class="form-control" placeholder="Name" [(ngModel)]='tempChild.name' />
                 </div>
               </div>
               <div class="col-md-4">
@@ -249,7 +340,7 @@
                   <label class="large-text" for="account_state">
                     Gender
                   </label>
-                  <select id="child_gender" class="form-control" [(ngModel)]='tempChild.chgender'>
+                  <select id="child_gender" class="form-control" [(ngModel)]='tempChild.gender'>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                   </select>
@@ -260,12 +351,32 @@
                   <label for="child_age" class="large-text">
                     Age
                   </label>
-                  <input type="number" id="child_age" class="form-control" placeholder="Age" [(ngModel)]='tempChild.chage' />
+                  <input type="number" id="child_age" class="form-control" placeholder="Age" [(ngModel)]='tempChild.age' />
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="childForm">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="child_allergies" class="large-text">Allergies</label>
+                  <textarea class="form-control" id="child_allergies" rows="3" [(ngModel)]="tempChild.allergies"></textarea>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="child_medications" class="large-text">Medications</label>
+                  <textarea class="form-control" id="child_medications" rows="3" [(ngModel)]="tempChild.medications"></textarea>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="child_specialReq" class="large-text">Special Requirements</label>
+                  <textarea class="form-control" id="child_specialReq" rows="3" [(ngModel)]="tempChild.specialReqs"></textarea>
                 </div>
               </div>
             </div>
             <div class="row justify-content-center" *ngIf="childForm">
-              <button type="button" id="addRef_btn" (click)="addReference()" class="btn btn-secondary">Add</button>
+              <button type="button" id="addRef_btn" (click)="addChild()" class="btn btn-secondary">Add</button>
             </div>
           </div>
         </div>

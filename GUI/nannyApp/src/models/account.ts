@@ -4,6 +4,8 @@ import { NannyReference } from './nanny-reference';
 export class Account {
   firstName?: string;
   lastName?: string;
+  username?: string;
+  password?: string;
   email?: string;
   phone?: number;
   address?: string;

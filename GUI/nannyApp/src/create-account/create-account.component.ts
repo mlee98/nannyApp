@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
-import { Account } from './models/account';
-import { NannyRef } from './/models/reference';
-import { Child } from './models/child';
+import { Account } from '../models/account';
+import { NannyReference } from '../models/nanny-reference';
+import { Child } from '../models/child';
 
 @Component({
   selector: 'app-create-account',
@@ -17,7 +17,7 @@ export class CreateAccountComponent implements OnInit {
   finalStepName: string;
   referenceForm: boolean;
   childForm: boolean;
-  tempRef: NannyRef;
+  tempRef: NannyReference;
   tempChild: Child;
 
   constructor() { }
@@ -33,8 +33,9 @@ export class CreateAccountComponent implements OnInit {
     this.childForm = false;
     this.account.references = [];
     this.account.children = [];
-    this.tempRef = {refname: ''};
-    this.tempChild = {chname: ''};
+    this.tempRef = {};
+    this.tempChild = {};
+
   }
 
   next() {
@@ -64,7 +65,7 @@ export class CreateAccountComponent implements OnInit {
   addReference() {
     this.account.references.push(this.tempRef);
     this.referenceForm = false;
-    this.tempRef = {refname: ''};
+    this.tempRef = {name: ''};
   }
 
   showChildForm() {
@@ -74,7 +75,7 @@ export class CreateAccountComponent implements OnInit {
   addChild() {
     this.account.children.push(this.tempChild);
     this.childForm = false;
-    this.tempChild = {chname: ''};
+    this.tempChild = {name: ''};
   }
 
 
