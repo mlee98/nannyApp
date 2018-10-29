@@ -10,7 +10,7 @@ create table login_info
 
 create table parent_info
 (
-	user_id int,
+	user_id int NOT NULL AUTO_INCREMENT,
     account_type varchar(50),
     username varchar(50),
     password varchar(50),
@@ -23,7 +23,8 @@ create table parent_info
     state varchar(50),
     zip int,
     email varchar(100),
-    phone_number int
+    phone_number int,
+    primary key (user_id)
 );
 
 create table child_info
@@ -40,7 +41,7 @@ create table child_info
     
 create table nanny_info
 (
-	user_id int,
+	user_id int NOT NULL AUTO_INCREMENT,
     account_type varchar(50),
     username varchar(50),
     password varchar(50),
@@ -53,7 +54,8 @@ create table nanny_info
     state varchar(50),
     zip int,
     email varchar(100),
-    phone_number int
+    phone_number int,
+    primary key (user_id)
 );    
     
 create table nanny_references
