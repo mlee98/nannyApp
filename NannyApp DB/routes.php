@@ -32,7 +32,7 @@ $nanny_references = $sth->fetchAll(); return $this->response->withJson($nanny_re
 });
 
 //Display Skills
-$app->get('/parents', function ($request, $response, $args) 
+$app->get('/skills', function ($request, $response, $args) 
 {$sth= $this->db->prepare("SELECT * FROM skills");
 $sth->execute();
 $skills = $sth->fetchAll(); return $this->response->withJson($skills);
