@@ -7,7 +7,7 @@ export class Account {
   username?: string;
   password?: string;
   email?: string;
-  phone?: number;
+  phone?: string;
   address?: string;
   city?: string;
   state?: string;

@@ -1,0 +1,148 @@
+<div class="row justify-content-center containter">
+  <div class="row col-md-8 justify-content-center">
+    <div class="col-md-10 pl-1 mb-2">
+      <button type="button" id="back_btn" (click)="back()" class="btn btn-sm btn-secondary" [hidden]="!stepHideController[0]">Back</button>
+    </div>
+    <div class="col-md-2 pr-1 mb-2 clearfix">
+      <button type="button" id="next_btn" (click)="finish()" class="btn btn-sm float-right btn-secondary">Finish</button>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header bg-info large-text text-light">
+        Experience
+      </div>
+      <div class="card-body bg-light">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="container pr-0 pl-0">
+                <div class="row">
+                  <div class="col-md-4">
+                    <label for="nanny_experience" class="large-text">
+                      Experience
+                    </label>
+                    <input type="number" id="nanny_experience" class="form-control" placeholder="Years" [(ngModel)]='nannyInfo.yearsExp' />
+                  </div>
+                  <div class="col-md-8 container mr-0 ml-0">
+                    <label for="nanny_minAge" class="large-text">
+                      Preferred Child Age
+                    </label>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <input type="number" id="nanny_minAge" class="form-control" placeholder="Min" [(ngModel)]='nannyInfo.minAge' />
+                      </div>
+                      <div class="col-md-6">
+                        <input type="number" id="nanny_maxAge" class="form-control" placeholder="Max" [(ngModel)]='nannyInfo.maxAge' />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <p class="large-text mt-2">
+                      Check All That Apply:
+                    </p>
+                    <div class="container">
+                      <div class="mt-2 row">
+                        <div class="col-md-6">
+                          <input class="form-check-input" type="checkbox" value="" id="cprTrained" [(ngModel)]="nannyInfo.cpr">
+                          <label class="form-check-label" for="cprTrained">
+                            CPR Certified
+                          </label>
+                        </div>
+                        <div class="col-md-6">
+                          <input class="form-check-input" type="checkbox" value="" id="petFriendly" [(ngModel)]="nannyInfo.petFriendly">
+                          <label class="form-check-label" for="petFriendly">
+                            Pet Friendly
+                          </label>
+                        </div>
+                      </div>
+                      <div class="mt-2 row">
+                        <div class="col-md-6">
+                          <input class="form-check-input" type="checkbox" value="" id="drive" [(ngModel)]="nannyInfo.canDrive">
+                          <label class="form-check-label mr-3" for="drive">
+                            Willing to Drive
+                          </label>
+                        </div>
+                        <div class="col-md-6">
+                          <input class="form-check-input" type="checkbox" value="" id="cook" [(ngModel)]="nannyInfo.canCook">
+                          <label class="form-check-label mr-3" for="cook">
+                            Willing to Cook
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="nanny_bio" class="large-text">Bio</label>
+                <textarea class="form-control" id="nanny_bio" rows="6" [(ngModel)]="nannyInfo.bio"></textarea>
+              </div>
+            </div>
+
+          </div>
+          <div class="row justify-content-center">
+            <p class="large-text text-center">References</p>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col">Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let ref of nannyInfo.references">
+                  <td>{{ref.name}}</td>
+                  <td>{{ref.phone}}</td>
+                  <td>{{ref.email}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row justify-content-center" *ngIf="!referenceForm">
+            <button type="button" id="showRef_btn" (click)="showReferenceForm()" class="btn btn-secondary">Add
+              Another
+              Reference</button>
+          </div>
+          <div class="row" *ngIf="referenceForm">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="reference_name" class="large-text">
+                  Name
+                </label>
+                <input type="text" id="reference_firstname" class="form-control" placeholder="Name" [(ngModel)]='tempRef.name' />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="reference_email" class="large-text">
+                  Email
+                </label>
+                <input type="email" id="reference_email" class="form-control" placeholder="you@example.com"
+                  [(ngModel)]='tempRef.email' />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="reference_phone" class="large-text">
+                  Phone
+                </label>
+                <input type="text" id="reference_phone" class="form-control" placeholder="Phone" [(ngModel)]='tempRef.phone' />
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center" *ngIf="referenceForm">
+            <button type="button" id="addRef_btn" (click)="addReference()" class="btn btn-secondary">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,6 +7,8 @@ import { SettingsPageModule } from '../settings-page/settings-page.module';
 import { CreateAccountModule } from '../create-account/create-account.module';
 import { MyJobsModule } from '../my-jobs/my-jobs.module';
 import { NannyProfilePageModule } from 'src/nanny-profile-page/nanny-profile-page.module';
+import { LoginModule } from 'src/login/login.module';
+import { SearchModule } from 'src/search/search.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { NannyProfilePageModule } from 'src/nanny-profile-page/nanny-profile-pag
     SettingsPageModule,
     CreateAccountModule,
     MyJobsModule,
-    NannyProfilePageModule
+    NannyProfilePageModule,
+    LoginModule,
+    SearchModule
   ],
   providers: [],
   bootstrap: [AppComponent]

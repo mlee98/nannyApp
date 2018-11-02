@@ -1,0 +1,113 @@
+<div class="row justify-content-center containter">
+  <div class="row col-md-8 justify-content-center">
+    <div class="col-md-10 pl-1 mb-2">
+      <button type="button" id="back_btn" (click)="back()" class="btn btn-sm btn-secondary">Back</button>
+    </div>
+    <div class="col-md-2 pr-1 mb-2 clearfix">
+      <button type="button" id="next_btn" (click)="next()" class="btn btn-sm float-right btn-secondary">Next</button>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header bg-info large-text text-light">
+        Personal Info
+      </div>
+      <div class="card-body bg-light">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="account_firstname" class="large-text">
+                  First Name
+                </label>
+                <input type="text" id="account_firstname" class="form-control" placeholder="First Name" [(ngModel)]='personalInfo.firstName' />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="account_lastname" class="large-text">
+                  Last Name
+                </label>
+                <input type="text" id="account_lastname" class="form-control" placeholder="Last Name" [(ngModel)]='personalInfo.lastName' />
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label for="account_age" class="large-text">
+                  Age
+                </label>
+                <input type="number" id="account_age" class="form-control" placeholder="Age" [(ngModel)]='personalInfo.age' />
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label class="large-text" for="account_state">
+                  Gender
+                </label>
+                <select id="account_gender" class="form-control" [(ngModel)]='personalInfo.gender'>
+                  <option></option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="account_staddress" class="large-text">
+                  Street Address
+                </label>
+                <input type="text" id="account_address" class="form-control" placeholder="Street Address" [(ngModel)]='personalInfo.address' />
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="account_city" class="large-text">
+                  City
+                </label>
+                <input type="text" id="account_city" class="form-control" placeholder="City" [(ngModel)]='personalInfo.city' />
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label class="large-text" for="account_state">
+                  State
+                </label>
+                <input type="text" id="account_state" class="form-control" placeholder="State" [(ngModel)]='personalInfo.state' />
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="account_zip" class="large-text">
+                  Zip Code
+                </label>
+                <input type="text" id="account_zip" class="form-control" placeholder="Zip Code" [(ngModel)]='personalInfo.zip' />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="account_email" class="large-text">
+                  Email
+                </label>
+                <input type="email" id="account_email" class="form-control" placeholder="you@example.com" [(ngModel)]='personalInfo.email' />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="account_phone" class="large-text">
+                  Phone Number
+                </label>
+                <input type="text" id="account_phone" class="form-control" placeholder="(111)-222-3334" [(ngModel)]='personalInfo.phone' />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

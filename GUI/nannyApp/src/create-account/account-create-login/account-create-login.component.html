@@ -1,0 +1,70 @@
+<div class="row justify-content-center containter">
+  <div class="row col-md-8 justify-content-end">
+    <div class="col-md-2 pr-1 mb-2 clearfix">
+      <button type="button" id="next_btn" (click)="next()" class="btn btn-sm float-right btn-secondary">Next</button>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header bg-info large-text text-light">
+        Login Info
+      </div>
+      <div class="card-body bg-light">
+        <div class="container">
+          <!-- Username and Password -->
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label for="account_username" class="large-text">
+                  Username
+                </label>
+                <input type="text" id="account_username" class="form-control" placeholder="Username" [(ngModel)]='loginInfo.username' />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <br>
+              Username check
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label for="account_password" class="large-text">
+                  Password
+                </label>
+                <input type="password" id="account_pasword" class="form-control" placeholder="Password" [(ngModel)]='loginInfo.password' />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <br>
+              Password Strength
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label for="confirm_password" class="large-text">
+                  Confirm Password
+                </label>
+                <input type="password" id="confirm_pasword" class="form-control" placeholder="Confirm Password" />
+              </div>
+            </div>
+          </div>
+          <div class="row large-text mt-3">
+            <div class="col-md-5 text-right">I am a: </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <select id="account_state" class="form-control" [(ngModel)]='loginInfo.type'>
+                  <option value="nanny" selected>Nanny</option>
+                  <option value="parent">Parent</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

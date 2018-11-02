@@ -1,7 +1,6 @@
 import { Component, OnInit} from '@angular/core';
-import { Account } from '../models/account';
-import { NannyReference } from '../models/nanny-reference';
-import { Child } from '../models/child';
+import { Account, LoginInfo, NannyInfo, ParentInfo, PersonalInfo } from 'src/models';
+
 
 @Component({
   selector: 'app-create-account',
@@ -10,78 +9,45 @@ import { Child } from '../models/child';
 })
 export class CreateAccountComponent implements OnInit {
 
-  account: Account;
+  account: Account = {};
   stepHideController: boolean[];
-  currentStep: number;
-  nextBtn: string;
-  finalStepName: string;
-  referenceForm: boolean;
-  childForm: boolean;
-  tempRef: NannyReference;
-  tempChild: Child;
+  loginInfo: LoginInfo = {};
+  personalInfo: PersonalInfo = {};
+  nannyInfo: NannyInfo = {references: []};
+  parentInfo: ParentInfo = {children: []};
 
   constructor() { }
 
   ngOnInit() {
-    this.account = {};
-    this.stepHideController = [false, true, true];
-    this.nextBtn = 'Next';
-    this.currentStep = 0;
-    this.finalStepName = '';
-    this.account.type = 'nanny';
-    this.referenceForm = false;
-    this.childForm = false;
+    this.stepHideController = [false, true, true, true];
+    this.loginInfo.type = 'nanny';
     this.account.references = [];
     this.account.children = [];
-    this.tempRef = {};
-    this.tempChild = {};
-
   }
-
-  next() {
-    if (this.currentStep === 2) {
-      this.generateAccount();
-    } else {
-      if (this.currentStep === 1) {
-        this.nextBtn = 'Finish';
-      }
-      this.stepHideController[this.currentStep] = true;
-      this.currentStep++;
-      this.stepHideController[this.currentStep] = false;
-    }
-  }
-
-  back() {
-    this.nextBtn = 'Next';
-    this.stepHideController[this.currentStep] = true;
-    this.currentStep--;
-    this.stepHideController[this.currentStep] = false;
-  }
-
-  showReferenceForm() {
-    this.referenceForm = true;
-  }
-
-  addReference() {
-    this.account.references.push(this.tempRef);
-    this.referenceForm = false;
-    this.tempRef = {name: ''};
-  }
-
-  showChildForm() {
-    this.childForm = true;
-  }
-
-  addChild() {
-    this.account.children.push(this.tempChild);
-    this.childForm = false;
-    this.tempChild = {name: ''};
-  }
-
-
 
   generateAccount() {
-    // Make the thing
+    for (const attribute in this.loginInfo) {
+      if (true) {
+        this.account[attribute] = this.loginInfo[attribute];
+      }
+    }
+    for (const attribute in this.personalInfo) {
+      if (true) {
+        this.account[attribute] = this.personalInfo[attribute];
+      }
+    }
+    if (this.account.type === 'nanny') {
+      for (const attribute in this.nannyInfo) {
+        if (true) {
+          this.account[attribute] = this.nannyInfo[attribute];
+        }
+      }
+    } else {
+      for (const attribute in this.parentInfo) {
+        if (true) {
+          this.account[attribute] = this.parentInfo[attribute];
+        }
+      }
+    }
   }
-
 }

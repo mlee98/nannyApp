@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
       firstName: 'Bob',
       lastName: 'Johnson',
       email: 'bobjohnson@gmail.com',
-      phone: 5125436733,
+      phone: '5125436733',
       address: '32 Sunshine Ave',
       city: 'Dallas',
       state: 'TX',
@@ -65,12 +65,12 @@ export class AppComponent implements OnInit {
       references: [
         {
           name: 'Ryan Reynolds',
-          phone: 5124687344,
+          phone: '5124687344',
           email: 'rreynolds@gmail.com',
         },
         {
           name: 'Hilary Duff',
-          phone: 2146723541,
+          phone: '2146723541',
           email: 'hilaryduff@gmail.com',
         }
       ]
