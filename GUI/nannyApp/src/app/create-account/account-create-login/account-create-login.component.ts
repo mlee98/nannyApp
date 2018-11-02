@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LoginInfo } from 'src/models';
+import { LoginInfo } from '../../models';
 
 @Component({
   selector: 'app-account-create-login',

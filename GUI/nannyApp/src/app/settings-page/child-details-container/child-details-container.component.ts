@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Account } from '../../models/account';
-import { Child } from '../../models/child';
+import { Account, Child } from '../../models';
 
 @Component({
   selector: 'app-child-details-container',

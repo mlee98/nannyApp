@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { Account, LoginInfo, NannyInfo, ParentInfo, PersonalInfo } from 'src/models';
+import { Account, LoginInfo, NannyInfo, ParentInfo, PersonalInfo } from '../models';
 
 
 @Component({

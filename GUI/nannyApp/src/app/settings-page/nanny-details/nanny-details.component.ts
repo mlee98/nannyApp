@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Account } from '../../models/account';
-import { NannyReference } from '../../models/nanny-reference';
+import { Account, NannyReference } from '../../models';
 
 @Component({
   selector: 'app-nanny-details',
