@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Account } from './models/account';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,16 @@ import { Account } from './models/account';
 })
 export class AppComponent implements OnInit {
   title = 'nannyApp';
+  constructor (private router: Router) {
+    this.router.events.subscribe(e => this.checkShowHeader(e));
+  }
 
   account: Account;
+  showHeader: Boolean = true;
 
   ngOnInit() {
     this.account = {
+      id: 1,
       firstName: 'Bob',
       lastName: 'Johnson',
       email: 'bobjohnson@gmail.com',
@@ -76,5 +82,13 @@ export class AppComponent implements OnInit {
       ]
     };
 
+  }
+
+  checkShowHeader(event) {
+    if (event.url === '/login' || event.url === '/create-account') {
+      this.showHeader = false;
+    } else if (event.url) {
+      this.showHeader = true;
+    }
   }
 }

@@ -21,7 +21,14 @@
 <div class="bottom-container">
   <div class="row">
     <div class="col">
-      <a href="#" style="color:white" class="btn">Don't have an account? Sign up here</a>
+      <a
+        style="color:white"
+        class="btn"
+        [routerLink]="['/create-account']"
+        routerLinkActive="router-link-active"
+      >
+        Don't have an account? Sign up here
+      </a>
     </div>
     <div class="col">
       <a href="#" style="color:white" class="btn">Forgot password?</a>
