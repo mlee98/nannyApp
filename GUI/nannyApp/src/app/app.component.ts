@@ -85,7 +85,8 @@ export class AppComponent implements OnInit {
   }
 
   checkShowHeader(event) {
-    if (event.url === '/login' || event.url === '/create-account') {
+    if (event.url === '/login' || event.url === '/create-account'
+        || event.url === '/404' || event.urlAfterRedirects === '/404') {
       this.showHeader = false;
     } else if (event.url) {
       this.showHeader = true;

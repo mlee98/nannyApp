@@ -12,11 +12,13 @@ import { LoginModule } from './login/login.module';
 import { SearchModule } from './search/search.module';
 import { HeaderComponent } from './header/header.component';
 import { HomePageModule } from './home-page/home-page.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

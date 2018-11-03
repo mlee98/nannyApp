@@ -8,17 +8,18 @@ import { SearchComponent } from './search/search.component';
 import { NannyProfilePageComponent } from './nanny-profile-page/nanny-profile-page.component';
 import { MyJobsComponent } from './my-jobs/my-jobs.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'create-account', component: CreateAccountComponent},
-  {path: 'home', component: HomePageComponent},
   {path: 'settings', component: SettingsPageComponent},
   {path: 'nanny-profile/:id', component: NannyProfilePageComponent},
   {path: 'jobs', component: MyJobsComponent},
   {path: 'search', component: SearchComponent},
-  {path: '', redirectTo: '/home', pathMatch: 'full'}, // where goes with default URL (check if logged in?)
-  // {path: '**'} -> make PageNotFoundComponent
+  {path: '', component: HomePageComponent}, // default URL (check if logged in?)
+  {path: '404', component: PageNotFoundComponent},
+  {path: '**', redirectTo: '404', pathMatch: 'full'}, // unknown path
 ];
 
 @NgModule({
