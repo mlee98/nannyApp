@@ -51,6 +51,6 @@ export class CreateAccountComponent implements OnInit {
       }
     }
 
-    this.router.navigateByUrl('/settings');
+    this.router.navigateByUrl('/home');
   }
 }

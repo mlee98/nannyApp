@@ -11,6 +11,7 @@ import { NannyProfilePageModule } from './nanny-profile-page/nanny-profile-page.
 import { LoginModule } from './login/login.module';
 import { SearchModule } from './search/search.module';
 import { HeaderComponent } from './header/header.component';
+import { HomePageModule } from './home-page/home-page.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { HeaderComponent } from './header/header.component';
     LoginModule,
     SearchModule,
     RouterModule,
+    HomePageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
