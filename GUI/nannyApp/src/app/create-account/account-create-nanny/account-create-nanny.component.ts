@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NannyInfo, NannyReference } from 'src/models';
+import { NannyInfo, NannyReference } from '../../models';
 
 @Component({
   selector: 'app-account-create-nanny',

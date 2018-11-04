@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ParentInfo, Child } from 'src/models';
+import { ParentInfo, Child } from '../../models';
 
 @Component({
   selector: 'app-account-create-parent',

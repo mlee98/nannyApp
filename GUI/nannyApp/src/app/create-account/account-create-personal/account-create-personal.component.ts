@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PersonalInfo } from 'src/models';
+import { PersonalInfo } from '../../models';
 
 @Component({
   selector: 'app-account-create-personal',
