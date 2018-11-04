@@ -49,25 +49,7 @@
       <p>
         {{dispJob.description}}
       </p>
-      <h4 *ngIf='isJob && !noJobs'>Schedule</h4>
-      <table class="table" *ngIf='isJob && !noJobs'>
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Time</th>
-            <th scope="col">Location</th>
-            <th scope="col">Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let task of dispJob.tasks">
-            <td>{{task.name}}</td>
-            <td>{{task.time}}</td>
-            <td>{{task.location}}</td>
-            <td>{{task.description}}</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-nanny-schedule *ngIf='isJob && !noJobs' [tasks]="dispJob.tasks"></app-nanny-schedule>
       <div class="row" *ngIf="!isJob">
         <div class="col-md-2">
           <button type="button" (click)='acceptRequest()' id="acceptReq" class="btn btn-success">Accept</button>
@@ -77,18 +59,9 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3" *ngIf='!isJob'></div>
-    <div class="col-md-3" *ngIf='isJob'>
-      <div class="card mb-3" *ngFor="let child of dispJob.children">
-        <div class="card-header bg-success large-text text-light">
-          {{child.name}} - {{child.age}}
-        </div>
-        <div class="card-body bg-light">
-          <b>Allergies:</b> {{child.allergies}}<br>
-          <b>Medications:</b> {{child.medications}}<br>
-          <b>Likes:</b> {{child.likes}}<br>
-          <b>Other:</b> {{child.specialReqs}}
-        </div>
+    <div class="col-md-3" >
+      <div *ngIf='isJob'>
+        <app-child-card *ngFor="let child of dispJob.children" [child]="child"></app-child-card>
       </div>
     </div>
   </div>
