@@ -28,7 +28,8 @@
       <td>{{task.description}}</td>
       <td *ngIf="!editable">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" [id]="task.name" [checked]="task.completed" [disabled]="!completeable" (change)="update()">
+          <input class="form-check-input" type="checkbox" value="" [id]="task.name" [checked]="task.completed" [disabled]="!completeable" (change)="update()"
+          [(ngModel)]="task.completed">
         </div>
       </td>
     </tr>

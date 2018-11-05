@@ -70,7 +70,10 @@ export class JobScheduleComponent implements OnInit {
   }
 
   update() {
-    const temporaryTasks = this.week.Mon;
+    const temporaryTasks = [];
+    for (let i = 0; i < this.week.Mon.length; i++) {
+      temporaryTasks.push(this.week.Mon[i]);
+    }
     for (let i = 0; i < this.week.Tues.length; i++) {
       temporaryTasks.push(this.week.Tues[i]);
     }
