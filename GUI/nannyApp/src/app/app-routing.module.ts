@@ -6,16 +6,18 @@ import { CreateAccountComponent } from './create-account/create-account.componen
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { SearchComponent } from './search/search.component';
 import { NannyProfilePageComponent } from './nanny-profile-page/nanny-profile-page.component';
-import { MyJobsComponent } from './my-jobs/my-jobs.component';
+import { NannyJobsComponent } from './nanny-jobs/nanny-jobs.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ParentJobsComponent } from './parent-jobs/parent-jobs.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'create-account', component: CreateAccountComponent},
   {path: 'settings', component: SettingsPageComponent},
   {path: 'nanny-profile/:id', component: NannyProfilePageComponent},
-  {path: 'jobs', component: MyJobsComponent},
+  {path: 'nanny-jobs', component: NannyJobsComponent},
+  {path: 'parent-jobs', component: ParentJobsComponent},
   {path: 'search', component: SearchComponent},
   {path: '', component: HomePageComponent}, // default URL (check if logged in?)
   {path: '404', component: PageNotFoundComponent},
