@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Job } from '../models';
+import { TEMP_ACCOUNT } from '../temp-account';
 
 @Component({
   selector: 'app-parent-jobs',
@@ -8,7 +9,6 @@ import { Job } from '../models';
 })
 export class ParentJobsComponent implements OnInit {
 
-  jobs: Job[];
   dispJob: Job;
   noJobs: boolean;
   nannyRating: number;
@@ -16,22 +16,9 @@ export class ParentJobsComponent implements OnInit {
 
   constructor() { }
 
+  jobs: Job[] = TEMP_ACCOUNT.parentJobs;
+
   ngOnInit() {
-    this.jobs = [
-      {id: 2, familyName: 'Smith', nannyName: 'Stokes', nannyPhone: '8179999999',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ',
-      duration: 'Dec 14-16', address: '4444 Bob Road', city: 'Dallas', state: 'Texas', zip: 75206,
-      tasks: [
-        {name: 'Lunch', time: '12:00PM', description: 'Warm leftovers in fridge', location: 'fdsfsd', day: 'Mon', completed: true},
-        {name: 'Soccer Practice', time: '3:00PM', description: 'Take lil jimmy to soccer',
-        location: '1111 Soccer Field Place', day: 'Tues'}
-      ],
-      children: [
-        {name: 'Johnny', age: 18, gender: 'male', allergies: 'gluten, milk', medications: 'ADHD', likes: 'Likes to play ball'},
-        {name: 'Billy', age: 14, gender: 'male', allergies: 'gluten, milk', medications: 'none', specialReqs: 'Plays too much fortnite'}
-      ]
-    }
-    ];
     this.dispJob = this.jobs[0];
     this.noJobs = false;
   }

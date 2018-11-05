@@ -35,6 +35,21 @@ export const TEMP_ACCOUNT: Account = {
       specialReqs: 'No TV 2 hours before bedtime',
     }
   ],
+  parentJobs: [
+    {id: 2, familyName: 'Smith', nannyName: 'Stokes', nannyPhone: '8179999999',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ',
+    duration: 'Dec 14-16', address: '4444 Bob Road', city: 'Dallas', state: 'Texas', zip: 75206,
+    tasks: [
+      {name: 'Lunch', time: '12:00PM', description: 'Warm leftovers in fridge', location: 'fdsfsd', day: 'Mon', completed: true},
+      {name: 'Soccer Practice', time: '3:00PM', description: 'Take lil jimmy to soccer',
+      location: '1111 Soccer Field Place', day: 'Tues'}
+    ],
+    children: [
+      {name: 'Johnny', age: 18, gender: 'male', allergies: 'gluten, milk', medications: 'ADHD', likes: 'Likes to play ball'},
+      {name: 'Billy', age: 14, gender: 'male', allergies: 'gluten, milk', medications: 'none', specialReqs: 'Plays too much fortnite'}
+    ]
+  }
+  ],
 
   // NANNY account info
   yearsExp: 3,
@@ -77,7 +92,7 @@ export const TEMP_ACCOUNT: Account = {
     ]
   }
   ],
-  jobs: [
+  nannyJobs: [
     {id: 2, familyName: 'Smith', nannyName: 'Stokes',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ',
     duration: 'M-T-W 12:00-8:00', address: '4444 Bob Road', city: 'Dallas', state: 'Texas', zip: 75206,

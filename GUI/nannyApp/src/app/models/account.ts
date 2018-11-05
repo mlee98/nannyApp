@@ -34,6 +34,7 @@ export class Account {
   bio?: string;
   references?: NannyReference[];
   requests?: Job[];
-  jobs?: Job[];
+  nannyJobs?: Job[];
+  parentJobs?: Job[];
   rating?: number;
 }

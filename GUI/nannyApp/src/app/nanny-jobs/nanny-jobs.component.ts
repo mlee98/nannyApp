@@ -19,7 +19,7 @@ export class NannyJobsComponent implements OnInit {
   constructor() { }
 
   requests: Job[] = TEMP_ACCOUNT.requests;
-  jobs: Job[] = TEMP_ACCOUNT.jobs;
+  jobs: Job[] = TEMP_ACCOUNT.nannyJobs;
 
   ngOnInit() {
     this.isJob = true;
