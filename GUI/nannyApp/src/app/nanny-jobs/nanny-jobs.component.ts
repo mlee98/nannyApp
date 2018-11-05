@@ -25,7 +25,7 @@ export class NannyJobsComponent implements OnInit {
       id: 0, familyName: 'You currently have no jobs', nannyName: ''
     };
     this.requests = [
-      {id: 1, familyName: 'Lee', nannyName: 'Stokes',
+      {id: 1, familyName: 'Lee', nannyName: 'Stokes', parentPhone: '9998887766',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ',
       duration: 'Dec 12-14', address: '4444 Bob Road', city: 'Dallas', state: 'Texas', zip: 75206,
       tasks: [

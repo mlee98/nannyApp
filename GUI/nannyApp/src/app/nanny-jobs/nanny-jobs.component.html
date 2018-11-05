@@ -14,7 +14,7 @@
           </button>
         </div>
         <div class="list-group text-truncate">
-          <button type="button" (click)="clickJob(job)" class="list-group-item list-group-item-action large-text "
+          <button type="button" (click)="clickJob(job)" class="list-group-item list-group-item-action large-text mb-3"
             *ngFor="let job of jobs">
             <div class="text-truncate">
               {{job.familyName}}
@@ -46,10 +46,11 @@
       <h2>{{dispJob.duration}}</h2>
       <h4 *ngIf='isJob' class="d-inline">{{dispJob.address}} {{dispJob.city}} </h4>
       <h4 class="d-inline">{{dispJob.state}} {{dispJob.zip}}</h4>
+      <h4>{{dispJob.parentPhone}}</h4>
       <p>
         {{dispJob.description}}
       </p>
-      <app-job-schedule *ngIf='isJob && !noJobs' [tasks]="dispJob.tasks"></app-job-schedule>
+      <app-job-schedule *ngIf='isJob && !noJobs' [tasks]="dispJob.tasks" [editable]="false" [completeable]="true"></app-job-schedule>
       <div class="row" *ngIf="!isJob">
         <div class="col-md-2">
           <button type="button" (click)='acceptRequest()' id="acceptReq" class="btn btn-success">Accept</button>

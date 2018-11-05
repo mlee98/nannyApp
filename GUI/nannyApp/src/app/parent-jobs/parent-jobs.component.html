@@ -20,6 +20,7 @@
               {{job.nannyName}}
             </div>
           </button>
+          <app-create-job [job]="tempJob"></app-create-job>
         </div>
       </div>
     </div>
@@ -53,7 +54,7 @@
         </div>
       </div>
 
-      <app-job-schedule [tasks]="dispJob.tasks"></app-job-schedule>
+      <app-job-schedule [tasks]="dispJob.tasks" [editable]="false" [completeable]="false"></app-job-schedule>
     </div>
     <div class="col-md-3">
       <app-child-card *ngFor="let child of dispJob.children" [child]="child"></app-child-card>

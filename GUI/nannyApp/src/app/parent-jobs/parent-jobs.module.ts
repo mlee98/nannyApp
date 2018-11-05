@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ParentJobsComponent } from './parent-jobs.component';
 import { JobsModule } from '../jobs/jobs.module';
 import { FormsModule } from '@angular/forms';
+import { CreateJobComponent } from './create-job/create-job.component';
 
 @NgModule({
   imports: [
@@ -10,7 +11,10 @@ import { FormsModule } from '@angular/forms';
     JobsModule,
     FormsModule
   ],
-  declarations: [ParentJobsComponent],
+  declarations: [
+    ParentJobsComponent,
+    CreateJobComponent
+  ],
   exports: [
     ParentJobsComponent
   ]

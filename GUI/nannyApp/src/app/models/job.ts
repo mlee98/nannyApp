@@ -1,9 +1,9 @@
 import { Task } from './task';
 import { Child } from './child';
 export class Job {
-  id: number;
-  familyName: string;
-  nannyName: string;
+  id?: number;
+  familyName?: string;
+  nannyName?: string;
   description?: string;
   address?: string;
   city?: string;
@@ -12,5 +12,6 @@ export class Job {
   children?: Child[];
   duration?: string;
   nannyPhone?: string;
+  parentPhone?: string;
   tasks?: Task[];
 }

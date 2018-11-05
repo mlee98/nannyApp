@@ -12,6 +12,7 @@ export class ParentJobsComponent implements OnInit {
   dispJob: Job;
   noJobs: boolean;
   nannyRating: number;
+  tempJob: Job = {};
 
   constructor() { }
 
@@ -22,7 +23,8 @@ export class ParentJobsComponent implements OnInit {
       duration: 'Dec 14-16', address: '4444 Bob Road', city: 'Dallas', state: 'Texas', zip: 75206,
       tasks: [
         {name: 'Lunch', time: '12:00PM', description: 'Warm leftovers in fridge', location: 'fdsfsd', day: 'Mon', completed: true},
-        {name: 'Soccer Practice', time: '3:00PM', description: 'Take lil jimmy to soccer', location: '1111 Soccer Field Place', day: 'Tues'}
+        {name: 'Soccer Practice', time: '3:00PM', description: 'Take lil jimmy to soccer',
+        location: '1111 Soccer Field Place', day: 'Tues'}
       ],
       children: [
         {name: 'Johnny', age: 18, gender: 'male', allergies: 'gluten, milk', medications: 'ADHD', likes: 'Likes to play ball'},

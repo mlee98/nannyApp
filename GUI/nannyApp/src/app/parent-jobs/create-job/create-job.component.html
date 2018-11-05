@@ -1,0 +1,74 @@
+<button type="button" class="list-group-item list-group-item-action large-text mt-4" data-toggle="modal" (click)="reset = true" data-target="#createJobModal">
+  <div class="text-truncate">
+    New Job
+  </div>
+</button>
+
+<!-- Modal -->
+<div class="modal fade bd-modal-lg" id="createJobModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" *ngIf="reset">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-info text-light">
+        <h3 class="modal-title" id="createJobModalTitle">Create Job</h3>
+      </div>
+      <div class="modal-body bg-light">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label for="task_name" class="large-text">
+                      Duration
+                    </label>
+                    <input type="text" id="task_name" class="form-control" placeholder="Ex: Jan 5-17" [(ngModel)]="job.duration"/>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="task_loc" class="large-text">
+                      Children
+                    </label>
+                    <select type="select" id="task_loc" class="form-control" [(ngModel)]="selectedChildName">
+                      <option></option>
+                      <option [value]="selectChild.name" *ngFor="let selectChild of children"> {{selectChild.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <br>
+                  <button type="button" class="btn btn-info" (click)="addChild()">Add Child</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label for="create_job_desc">Description</label>
+                    <textarea class="form-control" id="create_job_desc" rows="3" [(ngModel)]="job.description"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 row">
+              <div class="col-md-2">
+                <table class="table">
+                  <tbody>
+                    <tr *ngFor="let child of job.children">
+                      <th>{{child.name}}</th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-job-schedule [editable]="true" [tasks]="job.tasks" [completeable]="false"></app-job-schedule>
+      </div>
+      <div class="modal-footer bg-light">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="reset = false">Cancel</button>
+        <button type="button" class="btn btn-info">Create Job</button>
+      </div>
+    </div>
+  </div>
+</div>
