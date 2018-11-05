@@ -31,4 +31,5 @@ export class Account {
   canCook?: boolean;
   bio?: string;
   references?: NannyReference[];
+  rating?: number;
 }

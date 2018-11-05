@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Job } from '../models';
 
 @Component({
-  selector: 'app-my-jobs',
-  templateUrl: './my-jobs.component.html',
-  styleUrls: ['./my-jobs.component.css']
+  selector: 'app-nanny-jobs',
+  templateUrl: './nanny-jobs.component.html',
+  styleUrls: ['./nanny-jobs.component.css']
 })
-export class MyJobsComponent implements OnInit {
+export class NannyJobsComponent implements OnInit {
 
   jobs: Job[];
   requests: Job[];
@@ -22,15 +22,15 @@ export class MyJobsComponent implements OnInit {
   ngOnInit() {
     this.isJob = true;
     this.placeholderJob = {
-      id: 0, familyName: 'You currently have no jobs'
+      id: 0, familyName: 'You currently have no jobs', nannyName: ''
     };
     this.requests = [
-      {id: 1, familyName: 'Lee',
+      {id: 1, familyName: 'Lee', nannyName: 'Stokes',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ',
-      schedule: 'M-T-W 12:00-8:00', address: '4444 Bob Road', city: 'Dallas', state: 'Texas', zip: 75206,
+      duration: 'Dec 12-14', address: '4444 Bob Road', city: 'Dallas', state: 'Texas', zip: 75206,
       tasks: [
-        {name: 'Lunch', time: '12:00PM', description: 'Warm leftovers in fridge', location: 'fdsfsd'},
-        {name: 'Soccer Practice', time: '3:00PM', description: 'Take lil jimmy to soccer', location: '1111 Soccer Field Place'}
+        {name: 'Lunch', time: '12:00PM', description: 'Warm leftovers in fridge', location: 'fdsfsd', day: 'Mon'},
+        {name: 'Soccer Practice', time: '3:00PM', description: 'Take lil jimmy to soccer', location: '1111 Soccer Field Place', day: 'Tues'}
       ],
       children: [
         {name: 'Johnny', age: 18, gender: 'male', allergies: 'gluten, milk', medications: 'ADHD', likes: 'Likes to play ball'},
@@ -39,21 +39,21 @@ export class MyJobsComponent implements OnInit {
     }
     ];
     this.jobs = [
-      {id: 2, familyName: 'Smith',
+      {id: 2, familyName: 'Smith', nannyName: 'Stokes',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ',
-      schedule: 'M-T-W 12:00-8:00', address: '4444 Bob Road', city: 'Dallas', state: 'Texas', zip: 75206,
+      duration: 'M-T-W 12:00-8:00', address: '4444 Bob Road', city: 'Dallas', state: 'Texas', zip: 75206,
       tasks: [
-        {name: 'Lunch', time: '12:00PM', description: 'Warm leftovers in fridge', location: 'fdsfsd'},
-        {name: 'Soccer Practice', time: '3:00PM', description: 'Take lil jimmy to soccer', location: '1111 Soccer Field Place'}
+        {name: 'Lunch', time: '12:00PM', description: 'Warm leftovers in fridge', location: 'fdsfsd', day: 'Mon'},
+        {name: 'Soccer Practice', time: '3:00PM', description: 'Take lil jimmy to soccer', location: '1111 Soccer Field Place', day: 'Tues'}
       ],
       children: [
         {name: 'Johnny', age: 18, gender: 'male', allergies: 'gluten, milk', medications: 'ADHD', likes: 'Likes to play ball'},
         {name: 'Billy', age: 14, gender: 'male', allergies: 'gluten, milk', medications: 'none', specialReqs: 'Plays too much fortnite'}
       ]
     },
-      {id: 3, familyName: 'Jones'},
-      {id: 4, familyName: 'Brodsffs'},
-      {id: 5, familyName: 'Obama'}
+      {id: 3, familyName: 'Jones', nannyName: 'Dillard'},
+      {id: 4, familyName: 'Brodsffs', nannyName: 'Cage'},
+      {id: 5, familyName: 'Obama', nannyName: 'Knight'}
     ];
     this.dispJob = this.jobs[0];
     if (this.requests.length === 0) {

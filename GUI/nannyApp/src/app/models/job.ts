@@ -3,12 +3,14 @@ import { Child } from './child';
 export class Job {
   id: number;
   familyName: string;
+  nannyName: string;
   description?: string;
   address?: string;
   city?: string;
   state?: string;
   zip?: number;
   children?: Child[];
-  schedule?: string;
+  duration?: string;
+  nannyPhone?: string;
   tasks?: Task[];
 }

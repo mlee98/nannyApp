@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row bg-info display-4">
+    TEMP NAVBAR
+  </div>
+  <div class="row align-content-start">
+    <div class="col-md-2 container background-gray">
+      <div class="row">
+        <h1 class="text-truncate">Nannys</h1>
+      </div>
+      <div class="row">
+        <div class="list-group text-truncate mb-5" *ngIf="noJobs">
+          <button type="button" disabled class="list-group-item list-group-item-action large-text ">
+            No Nannys
+          </button>
+        </div>
+        <div class="list-group text-truncate mb-5">
+          <button type="button" (click)="clickJob(job)" class="list-group-item list-group-item-action large-text "
+            *ngFor="let job of jobs">
+            <div class="text-truncate">
+              {{job.nannyName}}
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-7 container">
+      <div class="row align-items-center">
+        <div class="col-md-9">
+          <h1 class="display-3">{{dispJob.nannyName}}</h1>
+        </div>
+        <div class="col-md-3">
+          <app-rating [ratingValue]="nannyRating"></app-rating>
+          <select id="addReviewRating" class="form-control d-inline mr-3" [(ngModel)]="nannyRating">
+            <option selected></option>
+            <option *ngFor="let star of [1,2,3,4,5]" [value]="star">{{star}} Stars</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <h2>{{dispJob.duration}}</h2>
+      </div>
+      <div class="row">
+        <h4 class="d-inline">Phone: {{dispJob.nannyPhone}}</h4>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <p>
+            {{dispJob.description}}
+          </p>
+        </div>
+        <div class="col-md-4 clearfix">
+          <button type="button" id="next_btn" class="btn float-right btn-info">Complete Job</button>
+        </div>
+      </div>
+
+      <app-job-schedule [tasks]="dispJob.tasks"></app-job-schedule>
+    </div>
+    <div class="col-md-3">
+      <app-child-card *ngFor="let child of dispJob.children" [child]="child"></app-child-card>
+    </div>
+  </div>
+</div>

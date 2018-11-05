@@ -5,24 +5,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SettingsPageModule } from './settings-page/settings-page.module';
 import { CreateAccountModule } from './create-account/create-account.module';
-import { MyJobsModule } from './my-jobs/my-jobs.module';
+import { NannyJobsModule } from './nanny-jobs/nanny-jobs.module';
 import { NannyProfilePageModule } from './nanny-profile-page/nanny-profile-page.module';
 import { LoginModule } from './login/login.module';
 import { SearchModule } from './search/search.module';
+import { ParentJobsModule } from './parent-jobs/parent-jobs.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SettingsPageModule,
     CreateAccountModule,
-    MyJobsModule,
+    NannyJobsModule,
     NannyProfilePageModule,
     LoginModule,
-    SearchModule
+    SearchModule,
+    ParentJobsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
