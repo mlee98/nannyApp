@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Account } from '../models';
+import { TEMP_ACCOUNT } from '../temp-account';
 
 @Component({
   selector: 'app-settings-page',
@@ -10,8 +11,10 @@ export class SettingsPageComponent implements OnInit {
 
   constructor() { }
 
-  @Input() account: Account;
+  account: Account;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.account = TEMP_ACCOUNT;
+  }
 
 }

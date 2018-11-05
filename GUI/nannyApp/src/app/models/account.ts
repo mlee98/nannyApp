@@ -1,5 +1,6 @@
 import { Child } from './child';
 import { NannyReference } from './nanny-reference';
+import { Job } from './job';
 
 export class Account {
   id?: number;
@@ -32,5 +33,7 @@ export class Account {
   canCook?: boolean;
   bio?: string;
   references?: NannyReference[];
+  requests?: Job[];
+  jobs?: Job[];
   rating?: number;
 }
