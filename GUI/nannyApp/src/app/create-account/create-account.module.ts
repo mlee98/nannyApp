@@ -6,11 +6,13 @@ import { AccountCreateLoginComponent } from './account-create-login/account-crea
 import { AccountCreatePersonalComponent } from './account-create-personal/account-create-personal.component';
 import { AccountCreateNannyComponent } from './account-create-nanny/account-create-nanny.component';
 import { AccountCreateParentComponent } from './account-create-parent/account-create-parent.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   declarations: [
     CreateAccountComponent,

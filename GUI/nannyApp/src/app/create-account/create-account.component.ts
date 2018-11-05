@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { Account, LoginInfo, NannyInfo, ParentInfo, PersonalInfo } from '../models';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class CreateAccountComponent implements OnInit {
   nannyInfo: NannyInfo = {references: []};
   parentInfo: ParentInfo = {children: []};
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.stepHideController = [false, true, true, true];
@@ -49,5 +50,7 @@ export class CreateAccountComponent implements OnInit {
         }
       }
     }
+
+    this.router.navigateByUrl('/');
   }
 }

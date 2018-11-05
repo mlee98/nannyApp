@@ -1,0 +1,51 @@
+<div class="d-flex justify-content-between bg-info">
+  <ul class="nav">
+    <li class="nav-item">
+        <a
+        class="nav-link"
+        [routerLink]="['/']"
+        routerLinkActive="router-link-active"
+      >
+        Home
+      </a>
+    </li>
+  </ul>
+  <ul class="nav">
+    <li *ngIf="accountType === 'parent'" class="nav-item">
+      <a
+        class="nav-link"
+        [routerLink]="['/search']"
+        routerLinkActive="router-link-active"
+      >
+        Search Jobs
+      </a>
+    </li>
+    <li *ngIf="accountType === 'nanny'" class="nav-item">
+      <a
+        class="nav-link"
+        [routerLink]="['/jobs']"
+        routerLinkActive="router-link-active"
+      >
+        My Jobs
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [routerLink]="['/settings']"
+        routerLinkActive="router-link-active"
+      >
+        My Account
+      </a>
+    </li>
+    <li class="nav-item">
+        <a
+          class="nav-link"
+          [routerLink]="['/login']"
+          routerLinkActive="router-link-active"
+        >
+          Logout
+        </a>
+      </li>
+  </ul>
+</div>

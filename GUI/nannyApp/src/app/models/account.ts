@@ -2,6 +2,7 @@ import { Child } from './child';
 import { NannyReference } from './nanny-reference';
 
 export class Account {
+  id?: number;
   firstName?: string;
   lastName?: string;
   username?: string;

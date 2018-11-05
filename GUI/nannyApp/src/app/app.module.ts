@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,10 +11,15 @@ import { NannyProfilePageModule } from './nanny-profile-page/nanny-profile-page.
 import { LoginModule } from './login/login.module';
 import { SearchModule } from './search/search.module';
 import { ParentJobsModule } from './parent-jobs/parent-jobs.module';
+import { HeaderComponent } from './header/header.component';
+import { HomePageModule } from './home-page/home-page.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,7 +30,9 @@ import { ParentJobsModule } from './parent-jobs/parent-jobs.module';
     NannyProfilePageModule,
     LoginModule,
     SearchModule,
-    ParentJobsModule
+    ParentJobsModule,
+    RouterModule,
+    HomePageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
