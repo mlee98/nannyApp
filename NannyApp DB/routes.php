@@ -66,6 +66,30 @@ $sth->execute();
 $nanny_info = $sth->fetchAll(); return $this->response->withJson($nanny_info);
 });
 
+//Insert into Nanny Table
+//Insert into parents table
+$app->post('/nannys/new', function ($request, $response) {
+	$input = $request->getParsedBody();
+	$sql = "INSERT INTO nanny_info (account_type,username,password,first_name,last_name,age,gender,address,city,state,zip,email,phone_number) 
+	VALUES (:account_type, :username, :password, :first_name, :last_name, :age, :gender, :address, :city, :state, :zip, :email, :phone_number)";
+	$sth = $this->db->prepare($sql);
+	$sth->bindParam("account_type", $input['account_type']);
+	$sth->bindParam("username", $input['username']);
+	$sth->bindParam("password", $input['password']);
+	$sth->bindParam("first_name", $input['first_name']);
+	$sth->bindParam("last_name", $input['last_name']);
+	$sth->bindParam("age", $input['age']);
+	$sth->bindParam("gender", $input['gender']);
+	$sth->bindParam("address", $input['address']);
+	$sth->bindParam("city", $input['city']);
+	$sth->bindParam("state", $input['state']);
+	$sth->bindParam("zip", $input['zip']);
+	$sth->bindParam("email", $input['email']);
+	$sth->bindParam("phone_number", $input['phone_number']);
+	$sth->execute();
+	return $this->response->withJson($input);
+});
+
 //Display References
 $app->get('/references', function ($request, $response, $args) 
 {$sth= $this->db->prepare("SELECT * FROM nanny_references");
@@ -73,9 +97,38 @@ $sth->execute();
 $nanny_references = $sth->fetchAll(); return $this->response->withJson($nanny_references);
 });
 
+//Insert into References
+$app->post('/references/new', function ($request, $response) {
+	$input = $request->getParsedBody();
+	$sql = "INSERT INTO nanny_references (user_id, name, phone_number, email) 
+	VALUES (:user_id, :name, :phone_number, :email)";
+	$sth = $this->db->prepare($sql);
+	$sth->bindParam("user_id", $input['user_id']);
+	$sth->bindParam("name", $input['name']);
+	$sth->bindParam("phone_number", $input['phone_number']);
+	$sth->bindParam("email", $input['email']);
+	$sth->execute();
+	return $this->response->withJson($input);
+});
+	
 //Display Skills
 $app->get('/skills', function ($request, $response, $args) 
 {$sth= $this->db->prepare("SELECT * FROM skills");
 $sth->execute();
 $skills = $sth->fetchAll(); return $this->response->withJson($skills);
+});
+
+//Insert into Skills
+$app->post('/skills/new', function ($request, $response) {
+	$input = $request->getParsedBody();
+	$sql = "INSERT INTO skills (user_id, cpr, can_cook, pet_friendly, can_drive) 
+	VALUES (:user_id, :cpr, :can_cook, :pet_friendly, :can_drive)";
+	$sth = $this->db->prepare($sql);
+	$sth->bindParam("user_id", $input['user_id']);
+	$sth->bindParam("cpr", $input['cpr']);
+	$sth->bindParam("can_cook", $input['can_cook']);
+	$sth->bindParam("pet_friendly", $input['pet_friendly']);
+	$sth->bindParam("can_drive", $input['can_drive']);
+	$sth->execute();
+	return $this->response->withJson($input);
 });
