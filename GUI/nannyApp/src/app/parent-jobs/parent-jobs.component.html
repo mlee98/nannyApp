@@ -60,16 +60,17 @@
         <div class="col-md-9">
           <h1 class="display-3">{{dispJob.nannyName}}</h1>
         </div>
-        <div class="col-md-3">
-          <app-rating [ratingValue]="nannyRating"></app-rating>
-          <select
-            id="addReviewRating"
-            class="form-control d-inline mr-3"
-            [(ngModel)]="nannyRating"
+        <div *ngIf="dispJob.isComplete" class="col-md-3">
+          <app-rating [ratingValue]="dispJob.rating"></app-rating>
+        </div>
+        <div *ngIf="!dispJob.isComplete" class="col-md-3 clearfix">
+          <button
+            type="button"
+            id="next_btn"
+            class="btn float-right btn-info"
           >
-            <option selected></option>
-            <option *ngFor="let star of [1,2,3,4,5]" [value]="star">{{star}} Stars</option>
-          </select>
+            Complete Job
+          </button>
         </div>
       </div>
       <div class="row">
@@ -83,15 +84,6 @@
           <p>
             {{dispJob.description}}
           </p>
-        </div>
-        <div class="col-md-4 clearfix">
-          <button
-            type="button"
-            id="next_btn"
-            class="btn float-right btn-info"
-          >
-            Complete Job
-          </button>
         </div>
       </div>
 

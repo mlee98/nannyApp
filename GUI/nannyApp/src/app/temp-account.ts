@@ -58,6 +58,7 @@ export const TEMP_ACCOUNT: Account = {
     {
       id: 2,
       isComplete: true,
+      rating: 5,
       familyName: 'Jones',
       nannyName: 'Jessica', nannyPhone: '5123347768',
       description: 'Make sure kids go to bed by 10',
