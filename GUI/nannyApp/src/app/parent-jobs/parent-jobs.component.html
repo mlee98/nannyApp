@@ -5,7 +5,7 @@
         <h1 class="text-truncate">Nannys</h1>
       </div>
       <div class="row">
-        <div class="list-group text-truncate mb-5" *ngIf="noJobs">
+        <div class="list-group text-truncate mb-5" *ngIf="!current.length">
           <button
             type="button"
             disabled
@@ -19,13 +19,39 @@
             type="button"
             (click)="clickJob(job)"
             class="list-group-item list-group-item-action large-text "
-            *ngFor="let job of jobs"
+            *ngFor="let job of current"
           >
             <div class="text-truncate">
               {{job.nannyName}}
             </div>
           </button>
           <app-create-job [job]="tempJob"></app-create-job>
+        </div>
+      </div>
+      <div class="row">
+        <h1 class="text-truncate">Completed</h1>
+      </div>
+      <div class="row">
+        <div class="list-group text-truncate mb-5" *ngIf="!completed.length">
+          <button
+            type="button"
+            disabled
+            class="list-group-item list-group-item-action large-text "
+          >
+            No Completed
+          </button>
+        </div>
+        <div class="list-group text-truncate mb-5">
+          <button
+            type="button"
+            (click)="clickJob(comp)"
+            class="list-group-item list-group-item-action large-text "
+            *ngFor="let comp of completed"
+          >
+            <div class="text-truncate">
+              {{comp.nannyName}}
+            </div>
+          </button>
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@ export const TEMP_ACCOUNT: Account = {
   zip: 75275,
   gender: 'Male',
   age: 27,
-  type: 'nanny',
+  type: 'parent',
 
   // PARENT account info
   children: [
@@ -37,7 +37,7 @@ export const TEMP_ACCOUNT: Account = {
   ],
   parentJobs: [
     {
-      id: 2,
+      id: 1,
       isComplete: false,
       familyName: 'Smith',
       nannyName: 'Stokes', nannyPhone: '8179999999',
@@ -54,6 +54,16 @@ export const TEMP_ACCOUNT: Account = {
           location: '1111 Soccer Field Place', day: 'Tues'
         }
       ],
+    },
+    {
+      id: 2,
+      isComplete: true,
+      familyName: 'Jones',
+      nannyName: 'Jessica', nannyPhone: '5123347768',
+      description: 'Make sure kids go to bed by 10',
+      duration: 'Dec 10-11',
+      address: '12 Sunshine Ave', city: 'Dallas', state: 'TX', zip: 75275,
+      tasks: [],
     }
   ],
 

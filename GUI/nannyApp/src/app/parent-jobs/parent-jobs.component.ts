@@ -10,17 +10,19 @@ import { TEMP_ACCOUNT } from '../temp-account';
 export class ParentJobsComponent implements OnInit {
 
   dispJob: Job;
-  noJobs: boolean;
   nannyRating: number;
   tempJob: Job = {};
 
   constructor() { }
 
   jobs: Job[] = TEMP_ACCOUNT.parentJobs;
+  current: Job[];
+  completed: Job[];
 
   ngOnInit() {
-    this.dispJob = this.jobs[0];
-    this.noJobs = false;
+    this.dispJob = this.jobs.length ? this.jobs[0] : null;
+    this.current = this.jobs.filter(job => job.isComplete === false);
+    this.completed = this.jobs.filter(job => job.isComplete === true);
   }
 
   clickJob(clickedJob) {
