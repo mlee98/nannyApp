@@ -1,13 +1,13 @@
 <h4>Schedule - {{currentDay}}</h4>
 <nav aria-label="ScheduleNav">
   <ul class="pagination mb-0">
-    <li class="page-item"><a class="page-link" href="#" (click)="!newTask ? showDay('Sun') : newTask = newTask">Sun</a></li>
-    <li class="page-item"><a class="page-link" href="#" (click)="!newTask ? showDay('Mon') : newTask = newTask">Mon</a></li>
-    <li class="page-item"><a class="page-link" href="#" (click)="!newTask ? showDay('Tues') : newTask = newTask">Tues</a></li>
-    <li class="page-item"><a class="page-link" href="#" (click)="!newTask ? showDay('Wed') : newTask = newTask">Wed</a></li>
-    <li class="page-item"><a class="page-link" href="#" (click)="!newTask ? showDay('Thurs') : newTask = newTask">Thurs</a></li>
-    <li class="page-item"><a class="page-link" href="#" (click)="!newTask ? showDay('Fri') : newTask = newTask">Fri</a></li>
-    <li class="page-item"><a class="page-link" href="#" (click)="!newTask ? showDay('Sat') : newTask = newTask">Sat</a></li>
+    <li class="page-item"><a class="page-link" (click)="!newTask ? showDay('Sun') : newTask = newTask">Sun</a></li>
+    <li class="page-item"><a class="page-link" (click)="!newTask ? showDay('Mon') : newTask = newTask">Mon</a></li>
+    <li class="page-item"><a class="page-link" (click)="!newTask ? showDay('Tues') : newTask = newTask">Tues</a></li>
+    <li class="page-item"><a class="page-link" (click)="!newTask ? showDay('Wed') : newTask = newTask">Wed</a></li>
+    <li class="page-item"><a class="page-link" (click)="!newTask ? showDay('Thurs') : newTask = newTask">Thurs</a></li>
+    <li class="page-item"><a class="page-link" (click)="!newTask ? showDay('Fri') : newTask = newTask">Fri</a></li>
+    <li class="page-item"><a class="page-link" (click)="!newTask ? showDay('Sat') : newTask = newTask">Sat</a></li>
   </ul>
 </nav>
 <table class="table mt-0">
