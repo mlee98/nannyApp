@@ -10,7 +10,7 @@ import { TEMP_ACCOUNT } from '../temp-account';
 export class ParentJobsComponent implements OnInit {
 
   dispJob: Job;
-  nannyRating: number;
+  tempRating: number;
   tempJob: Job = {};
 
   constructor() { }
@@ -27,6 +27,17 @@ export class ParentJobsComponent implements OnInit {
 
   clickJob(clickedJob) {
     this.dispJob = clickedJob;
+  }
+
+  clickPay() {
+    this.dispJob = {
+      ...this.dispJob,
+      isComplete: true,
+      rating: this.tempRating,
+    };
+    this.completed.push(this.dispJob);
+    this.tempRating = 0;
+    this.current = this.current.filter(job => job.isComplete === false);
   }
 
 }
