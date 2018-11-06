@@ -43,7 +43,6 @@ export class JobScheduleComponent implements OnInit {
 
   @Input()
   set tasks(arr: Task[]) {
-    console.log(arr);
     this._tasks = arr;
     this.createWeek(arr);
   }

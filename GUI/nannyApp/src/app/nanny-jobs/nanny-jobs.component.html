@@ -6,7 +6,11 @@
       </div>
       <div class="row">
         <div class="list-group text-truncate mb-5" *ngIf="!jobs.length">
-          <button type="button" disabled class="list-group-item list-group-item-action large-text ">
+          <button
+            type="button"
+            disabled
+            class="list-group-item list-group-item-action large-text "
+          >
             No Jobs
           </button>
         </div>
@@ -27,7 +31,11 @@
       </div>
       <div class="row">
         <div class="list-group text-truncate mb-5" *ngIf="!requests.length">
-          <button type="button" disabled class="list-group-item list-group-item-action large-text ">
+          <button
+            type="button"
+            disabled
+            class="list-group-item list-group-item-action large-text "
+          >
             No Requests
           </button>
         </div>
@@ -48,7 +56,11 @@
       </div>
       <div class="row">
         <div class="list-group text-truncate mb-5" *ngIf="!completed.length">
-          <button type="button" disabled class="list-group-item list-group-item-action large-text ">
+          <button
+            type="button"
+            disabled
+            class="list-group-item list-group-item-action large-text "
+          >
             No Completed Jobs
           </button>
         </div>
@@ -68,7 +80,11 @@
     <div class="col-md-7 container">
       <h1 class="display-3">{{dispJob.familyName}}</h1>
       <h2>{{dispJob.duration}}</h2>
-      <h4 *ngIf='dispJob.isAccepted' class="d-inline">{{dispJob.address}} {{dispJob.city}} </h4>
+      <h4
+        *ngIf='dispJob.isAccepted'
+        class="d-inline"
+      >
+        {{dispJob.address}} {{dispJob.city}} </h4>
       <h4 class="d-inline">{{dispJob.state}} {{dispJob.zip}}</h4>
       <h4>{{dispJob.parentPhone}}</h4>
       <p>
@@ -83,10 +99,24 @@
       </app-job-schedule>
       <div class="row" *ngIf="!dispJob.isAccepted">
         <div class="col-md-2">
-          <button type="button" (click)='acceptRequest()' id="acceptReq" class="btn btn-success">Accept</button>
+          <button
+            type="button"
+            (click)='acceptRequest()'
+            id="acceptReq"
+            class="btn btn-success"
+          >
+            Accept
+          </button>
         </div>
         <div class="col-md-2">
-          <button type="button" (click)='declineRequest()' id="declineReq" class="btn btn-secondary">Decline</button>
+          <button
+            type="button"
+            (click)='declineRequest()'
+            id="declineReq"
+            class="btn btn-secondary"
+          >
+            Decline
+          </button>
         </div>
       </div>
     </div>

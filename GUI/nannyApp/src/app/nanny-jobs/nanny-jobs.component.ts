@@ -12,7 +12,6 @@ export class NannyJobsComponent implements OnInit {
   dispJob: Job;
   placeholderJob: Job;
 
-
   constructor() { }
 
   requests: Job[] = TEMP_ACCOUNT.nannyJobs.filter(job => job.isAccepted === false);
@@ -24,12 +23,10 @@ export class NannyJobsComponent implements OnInit {
       id: 0, familyName: 'You currently have no jobs', nannyName: ''
     };
     this.dispJob = this.jobs[0];
-    console.log(this.dispJob);
   }
 
   clickJob(clickedJob) {
     this.dispJob = clickedJob;
-    console.log(this.dispJob);
   }
 
   clickRequest(clickedReq) {
