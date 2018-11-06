@@ -16,8 +16,8 @@ const routes: Routes = [
   {path: 'create-account', component: CreateAccountComponent},
   {path: 'settings', component: SettingsPageComponent},
   {path: 'nanny-profile/:id', component: NannyProfilePageComponent},
-  {path: 'my-jobs', component: NannyJobsComponent},
-  {path: 'my-jobs', component: ParentJobsComponent},
+  {path: 'nanny-jobs', component: NannyJobsComponent},
+  {path: 'parent-jobs', component: ParentJobsComponent},
   {path: 'search', component: SearchComponent},
   {path: '', component: HomePageComponent}, // default URL (check if logged in?)
   {path: '404', component: PageNotFoundComponent},

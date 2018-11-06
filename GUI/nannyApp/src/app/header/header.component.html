@@ -20,10 +20,19 @@
         Search Jobs
       </a>
     </li>
-    <li class="nav-item">
+    <li *ngIf="accountType === 'nanny'" class="nav-item">
       <a
         class="nav-link"
-        [routerLink]="['/my-jobs']"
+        [routerLink]="['/nanny-jobs']"
+        routerLinkActive="router-link-active"
+      >
+        My Jobs
+      </a>
+    </li>
+    <li *ngIf="accountType === 'parent'" class="nav-item">
+      <a
+        class="nav-link"
+        [routerLink]="['/parent-jobs']"
         routerLinkActive="router-link-active"
       >
         My Jobs
