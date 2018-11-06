@@ -18,17 +18,6 @@ class Week {
 })
 export class JobScheduleComponent implements OnInit {
 
-  @Input()
-  tasks: Task[];
-
-  @Input()
-  editable: boolean;
-
-  @Input()
-  completeable: boolean;
-
-  @Output() updateTasks = new EventEmitter();
-
   showTasks: Task[];
   currentDay: string;
   week: Week = {
@@ -40,21 +29,49 @@ export class JobScheduleComponent implements OnInit {
     Fri: [],
     Sat: []
   };
+  _tasks: Task[];
   newTask: boolean;
   tempTask: Task;
+
+  @Input()
+  editable: boolean;
+
+  @Input()
+  completeable: boolean;
+
+  @Output() updateTasks = new EventEmitter();
+
+  @Input()
+  set tasks(arr: Task[]) {
+    console.log(arr);
+    this._tasks = arr;
+    this.createWeek(arr);
+  }
 
   constructor() { }
 
   ngOnInit() {
-    this.currentDay = 'Sun';
+    this.newTask = false;
+    this.tempTask = {};
+  }
+
+  createWeek(arr: Task[]) {
+    this.week = {
+      Sun: [],
+      Mon: [],
+      Tues: [],
+      Wed: [],
+      Thurs: [],
+      Fri: [],
+      Sat: []
+    };
     if (!this.editable) {
-      this.tasks.forEach(element => {
+      arr.forEach(element => {
         this.week[element.day].push(element);
       });
     }
+    this.currentDay = 'Sun';
     this.showTasks = this.week.Sun;
-    this.newTask = false;
-    this.tempTask = {};
   }
 
   showDay(day: string) {
@@ -92,7 +109,7 @@ export class JobScheduleComponent implements OnInit {
     for (let i = 0; i < this.week.Sun.length; i++) {
       temporaryTasks.push(this.week.Sun[i]);
     }
-    this.tasks = temporaryTasks;
+    this._tasks = temporaryTasks;
     this.updateTasks.emit(true);
   }
 

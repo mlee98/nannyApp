@@ -10,42 +10,29 @@ import { TEMP_ACCOUNT } from '../temp-account';
 export class NannyJobsComponent implements OnInit {
 
   dispJob: Job;
-  isJob: boolean;
-  noReqs: boolean;
-  noJobs: boolean;
   placeholderJob: Job;
 
 
   constructor() { }
 
-  requests: Job[] = TEMP_ACCOUNT.requests;
-  jobs: Job[] = TEMP_ACCOUNT.nannyJobs;
+  requests: Job[] = TEMP_ACCOUNT.nannyJobs.filter(job => job.isAccepted === false);
+  jobs: Job[] = TEMP_ACCOUNT.nannyJobs.filter(job => job.isAccepted && !job.isComplete);
+  completed: Job[] = TEMP_ACCOUNT.nannyJobs.filter(job => job.isAccepted && job.isComplete);
 
   ngOnInit() {
-    this.isJob = true;
     this.placeholderJob = {
       id: 0, familyName: 'You currently have no jobs', nannyName: ''
     };
     this.dispJob = this.jobs[0];
-    if (this.requests.length === 0) {
-      this.noReqs = true;
-    } else {
-      this.noReqs = false;
-    }
-    if (this.jobs.length === 0) {
-      this.noJobs = true;
-    } else {
-      this.noJobs = false;
-    }
+    console.log(this.dispJob);
   }
 
   clickJob(clickedJob) {
-    this.isJob = true;
     this.dispJob = clickedJob;
+    console.log(this.dispJob);
   }
 
   clickRequest(clickedReq) {
-    this.isJob = false;
     this.dispJob = clickedReq;
   }
 
@@ -53,30 +40,23 @@ export class NannyJobsComponent implements OnInit {
     for (let i = 0; i < this.requests.length; i++) {
       if (this.requests[i].id === this.dispJob.id) {
         this.requests.splice(i, 1);
-        if (this.requests.length === 0) {
-          this.noReqs = true;
-        }
         break;
       }
     }
+    this.dispJob.isAccepted = true;
     this.jobs.push(this.dispJob);
-    this.isJob = true;
   }
 
   declineRequest() {
     for (let i = 0; i < this.requests.length; i++) {
       if (this.requests[i].id === this.dispJob.id) {
         this.requests.splice(i, 1);
-        if (this.requests.length === 0) {
-          this.noReqs = true;
-        }
         break;
       }
     }
-    if (this.noJobs === true) {
+    if (this.jobs.length) {
       this.dispJob = this.placeholderJob;
     } else {
-      this.isJob = true;
       this.dispJob = this.jobs[0];
     }
   }

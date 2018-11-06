@@ -36,19 +36,25 @@ export const TEMP_ACCOUNT: Account = {
     }
   ],
   parentJobs: [
-    {id: 2, familyName: 'Smith', nannyName: 'Stokes', nannyPhone: '8179999999',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ',
-    duration: 'Dec 14-16', address: '4444 Bob Road', city: 'Dallas', state: 'Texas', zip: 75206,
-    tasks: [
-      {name: 'Lunch', time: '12:00PM', description: 'Warm leftovers in fridge', location: 'fdsfsd', day: 'Mon', completed: true},
-      {name: 'Soccer Practice', time: '3:00PM', description: 'Take lil jimmy to soccer',
-      location: '1111 Soccer Field Place', day: 'Tues'}
-    ],
-    children: [
-      {name: 'Johnny', age: 18, gender: 'male', allergies: 'gluten, milk', medications: 'ADHD', likes: 'Likes to play ball'},
-      {name: 'Billy', age: 14, gender: 'male', allergies: 'gluten, milk', medications: 'none', specialReqs: 'Plays too much fortnite'}
-    ]
-  }
+    {
+      id: 2,
+      isComplete: false,
+      familyName: 'Smith',
+      nannyName: 'Stokes', nannyPhone: '8179999999',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ',
+      duration: 'Dec 14-16',
+      address: '4444 Bob Road', city: 'Dallas', state: 'Texas', zip: 75206,
+      tasks: [
+        {
+          name: 'Lunch', time: '12:00PM', description: 'Warm leftovers in fridge',
+          location: 'fdsfsd', day: 'Mon', completed: true
+        },
+        {
+          name: 'Soccer Practice', time: '3:00PM', description: 'Take lil jimmy to soccer',
+          location: '1111 Soccer Field Place', day: 'Tues'
+        }
+      ],
+    }
   ],
 
   // NANNY account info
@@ -78,35 +84,67 @@ export const TEMP_ACCOUNT: Account = {
       email: 'hilaryduff@gmail.com',
     }
   ],
-  requests: [
-    {id: 1, familyName: 'Lee', nannyName: 'Stokes', parentPhone: '9998887766',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ',
-    duration: 'Dec 12-14', address: '4444 Bob Road', city: 'Dallas', state: 'Texas', zip: 75206,
-    tasks: [
-      {name: 'Lunch', time: '12:00PM', description: 'Warm leftovers in fridge', location: 'fdsfsd', day: 'Mon'},
-      {name: 'Soccer Practice', time: '3:00PM', description: 'Take lil jimmy to soccer', location: '1111 Soccer Field Place', day: 'Tues'}
-    ],
-    children: [
-      {name: 'Johnny', age: 18, gender: 'male', allergies: 'gluten, milk', medications: 'ADHD', likes: 'Likes to play ball'},
-      {name: 'Billy', age: 14, gender: 'male', allergies: 'gluten, milk', medications: 'none', specialReqs: 'Plays too much fortnite'}
-    ]
-  }
-  ],
   nannyJobs: [
-    {id: 2, familyName: 'Smith', nannyName: 'Stokes',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ',
-    duration: 'M-T-W 12:00-8:00', address: '4444 Bob Road', city: 'Dallas', state: 'Texas', zip: 75206,
-    tasks: [
-      {name: 'Lunch', time: '12:00PM', description: 'Warm leftovers in fridge', location: 'fdsfsd', day: 'Mon'},
-      {name: 'Soccer Practice', time: '3:00PM', description: 'Take lil jimmy to soccer', location: '1111 Soccer Field Place', day: 'Tues'}
-    ],
-    children: [
-      {name: 'Johnny', age: 18, gender: 'male', allergies: 'gluten, milk', medications: 'ADHD', likes: 'Likes to play ball'},
-      {name: 'Billy', age: 14, gender: 'male', allergies: 'gluten, milk', medications: 'none', specialReqs: 'Plays too much fortnite'}
-    ]
-  },
-    {id: 3, familyName: 'Jones', nannyName: 'Dillard'},
-    {id: 4, familyName: 'Brodsffs', nannyName: 'Cage'},
-    {id: 5, familyName: 'Obama', nannyName: 'Knight'}
+    {
+      id: 1, isAccepted: false, isComplete: false,
+      familyName: 'Lee',
+      nannyName: 'Stokes',
+      parentPhone: '9998887766',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ',
+      duration: 'Dec 12-14', address: '4444 Bob Road', city: 'Dallas', state: 'Texas', zip: 75206,
+      tasks: [
+        {
+          name: 'Lunch', time: '12:00PM', description: 'Warm leftovers in fridge',
+          location: 'fdsfsd', day: 'Mon'
+        },
+        {
+          name: 'Soccer Practice', time: '3:00PM', description: 'Take lil jimmy to soccer',
+          location: '1111 Soccer Field Place', day: 'Tues'
+        }
+      ],
+      children: [
+        {
+          name: 'Johnny', age: 18, gender: 'male', allergies: 'gluten, milk',
+          medications: 'ADHD', likes: 'Likes to play ball'
+        },
+        {
+          name: 'Billy', age: 14, gender: 'male', allergies: 'gluten, milk',
+          medications: 'none', specialReqs: 'Plays too much fortnite'
+        }
+      ]
+    },
+    {
+      id: 2,
+      isAccepted: true,
+      isComplete: false,
+      familyName: 'Smith',
+      nannyName: 'Stokes',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ',
+      duration: 'M-T-W 12:00-8:00', address: '4444 Bob Road', city: 'Dallas',
+      state: 'Texas', zip: 75206,
+      tasks: [
+        {
+          name: 'Lunch', time: '12:00PM', description: 'Warm leftovers in fridge',
+          location: 'fdsfsd', day: 'Mon'
+        },
+        {
+          name: 'Soccer Practice', time: '3:00PM', description: 'Take lil jimmy to soccer',
+          location: '1111 Soccer Field Place', day: 'Tues'
+        }
+      ],
+      children: [
+        {
+          name: 'Johnny', age: 18, gender: 'male', allergies: 'gluten, milk',
+          medications: 'ADHD', likes: 'Likes to play ball'
+        },
+        {
+          name: 'Billy', age: 14, gender: 'male', allergies: 'gluten, milk',
+          medications: 'none', specialReqs: 'Plays too much fortnite'
+        }
+      ]
+    },
+    {id: 3, isAccepted: true, isComplete: false, familyName: 'Jones', nannyName: 'Dillard', tasks: []},
+    {id: 4, isAccepted: true, isComplete: false, familyName: 'Brodsffs', nannyName: 'Cage', tasks: []},
+    {id: 5, isAccepted: true, isComplete: true, familyName: 'Obama', nannyName: 'Knight', tasks: []}
   ],
 };

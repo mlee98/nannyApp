@@ -33,7 +33,6 @@ export class Account {
   canCook?: boolean;
   bio?: string;
   references?: NannyReference[];
-  requests?: Job[];
   nannyJobs?: Job[];
   parentJobs?: Job[];
   rating?: number;

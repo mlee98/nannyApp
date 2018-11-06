@@ -14,4 +14,6 @@ export class Job {
   nannyPhone?: string;
   parentPhone?: string;
   tasks?: Task[];
+  isAccepted?: Boolean;
+  isComplete?: Boolean;
 }

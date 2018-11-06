@@ -5,13 +5,16 @@
         <h1 class="text-truncate">Jobs</h1>
       </div>
       <div class="row">
-        <div class="list-group text-truncate mb-5" *ngIf="noJobs">
+        <div class="list-group text-truncate mb-5" *ngIf="!jobs.length">
           <button type="button" disabled class="list-group-item list-group-item-action large-text ">
             No Jobs
           </button>
         </div>
         <div class="list-group text-truncate">
-          <button type="button" (click)="clickJob(job)" class="list-group-item list-group-item-action large-text mb-3"
+          <button
+            type="button"
+            (click)="clickJob(job)"
+            class="list-group-item list-group-item-action large-text mb-3"
             *ngFor="let job of jobs">
             <div class="text-truncate">
               {{job.familyName}}
@@ -23,16 +26,40 @@
         <h1 class="text-truncate">Requests</h1>
       </div>
       <div class="row">
-        <div class="list-group text-truncate mb-5" *ngIf="noReqs">
+        <div class="list-group text-truncate mb-5" *ngIf="!requests.length">
           <button type="button" disabled class="list-group-item list-group-item-action large-text ">
             No Requests
           </button>
         </div>
-        <div class="list-group text-truncate mb-5" *ngIf="!noReqs">
-          <button type="button" (click)="clickRequest(req)" class="list-group-item list-group-item-action large-text "
+        <div class="list-group text-truncate mb-5" *ngIf="requests.length">
+          <button
+            type="button"
+            (click)="clickRequest(req)"
+            class="list-group-item list-group-item-action large-text "
             *ngFor="let req of requests">
             <div class="text-truncate">
               {{req.familyName}}
+            </div>
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <h1 class="text-truncate">Completed</h1>
+      </div>
+      <div class="row">
+        <div class="list-group text-truncate mb-5" *ngIf="!completed.length">
+          <button type="button" disabled class="list-group-item list-group-item-action large-text ">
+            No Completed Jobs
+          </button>
+        </div>
+        <div class="list-group text-truncate mb-5" *ngIf="completed.length">
+          <button
+            type="button"
+            (click)="clickRequest(job)"
+            class="list-group-item list-group-item-action large-text "
+            *ngFor="let job of completed">
+            <div class="text-truncate">
+              {{job.familyName}}
             </div>
           </button>
         </div>
@@ -41,14 +68,20 @@
     <div class="col-md-7 container">
       <h1 class="display-3">{{dispJob.familyName}}</h1>
       <h2>{{dispJob.duration}}</h2>
-      <h4 *ngIf='isJob' class="d-inline">{{dispJob.address}} {{dispJob.city}} </h4>
+      <h4 *ngIf='dispJob.isAccepted' class="d-inline">{{dispJob.address}} {{dispJob.city}} </h4>
       <h4 class="d-inline">{{dispJob.state}} {{dispJob.zip}}</h4>
       <h4>{{dispJob.parentPhone}}</h4>
       <p>
         {{dispJob.description}}
       </p>
-      <app-job-schedule *ngIf='isJob && !noJobs' [tasks]="dispJob.tasks" [editable]="false" [completeable]="true"></app-job-schedule>
-      <div class="row" *ngIf="!isJob">
+      <app-job-schedule
+        *ngIf='dispJob.isAccepted && jobs.length'
+        [tasks]="dispJob.tasks"
+        [editable]="false"
+        [completeable]="true"
+      >
+      </app-job-schedule>
+      <div class="row" *ngIf="!dispJob.isAccepted">
         <div class="col-md-2">
           <button type="button" (click)='acceptRequest()' id="acceptReq" class="btn btn-success">Accept</button>
         </div>
@@ -58,7 +91,7 @@
       </div>
     </div>
     <div class="col-md-3" >
-      <div *ngIf='isJob'>
+      <div *ngIf='dispJob.isAccepted'>
         <app-child-card *ngFor="let child of dispJob.children" [child]="child"></app-child-card>
       </div>
     </div>
