@@ -1,15 +1,18 @@
 <div class="container">
   <!-- Show no matter what account -->
   <app-account-details [account]="account"></app-account-details>
-  <app-payment-details [payment]="account.payment"></app-payment-details>
+
 
   <!-- show if nanny account -->
   <app-nanny-details [hidden]="account.type !== 'nanny'" [account]="account"></app-nanny-details>
 
   <!-- show if parent account -->
-  <div class="row" [hidden]="account.type !== 'parent'">
-    <div class="container pr-0 pl-0">
-      <app-child-details-container [account]="account"></app-child-details-container>
+  <div *ngIf="account.type === 'parent'">
+    <app-payment-details [payment]="account.payment"></app-payment-details>
+    <div class="row">
+      <div class="container pr-0 pl-0">
+        <app-child-details-container [account]="account"></app-child-details-container>
+      </div>
     </div>
   </div>
 </div>

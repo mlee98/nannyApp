@@ -2,7 +2,9 @@
   <div class="container d-flex justify-content-between bg-info mb-3">
     <div class="m-4 text-light">
       <h1 class="d-inline mr-4">My Wallet</h1>
-      <h5 class="d-inline">Automatic Payment {{ payment.automatic ? 'Enabled' : 'Disabled'}}</h5>
+      <h5 *ngIf="!isEditMode" class="d-inline">
+        Automatic Payment {{ payment.automatic ? 'Enabled' : 'Disabled'}}
+      </h5>
     </div>
     <button
       [disabled]="isEditMode && (!updatePayment.name

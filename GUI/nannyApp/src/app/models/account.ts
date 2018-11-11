@@ -17,10 +17,10 @@ export class Account {
   zip?: number;
   gender?: string;
   age?: number;
-  payment?: Payment;
   type?: string; // parent or nanny
 
   // PARENT
+  payment?: Payment;
   children?: Child[];
 
   // NANNY

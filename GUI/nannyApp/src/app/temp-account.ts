@@ -12,6 +12,9 @@ export const TEMP_ACCOUNT: Account = {
   zip: 75275,
   gender: 'Male',
   age: 27,
+  type: 'nanny',
+
+  // PARENT account info
   payment: {
     name: 'Bob Johnson',
     cardNumber: 234325555221,
@@ -22,9 +25,6 @@ export const TEMP_ACCOUNT: Account = {
     zip: 75275,
     automatic: false,
   },
-  type: 'parent',
-
-  // PARENT account info
   children: [
     {
       name: 'Jenny',
