@@ -1,0 +1,7 @@
+.long-label {
+  min-width: 8em;
+}
+
+.short-input {
+  max-width: 6em;
+}

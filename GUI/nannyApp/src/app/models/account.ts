@@ -1,6 +1,7 @@
 import { Child } from './child';
 import { NannyReference } from './nanny-reference';
 import { Job } from './job';
+import { Payment } from './payment';
 
 export class Account {
   id?: number;
@@ -16,6 +17,7 @@ export class Account {
   zip?: number;
   gender?: string;
   age?: number;
+  payment?: Payment;
   type?: string; // parent or nanny
 
   // PARENT

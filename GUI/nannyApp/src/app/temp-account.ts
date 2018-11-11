@@ -12,6 +12,15 @@ export const TEMP_ACCOUNT: Account = {
   zip: 75275,
   gender: 'Male',
   age: 27,
+  payment: {
+    name: 'Bob Johnson',
+    cardNumber: 234325555221,
+    expiration: '3/21',
+    address: '32 Sunshine Ave',
+    city: 'Dallas',
+    state: 'TX',
+    zip: 75275,
+  },
   type: 'parent',
 
   // PARENT account info
