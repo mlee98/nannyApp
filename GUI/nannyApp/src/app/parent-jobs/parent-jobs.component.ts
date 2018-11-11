@@ -30,14 +30,22 @@ export class ParentJobsComponent implements OnInit {
   }
 
   clickPay() {
+    this.jobs.forEach(job => {
+      if (job === this.dispJob) {
+        job.isComplete = true;
+        job.rating = this.tempRating;
+      }
+    });
+
     this.dispJob = {
       ...this.dispJob,
       isComplete: true,
       rating: this.tempRating,
     };
+
     this.completed.push(this.dispJob);
     this.tempRating = 0;
-    this.current = this.current.filter(job => job.isComplete === false);
+    this.current = this.jobs.filter(job => job.isComplete === false);
   }
 
 }
