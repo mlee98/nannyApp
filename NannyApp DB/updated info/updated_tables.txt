@@ -1,0 +1,96 @@
+create table login_info
+(
+    username varchar(50),
+    password varchar(50),
+    account_type varchar(50)
+);
+
+create table parent_info
+(
+    username varchar(50),
+    password varchar(50),
+    first_name varchar(50),
+    last_name varchar(50),
+    age int,
+    gender varchar(50),
+    address varchar(50),
+    city varchar(50),
+    state varchar(50),
+    zip int,
+    email varchar(100),
+    phone_number int
+);
+
+create table child_info
+(
+    parent_username varchar(50),
+    name varchar(50),
+    gender varchar(50),
+    age int,
+    likes varchar(250),
+    allergies varchar(250),
+    medications varchar(250),
+    special_requirements varchar(250)
+);
+    
+create table nanny_info
+(
+    username varchar(50),
+    password varchar(50),
+    first_name varchar(50),
+    last_name varchar(50),
+    age int,
+    gender varchar(50),
+    address varchar(50),
+    city varchar(50),
+    state varchar(50),
+    zip int,
+    email varchar(100),
+    phone_number int
+);    
+    
+create table nanny_references
+(
+	nanny_username varchar(50),
+        name varchar(50),
+        phone_number int,
+        email varchar(50)
+);
+  
+create table skills
+(
+    nanny_username varchar(50),
+    cpr bool,
+    can_cook bool,
+    pet_friendly bool,
+    can_drive bool
+);
+
+create table jobs(
+	job_id int NOT NULL AUTO_INCREMENT,
+	parent_username varchar (50),
+	nanny_username varchar (50),
+	parent_phone int,
+	nanny_phone int,
+	address varchar (50),
+	city varchar (50),
+	state varchar (50),
+	zip int,
+	is_accepted bool,
+	is_complete bool,
+	primary key (job_id)
+);
+
+create table tasks (
+	job_id int,
+	task_name varchar(50),
+	task_time varchar(50),
+	task_day varchar(50),
+	description varchar(50),
+	location varchar(50),
+	completed bool
+);
+
+
+
+

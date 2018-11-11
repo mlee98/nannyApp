@@ -1,0 +1,79 @@
+
+route:	http://localhost:8080/login/new
+{
+	"username":"random_parent123",
+	"password": "password123",
+	"account_type": "parent"
+}
+
+--------------------------------------------
+
+route:	http://localhost:8080/login/new
+{
+	"username":"random_nanny456",
+	"password": "password456",
+	"account_type": "nanny"
+}
+--------------------------------------------
+
+route:	http://localhost:8080/parents/new
+{
+	"username":"random_parent123",
+	"password": "password123",
+	"first_name":"blair",
+	"last_name":"saunders",
+	"age":"40",
+	"gender":"female",
+	"address":"123 purple way",
+	"city":"dallas",
+	"state":"texas", 
+	"zip":"75206",
+	"email":"b@b.com",
+	"phone_number":"8013344477"
+	
+}
+--------------------------------------------
+
+route:	http://localhost:8080/nanny/new
+{
+	"username":"random_nanny456",
+	"password": "password456",
+	"first_name":"george",
+	"last_name":"washington",
+	"age":"20",
+	"gender":"male",
+	"address":"123 blue way",
+	"city":"dallas",
+	"state":"texas", 
+	"zip":"75206",
+	"email":"b@b.com",
+	"phone_number":"8012244477"
+	
+}
+--------------------------------------------
+
+route:	http://localhost:8080/children/new
+{
+	"parent_username":"random_parent123",
+	"name": "ben",
+	"age": "6",
+	"gender": "male",
+	"likes": "soccer",
+	"allergies": "peanuts",
+	"medications": "none",
+	"special_requirements": "none"
+}
+--------------------------------------------
+
+route:	http://localhost:8080/references/new
+
+
+{
+	"nanny_username":"random_nanny456",
+	"name": "jack",
+	"phone_number": "1111111111",
+	"email": "j@j.com"
+}
+--------------------------------------------
+
+
