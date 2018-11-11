@@ -6,4 +6,5 @@ export class Payment {
   zip?: number;
   cardNumber?: number;
   expiration?: string;
+  automatic?: boolean;
 }

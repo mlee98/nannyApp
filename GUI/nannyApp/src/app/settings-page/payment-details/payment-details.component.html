@@ -1,11 +1,14 @@
 <div class="row border border-info mb-5 mt-3">
   <div class="container d-flex justify-content-between bg-info mb-3">
-    <h1 class="m-4 text-light">My Wallet</h1>
+    <div class="m-4 text-light">
+      <h1 class="d-inline mr-4">My Wallet</h1>
+      <h5 class="d-inline">Automatic Payment {{ payment.automatic ? 'Enabled' : 'Disabled'}}</h5>
+    </div>
     <button
       [disabled]="isEditMode && (!updatePayment.name
-                  || !updatePayment.cardNumber || !updatePayment.expiration
-                  || !updatePayment.address || !updatePayment.city
-                  || !updatePayment.state || !updatePayment.zip)"
+        || !updatePayment.cardNumber || !updatePayment.expiration
+        || !updatePayment.address || !updatePayment.city
+        || !updatePayment.state || !updatePayment.zip)"
       (click)="clickInfo()"
       class="btn btn-link text-light"
     >
@@ -117,7 +120,15 @@
                 id="zip">
             </div>
         </div>
-
+      </div>
+      <div class="form-group row d-flex justify-content-end align-items-baseline m-4">
+        <input
+          type="checkbox"
+          [(ngModel)]="updatePayment.automatic"
+          name="automatic"
+          class="mr-2"
+          id="automatic">
+        <label for="automatic" class="mr-4">Automatic Payment</label>
       </div>
     </form>
   </div>

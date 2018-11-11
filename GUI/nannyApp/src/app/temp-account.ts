@@ -20,6 +20,7 @@ export const TEMP_ACCOUNT: Account = {
     city: 'Dallas',
     state: 'TX',
     zip: 75275,
+    automatic: false,
   },
   type: 'parent',
 
