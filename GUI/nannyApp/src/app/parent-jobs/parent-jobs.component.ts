@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Job } from '../models';
+import { Job, Child } from '../models';
 import { TEMP_ACCOUNT } from '../temp-account';
+import { JobInfo } from '../services/job-info.service';
+import { AccountInfo } from '../services/account-info.service';
 
 @Component({
   selector: 'app-parent-jobs',
@@ -12,15 +14,25 @@ export class ParentJobsComponent implements OnInit {
   dispJob: Job;
   noJobs: boolean;
   nannyRating: number;
-  tempJob: Job = {};
+  children: Child[];
+  tempJob: {};
 
-  constructor() { }
+  constructor(
+    private jobInfo: JobInfo,
+    private accountInfo: AccountInfo
+  ) { }
 
-  jobs: Job[] = TEMP_ACCOUNT.parentJobs;
+  jobs: Job[]; // = TEMP_ACCOUNT.parentJobs;
 
   ngOnInit() {
-    this.dispJob = this.jobs[0];
-    this.noJobs = false;
+    this.jobInfo.getParentJobsById(1).subscribe((result) => {
+      this.jobs = result;
+      this.dispJob = this.jobs[0];
+      this.noJobs = false;
+      this.accountInfo.getChildrenById(1).subscribe((children) => {
+        this.children = children;
+      });
+    });
   }
 
   clickJob(clickedJob) {

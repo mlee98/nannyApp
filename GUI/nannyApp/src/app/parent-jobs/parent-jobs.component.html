@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="jobs && children">
   <div class="row align-content-start">
     <div class="col-md-2 container background-gray">
       <div class="row">
@@ -25,7 +25,7 @@
               {{job.nannyName}}
             </div>
           </button>
-          <app-create-job [job]="tempJob"></app-create-job>
+          <app-create-job [children]="children"></app-create-job>
         </div>
       </div>
     </div>
