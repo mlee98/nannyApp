@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Job, Account, Child } from '../models';
+import { Payment } from '../models/payment';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,7 @@ export class AccountInfo {
     protected httpClient: HttpClient
   ) {}
 
+  // Get Requests
   getAccountById(id: number): Observable<Account> {
     return this.httpClient
       .get<Account>(`${this.endPoint}/accounts/${id}`, this.httpOptions)
@@ -30,6 +32,19 @@ export class AccountInfo {
   getChildrenById(id: number): Observable<Child[]> {
     return this.httpClient
       .get<Child[]>(`${this.endPoint}/accounts/children/${id}`, this.httpOptions)
+      .pipe(catchError(this.handleException));
+  }
+
+  getAutomaticPaybyId(id: number): Observable<Payment> {
+    return this.httpClient
+      .get<Payment>(`${this.endPoint}/accounts/payments/${id}`, this.httpOptions)
+      .pipe(catchError(this.handleException));
+  }
+
+  // Post Requests
+  addAccount(account: Account): Observable<Account> {
+    return this.httpClient
+      .post<Account>(`${this.endPoint}/accounts/new`, account, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 
