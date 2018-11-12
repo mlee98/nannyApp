@@ -13,7 +13,7 @@ export class CreateAccountComponent implements OnInit {
   account: Account = {};
   stepHideController: boolean[];
   loginInfo: LoginInfo = {};
-  personalInfo: PersonalInfo = {};
+  personalInfo: PersonalInfo = {paymentMethod: {}};
   nannyInfo: NannyInfo = {references: []};
   parentInfo: ParentInfo = {children: []};
 
@@ -24,6 +24,7 @@ export class CreateAccountComponent implements OnInit {
     this.loginInfo.type = 'nanny';
     this.account.references = [];
     this.account.children = [];
+    this.account.paymentMethod = {};
   }
 
   generateAccount() {
