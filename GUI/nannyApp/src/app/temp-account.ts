@@ -12,7 +12,7 @@ export const TEMP_ACCOUNT: Account = {
   zip: 75275,
   gender: 'Male',
   age: 27,
-  type: 'nanny',
+  type: 'parent',
 
   // PARENT account info
   payment: {

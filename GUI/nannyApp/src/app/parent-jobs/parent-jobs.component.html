@@ -9,7 +9,7 @@
           <button
             type="button"
             disabled
-            class="list-group-item list-group-item-action large-text "
+            class="list-group-item list-group-item-action large-text"
           >
             No Nannys
           </button>
@@ -117,17 +117,20 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="completeModalTitle">
+        <h5 *ngIf="!displayPayment" class="modal-title" id="completeModalTitle">
           How did {{dispJob.nannyName}} do?
+        </h5>
+        <h5 *ngIf="displayPayment" class="modal-title" id="completeModalTitle">
+          Please Enter Your Billing Information
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <h6>Leave a quick rating, where 5 stars is fantastic!</h6>
+        <h6 *ngIf="!displayPayment">Leave a quick rating, where 5 stars is fantastic!</h6>
         <form>
-          <div class="form-group">
+          <div *ngIf="!displayPayment" class="form-group">
             <select
             id="jobRating"
             name="jobRating"
@@ -140,18 +143,108 @@
               </option>
             </select>
           </div>
+          <div *ngIf="displayPayment">
+            <div class="form-group row m-4">
+              <label for="name" class="mr-4">Cardholder Name</label>
+              <input
+                type="text"
+                [(ngModel)]="payment.name"
+                name="name"
+                class="form-control"
+                id="name">
+            </div>
+            <div class="form-group row m-4">
+              <label for="cardNumber">Card Number</label>
+              <input
+                type="text"
+                [(ngModel)]="payment.cardNumber"
+                name="cardNumber"
+                class="form-control"
+                id="cardNumber">
+            </div>
+            <div class="form-group row m-4">
+              <label for="expiration" class="mr-2">Expiration Date</label>
+              <input
+                type="text"
+                [(ngModel)]="payment.expiration"
+                name="expiration"
+                class="form-control"
+                id="expiration">
+            </div>
+            <div class="form-group row m-4">
+              <label for="address" class="mr-4">Address</label>
+              <input
+                type="text"
+                [(ngModel)]="payment.address"
+                name="address"
+                class="form-control"
+                id="address">
+            </div>
+            <div class="form-group row m-4">
+              <label for="city" class="mr-4">City</label>
+              <input
+                type="text"
+                [(ngModel)]="payment.city"
+                name="city"
+                class="form-control"
+                id="city">
+            </div>
+            <div class="form-group row m-4">
+              <div class="col d-flex">
+                <div class="form-group row mr-3">
+                  <label for="state" class="mr-4">State</label>
+                  <input
+                    type="text"
+                    [(ngModel)]="payment.state"
+                    name="state"
+                    class="form-control"
+                    id="state">
+                </div>
+                <div class="form-group row ml-3">
+                    <label for="zip" class="mr-4">Zip</label>
+                    <input
+                      type="text"
+                      [(ngModel)]="payment.zip"
+                      name="zip"
+                      class="form-control"
+                      id="zip">
+                  </div>
+              </div>
+            </div>
+          </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
         <button
+          *ngIf="!displayPayment && autoPay"
           type="button"
           [disabled]="!tempRating && !dispJob.isComplete"
-          (click)="clickPay()"
+          (click)="submitRatingAutoPay()"
           class="btn btn-primary"
           data-dismiss="modal"
         >
           Finish and Pay
+        </button>
+        <button
+          *ngIf="!displayPayment && !autoPay"
+          type="button"
+          [disabled]="!tempRating && !dispJob.isComplete"
+          (click)="submitRating()"
+          class="btn btn-primary"
+        >
+          Finish and Pay
+        </button>
+        <button
+          [hidden]="!displayPayment"
+          [disabled]="!payment.name || !payment.cardNumber || !payment.expiration
+            || !payment.address || !payment.city || !payment.state || !payment.zip"
+          type="button"
+          (click)="submitPayment()"
+          class="btn btn-primary"
+          data-dismiss="modal"
+        >
+          Complete Payment
         </button>
       </div>
     </div>
