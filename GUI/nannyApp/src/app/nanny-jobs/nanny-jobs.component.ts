@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Job } from '../models';
 import { TEMP_ACCOUNT } from '../temp-account';
 import { JobInfo } from '../services/job-info.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class NannyJobsComponent implements OnInit {
   };
 
   constructor(
-    private jobInfo: JobInfo
+    private jobInfo: JobInfo,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   requests: Job[]; // = TEMP_ACCOUNT.nannyJobs.filter(job => job.isAccepted === false);
@@ -25,11 +27,13 @@ export class NannyJobsComponent implements OnInit {
   completed: Job[]; // = TEMP_ACCOUNT.nannyJobs.filter(job => job.isAccepted && job.isComplete);
 
   ngOnInit() {
-    this.jobInfo.getNannyJobsById(1).subscribe((result) => {
-      this.requests = result.filter(job => job.isAccepted === false);
-      this.jobs = result.filter(job => job.isAccepted && !job.isComplete);
-      this.completed = result.filter(job => job.isAccepted && job.isComplete);
-      this.dispJob = this.jobs[0];
+    this.activatedRoute.params.subscribe((params) => {
+      this.jobInfo.getNannyJobsById(params.id).subscribe((result) => {
+        this.requests = result.filter(job => job.isAccepted === false);
+        this.jobs = result.filter(job => job.isAccepted && !job.isComplete);
+        this.completed = result.filter(job => job.isAccepted && job.isComplete);
+        this.dispJob = this.jobs[0];
+      });
     });
   }
 

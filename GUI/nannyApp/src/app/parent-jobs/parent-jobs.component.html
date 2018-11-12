@@ -39,7 +39,7 @@
         <div class="col-md-9">
           <h1 class="display-3">{{dispJob.nannyName}}</h1>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3" *ngIf="ongoing">
           <app-rating [ratingValue]="nannyRating"></app-rating>
           <select id="addReviewRating" class="form-control d-inline mr-3" [(ngModel)]="nannyRating">
             <option selected></option>
@@ -59,8 +59,8 @@
             {{dispJob.description}}
           </p>
         </div>
-        <div class="col-md-4 clearfix">
-          <button type="button" id="next_btn" class="btn float-right btn-info">
+        <div class="col-md-4 clearfix" *ngIf="ongoing">
+          <button type="button" id="next_btn" class="btn float-right btn-info" *ngIf="ongoing" (click)="completeJob()">
             Complete Job
           </button>
         </div>

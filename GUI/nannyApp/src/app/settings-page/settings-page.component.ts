@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Account } from '../models';
 import { TEMP_ACCOUNT } from '../temp-account';
 import { AccountInfo } from '../services/account-info.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-settings-page',
@@ -11,14 +12,21 @@ import { AccountInfo } from '../services/account-info.service';
 export class SettingsPageComponent implements OnInit {
 
   constructor(
-    private accountInfo: AccountInfo
+    private accountInfo: AccountInfo,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   account: Account;
 
   ngOnInit() {
-    this.accountInfo.getAccountById(1).subscribe((result) => {
-      this.account = result;
+    this.activatedRoute.params.subscribe((params) => {
+      if (params.id) {
+        this.accountInfo.getAccountById(+params.id).subscribe((result) => {
+          this.account = result;
+        });
+      } else {
+        this.account = {};
+      }
     });
     // this.account = TEMP_ACCOUNT;
   }
