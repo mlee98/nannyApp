@@ -29,7 +29,7 @@ export class JobScheduleComponent implements OnInit {
     Fri: [],
     Sat: []
   };
-  _tasks: Task[];
+  // _tasks: Task[];
   newTask: boolean;
   tempTask: Task;
 
@@ -42,15 +42,18 @@ export class JobScheduleComponent implements OnInit {
   @Output() updateTasks = new EventEmitter();
 
   @Input()
-  set tasks(arr: Task[]) {
+  tasks: Task[];
+
+  /*set tasks(arr: Task[]) {
     this._tasks = arr;
     this.createWeek(arr);
-  }
+  }*/
 
   constructor() { }
 
   ngOnInit() {
     this.newTask = false;
+    this.createWeek(this.tasks);
     this.tempTask = {};
   }
 
@@ -108,8 +111,8 @@ export class JobScheduleComponent implements OnInit {
     for (let i = 0; i < this.week.Sun.length; i++) {
       temporaryTasks.push(this.week.Sun[i]);
     }
-    this._tasks = temporaryTasks;
-    this.updateTasks.emit(true);
+    this.tasks = temporaryTasks;
+    this.updateTasks.emit(this.tasks);
   }
 
 }

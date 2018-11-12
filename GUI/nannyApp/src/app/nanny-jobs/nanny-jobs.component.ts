@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Job } from '../models';
 import { TEMP_ACCOUNT } from '../temp-account';
+import { JobInfo } from '../services/job-info.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-nanny-jobs',
@@ -10,19 +13,28 @@ import { TEMP_ACCOUNT } from '../temp-account';
 export class NannyJobsComponent implements OnInit {
 
   dispJob: Job;
-  placeholderJob: Job;
+  placeholderJob: {
+    id: 0, familyName: 'You currently have no jobs', nannyName: ''
+  };
 
-  constructor() { }
+  constructor(
+    private jobInfo: JobInfo,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
-  requests: Job[] = TEMP_ACCOUNT.nannyJobs.filter(job => job.isAccepted === false);
-  jobs: Job[] = TEMP_ACCOUNT.nannyJobs.filter(job => job.isAccepted && !job.isComplete);
-  completed: Job[] = TEMP_ACCOUNT.nannyJobs.filter(job => job.isAccepted && job.isComplete);
+  requests: Job[]; // = TEMP_ACCOUNT.nannyJobs.filter(job => job.isAccepted === false);
+  jobs: Job[]; // = TEMP_ACCOUNT.nannyJobs.filter(job => job.isAccepted && !job.isComplete);
+  completed: Job[]; // = TEMP_ACCOUNT.nannyJobs.filter(job => job.isAccepted && job.isComplete);
 
   ngOnInit() {
-    this.placeholderJob = {
-      id: 0, familyName: 'You currently have no jobs', nannyName: ''
-    };
-    this.dispJob = this.jobs[0];
+    this.activatedRoute.params.subscribe((params) => {
+      this.jobInfo.getNannyJobsById(params.id).subscribe((result) => {
+        this.requests = result.filter(job => job.isAccepted === false);
+        this.jobs = result.filter(job => job.isAccepted && !job.isComplete);
+        this.completed = result.filter(job => job.isAccepted && job.isComplete);
+        this.dispJob = this.jobs[0];
+      });
+    });
   }
 
   clickJob(clickedJob) {

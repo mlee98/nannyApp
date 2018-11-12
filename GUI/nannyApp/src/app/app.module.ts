@@ -14,6 +14,11 @@ import { ParentJobsModule } from './parent-jobs/parent-jobs.module';
 import { HeaderComponent } from './header/header.component';
 import { HomePageModule } from './home-page/home-page.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AccountInfo } from './services/account-info.service';
+import { JobInfo } from './services/job-info.service';
+
+
 
 @NgModule({
   declarations: [
@@ -32,9 +37,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     SearchModule,
     ParentJobsModule,
     RouterModule,
-    HomePageModule
+    HomePageModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [AccountInfo, JobInfo],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

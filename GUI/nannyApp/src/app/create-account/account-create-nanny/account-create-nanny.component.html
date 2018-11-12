@@ -74,18 +74,28 @@
                           </label>
                         </div>
                       </div>
+                      <div class="row">
+                        <div class="col-md-5 pl-0">
+                          <label for="nanny_rate" class="large-text">
+                            Hourly Rate
+                          </label>
+                          <input type="number" id="nanny_rate" class="form-control" placeholder=""
+                            [(ngModel)]='nannyInfo.minWage' />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-md-6">
-              <div class="form-group">
-                <label for="nanny_bio" class="large-text">Bio</label>
-                <textarea class="form-control" id="nanny_bio" rows="6" [(ngModel)]="nannyInfo.bio"></textarea>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="nanny_bio" class="large-text">Bio</label>
+                  <textarea class="form-control" id="nanny_bio" rows="9" [(ngModel)]="nannyInfo.bio"></textarea>
+                </div>
               </div>
             </div>
-
           </div>
           <div class="row justify-content-center">
             <p class="large-text text-center">References</p>
@@ -125,8 +135,7 @@
                 <label for="reference_email" class="large-text">
                   Email
                 </label>
-                <input type="email" id="reference_email" class="form-control" placeholder="you@example.com"
-                  [(ngModel)]='tempRef.email' />
+                <input type="email" id="reference_email" class="form-control" placeholder="you@example.com" [(ngModel)]='tempRef.email' />
               </div>
             </div>
             <div class="col-md-4">

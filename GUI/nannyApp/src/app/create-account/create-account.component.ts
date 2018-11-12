@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Account, LoginInfo, NannyInfo, ParentInfo, PersonalInfo } from '../models';
 import { Router } from '@angular/router';
+import { AccountInfo } from '../services/account-info.service';
 
 
 @Component({
@@ -17,7 +18,10 @@ export class CreateAccountComponent implements OnInit {
   nannyInfo: NannyInfo = {references: []};
   parentInfo: ParentInfo = {children: []};
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private accountInfo: AccountInfo
+    ) { }
 
   ngOnInit() {
     this.stepHideController = [false, true, true, true];
@@ -51,6 +55,11 @@ export class CreateAccountComponent implements OnInit {
       }
     }
 
+    /*this.accountInfo.addAccount(this.account).subscribe(() => {
+      console.log(this.account);
+      this.router.navigateByUrl('/');
+    });*/
+    console.log(this.account);
     this.router.navigateByUrl('/');
   }
 }

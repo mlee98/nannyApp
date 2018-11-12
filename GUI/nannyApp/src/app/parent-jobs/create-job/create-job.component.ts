@@ -8,13 +8,13 @@ import { Job, Child } from 'src/app/models';
 })
 export class CreateJobComponent implements OnInit {
 
-  @Input()
-  job: Job = {};
+  @Output() newJob: EventEmitter<Job> = new EventEmitter();
 
   @Input()
-  children: Child[] = [];
+  children: Child[];
 
   reset: boolean;
+  job: Job;
 
   selectedChildName: '';
 
@@ -22,14 +22,11 @@ export class CreateJobComponent implements OnInit {
 
   ngOnInit() {
     this.reset = false;
-    this.job.children = [
-      {name: 'Bill', age: 12}
-    ];
-    this.children = [
-      {name: 'Bill', age: 12},
-      {name: 'Sam', age: 12},
-      {name: 'Jill', age: 12}
-    ];
+    this.job = {
+      duration: '',
+      children: [],
+      tasks: []
+    };
   }
 
   addChild() {
@@ -39,6 +36,16 @@ export class CreateJobComponent implements OnInit {
         break;
       }
     }
+  }
+
+  createJob() {
+    this.job.nannyName = 'Bob';
+    this.newJob.emit(this.job);
+    this.job = {
+      duration: '',
+      children: [],
+      tasks: []
+    };
   }
 
 }
