@@ -64,11 +64,10 @@
           </div>
         </div>
         <app-job-schedule [editable]="true" [tasks]="job.tasks" (updateTasks)="job.tasks = $event" [completeable]="false"></app-job-schedule>
-        <pre>{{job | json}}</pre>
       </div>
       <div class="modal-footer bg-light">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="reset = false">Cancel</button>
-        <button type="button" class="btn btn-info" (click)="createJob()" [disabled]="!job.duration || !job.children || !job.description || !job.tasks">Create Job</button>
+        <button type="button" class="btn btn-info" (click)="createJob()" [disabled]="!job.duration || !job.children || !job.description || !job.tasks[0]" data-dismiss="modal">Create Job</button>
       </div>
     </div>
   </div>

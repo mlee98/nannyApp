@@ -33,6 +33,12 @@ export class JobInfo {
       .pipe(catchError(this.handleException));
   }
 
+  addJob(job: Job): Observable<Job> {
+    return this.httpClient
+      .post<Job>(`${this.endPoint}/parentJobs/new`, job, this.httpOptions)
+      .pipe(catchError(this.handleException));
+  }
+
   protected handleException(exception: any) {
     const message = `${exception.status} : ${exception.statusText}\r\n${exception.message}`;
     alert(message);

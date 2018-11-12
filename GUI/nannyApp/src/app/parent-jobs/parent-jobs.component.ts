@@ -23,10 +23,12 @@ export class ParentJobsComponent implements OnInit {
   ) { }
 
   jobs: Job[]; // = TEMP_ACCOUNT.parentJobs;
+  pending: Job[];
 
   ngOnInit() {
     this.jobInfo.getParentJobsById(1).subscribe((result) => {
-      this.jobs = result;
+      this.pending = result.filter(job => job.isAccepted === false);
+      this.jobs = result.filter(job => job.isAccepted && !job.isComplete);
       this.dispJob = this.jobs[0];
       this.noJobs = false;
       this.accountInfo.getChildrenById(1).subscribe((children) => {
@@ -37,6 +39,14 @@ export class ParentJobsComponent implements OnInit {
 
   clickJob(clickedJob) {
     this.dispJob = clickedJob;
+  }
+
+  newJob(job) {
+    console.log(job);
+    /*this.jobInfo.addJob(job).subscribe(() => {
+      this.pending.push(job);
+    });*/
+    this.pending.push(job);
   }
 
 }

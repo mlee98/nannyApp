@@ -39,7 +39,13 @@ export class CreateJobComponent implements OnInit {
   }
 
   createJob() {
+    this.job.nannyName = "Bob";
     this.newJob.emit(this.job);
+    this.job = {
+      duration: '',
+      children: [],
+      tasks: []
+    };
   }
 
 }
