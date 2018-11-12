@@ -37,6 +37,9 @@
                $sth->execute();
                return $this->response->withJson($input);
                });
+
+    
+  
     
     //check
     //Insert into Children Table
@@ -206,3 +209,123 @@
               $sth->execute();
               $skills = $sth->fetchAll(); return $this->response->withJson($skills);
               });
+    
+    
+    //updates parent_info
+    $app->put('/parents/update', function ($request, $response) {
+              $input = $request->getParsedBody();
+              $sql = "update parent_info set first_name = :first_name, last_name = :last_name, age= :age, gender = :gender, address = :address, city = :city, state = :state, zip= :zip, email= :email, phone_number =:phone_number where username = :username";
+              $sth = $this->dbConn->prepare($sql);
+              $sth->bindParam("username", $input['username']);
+              $sth->bindParam("first_name", $input['first_name']);
+              $sth->bindParam("last_name", $input['last_name']);
+              $sth->bindParam("age", $input['age']);
+              $sth->bindParam("gender", $input['gender']);
+              $sth->bindParam("address", $input['address']);
+              $sth->bindParam("city", $input['city']);
+              $sth->bindParam("state", $input['state']);
+              $sth->bindParam("zip", $input['zip']);
+              $sth->bindParam("email", $input['email']);
+              $sth->bindParam("phone_number", $input['phone_number']);
+              $sth->execute();
+              return $this->response->withJson($input);
+              });
+    
+    //updates nanny_info
+    $app->put('/nannys/update', function ($request, $response) {
+              $input = $request->getParsedBody();
+              $sql = "update nanny_info set first_name = :first_name, last_name = :last_name, age= :age, gender = :gender, address = :address, city = :city, state = :state, zip= :zip, email= :email, phone_number =:phone_number where username = :username";
+              $sth = $this->dbConn->prepare($sql);
+              $sth->bindParam("username", $input['username']);
+              $sth->bindParam("first_name", $input['first_name']);
+              $sth->bindParam("last_name", $input['last_name']);
+              $sth->bindParam("age", $input['age']);
+              $sth->bindParam("gender", $input['gender']);
+              $sth->bindParam("address", $input['address']);
+              $sth->bindParam("city", $input['city']);
+              $sth->bindParam("state", $input['state']);
+              $sth->bindParam("zip", $input['zip']);
+              $sth->bindParam("email", $input['email']);
+              $sth->bindParam("phone_number", $input['phone_number']);
+              $sth->execute();
+              return $this->response->withJson($input);
+              });
+    
+    
+    //updates child_info
+    $app->put('/children/update', function ($request, $response) {
+              $input = $request->getParsedBody();
+              $sql = "update child_info set name = :name, age= :age, gender = :gender, likes = :likes, allergies = :allergies, medications = :medications, special_requirements = :special_requirements where parent_username = :parent_username";
+              $sth = $this->dbConn->prepare($sql);
+              $sth->bindParam("parent_username", $input['parent_username']);
+              $sth->bindParam("name", $input['name']);
+              $sth->bindParam("gender", $input['gender']);
+              $sth->bindParam("age", $input['age']);
+              $sth->bindParam("likes", $input['likes']);
+              $sth->bindParam("allergies", $input['allergies']);
+              $sth->bindParam("medications", $input['medications']);
+              $sth->bindParam("special_requirements", $input['special_requirements']);
+              $sth->execute();
+              return $this->response->withJson($input);
+              });
+    
+    
+    //changes password (definitely need a better method for this)
+    $app->put('/login/change_password', function ($request, $response) {
+               $input = $request->getParsedBody();
+               $sql = "update login_info set password = :password where username = :username ";
+               $sth = $this->dbConn->prepare($sql);
+               $sth->bindParam("username", $input['username']);
+               $sth->bindParam("password", $input['password']);
+               $sth->execute();
+               return $this->response->withJson($input);
+               });
+    
+   
+    //deletes from parent_info
+    $app->delete('/parents/delete', function ($request, $response) {
+                 $input = $request->getParsedBody();
+                  $sql = "DELETE FROM parent_info WHERE username = :username";
+                 $sth = $this->dbConn->prepare($sql);
+                 $sth->bindParam("username", $input['username']);
+                 $sth->execute();
+                 return $this->response->withJson($input);
+                 });
+    
+    //deletes from nanny_info
+    $app->delete('/nannys/delete', function ($request, $response) {
+                 $input = $request->getParsedBody();
+                 $sql = "DELETE FROM nanny_info WHERE username = :username";
+                 $sth = $this->dbConn->prepare($sql);
+                 $sth->bindParam("username", $input['username']);
+                 $sth->execute();
+                 return $this->response->withJson($input);
+                 });
+    
+    //deletes from children_info
+    $app->delete('/children/delete', function ($request, $response) {
+                 $input = $request->getParsedBody();
+                 $sql = "DELETE FROM child_info WHERE parent_username = :parent_username";
+                 $sth = $this->dbConn->prepare($sql);
+                 $sth->bindParam("parent_username", $input['parent_username']);
+                 $sth->execute();
+                 return $this->response->withJson($input);
+                 });
+    
+    //deletes from login_info
+    $app->delete('/login/delete', function ($request, $response) {
+                 $input = $request->getParsedBody();
+                 $sql = "DELETE FROM login_info WHERE username = :username";
+                 $sth = $this->dbConn->prepare($sql);
+                 $sth->bindParam("username", $input['username']);
+                 $sth->execute();
+                 return $this->response->withJson($input);
+                 });
+    
+    
+    
+
+    
+   
+    
+   
