@@ -1,0 +1,89 @@
+<div class="row border border-info mb-5 mt-3">
+  <div class="container d-flex justify-content-between bg-info mb-3">
+    <div class="m-4 text-light">
+      <h1 class="d-inline mr-4">My Direct Deposit</h1>
+    </div>
+    <button
+      [disabled]="isEditMode && (!updateDeposit.name
+        || !updateDeposit.type || !updateDeposit.accountNumber
+        || !updateDeposit.routingNumber)"
+      (click)="clickInfo()"
+      class="btn btn-link text-light"
+    >
+      {{isEditMode ? 'Save Info' : 'Edit Info'}}
+    </button>
+  </div>
+
+  <!-- No Deposit Info -->
+  <div *ngIf="!isEditMode && !deposit.name" class="container">
+    <div class="h5 m-4 font-weight-light">
+      <div class="text-center mb-2">You don't have direct deposit set up yet.</div>
+    </div>
+  </div>
+
+  <!-- Display Info -->
+  <div *ngIf="!isEditMode && deposit.name" class="container text-info">
+    <div class="row m-2">
+      <div class="col h5 font-weight-light">Account Holder Name:
+        <span class="text-dark">{{deposit.name}}</span>
+      </div>
+      <div class="col h5 font-weight-light">Account Type:
+        <span class="text-dark">{{deposit.type}}</span>
+      </div>
+    </div>
+    <div class="row m-2">
+      <div class="col h5 font-weight-light">Account Number:
+        <span class="text-dark">{{deposit.accountNumber}}</span>
+      </div>
+      <div class="col h5 font-weight-light">Routing Number:
+        <span class="text-dark">{{deposit.routingNumber}}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Info -->
+  <div *ngIf="isEditMode" class="container">
+    <form>
+      <div class="form-group row m-4">
+        <div class="col d-flex align-items-center">
+          <label for="name" class="mr-4 long-label">Account Holder Name</label>
+          <input
+            type="text"
+            [(ngModel)]="updateDeposit.name"
+            name="name"
+            class="form-control"
+            id="name">
+        </div>
+        <div class="col d-flex align-items-center">
+          <label for="type" class="mr-4 small-label">Account Type</label>
+          <input
+            type="text"
+            [(ngModel)]="updateDeposit.type"
+            name="type"
+            class="form-control"
+            id="type">
+        </div>
+      </div>
+      <div class="form-group row m-4">
+        <div class="col d-flex align-items-center">
+          <label for="accNum" class="mr-4 medium-label">Account Number</label>
+          <input
+            type="text"
+            [(ngModel)]="updateDeposit.accountNumber"
+            name="accNum"
+            class="form-control"
+            id="accNum">
+        </div>
+        <div class="col d-flex align-items-center">
+          <label for="routNum" class="mr-4 medium-label">Routing Number</label>
+          <input
+            type="text"
+            [(ngModel)]="updateDeposit.routingNumber"
+            name="routNum"
+            class="form-control"
+            id="routNum">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

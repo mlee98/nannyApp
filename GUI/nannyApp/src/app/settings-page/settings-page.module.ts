@@ -9,6 +9,7 @@ import { ChildDetailsUpdateComponent } from './child-details-update/child-detail
 import { NannyProfilePageModule } from '../nanny-profile-page/nanny-profile-page.module';
 import { NannyDetailsComponent } from './nanny-details/nanny-details.component';
 import { PaymentDetailsComponent } from './payment-details/payment-details.component';
+import { DepositDetailsComponent } from './deposit-details/deposit-details.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { PaymentDetailsComponent } from './payment-details/payment-details.compo
     ChildDetailsContainerComponent,
     ChildDetailsUpdateComponent,
     NannyDetailsComponent,
-    PaymentDetailsComponent
+    PaymentDetailsComponent,
+    DepositDetailsComponent
   ],
   exports: [
     SettingsPageComponent

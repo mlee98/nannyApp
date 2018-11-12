@@ -4,7 +4,11 @@
 
 
   <!-- show if nanny account -->
-  <app-nanny-details [hidden]="account.type !== 'nanny'" [account]="account"></app-nanny-details>
+  <div *ngIf="account.type === 'nanny'">
+    <app-deposit-details [deposit]="account.deposit"></app-deposit-details>
+    <app-nanny-details [account]="account"></app-nanny-details>
+  </div>
+
 
   <!-- show if parent account -->
   <div *ngIf="account.type === 'parent'">

@@ -12,7 +12,7 @@ export const TEMP_ACCOUNT: Account = {
   zip: 75275,
   gender: 'Male',
   age: 27,
-  type: 'parent',
+  type: 'nanny',
 
   // PARENT account info
   payment: {
@@ -168,4 +168,5 @@ export const TEMP_ACCOUNT: Account = {
     {id: 4, isAccepted: true, isComplete: false, familyName: 'Brodsffs', nannyName: 'Cage', tasks: []},
     {id: 5, isAccepted: true, isComplete: true, familyName: 'Obama', nannyName: 'Knight', tasks: []}
   ],
+  deposit: {},
 };
