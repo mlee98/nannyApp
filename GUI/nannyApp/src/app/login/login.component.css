@@ -4,6 +4,12 @@
   padding: 20px 0 20px 0;
 }
 
+.bottom-container {
+  width: 82.5%;
+  margin: auto;
+  padding: 0 50px;
+}
+
 input,
 .btn {
   width: 100%;
@@ -31,6 +37,11 @@ input[type=submit] {
   padding: 0 50px;
   margin-top: 6px;
 }
+
+
+
+
+
 
 .bottom-container {
   background-color: #666;
