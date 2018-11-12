@@ -50,8 +50,11 @@ export class ParentJobsComponent implements OnInit {
         this.accountInfo.getChildrenById(params.id).subscribe((children) => {
           this.children = children;
           this.accountInfo.getAutomaticPaybyId(params.id).subscribe((payment) => {
-            this.payment = payment;
-            this.autoPay = payment.automatic;
+            if (payment.automatic === true) {
+              this.payment = payment;
+            } else {
+              this.payment = {};
+            }
           });
         });
       });
