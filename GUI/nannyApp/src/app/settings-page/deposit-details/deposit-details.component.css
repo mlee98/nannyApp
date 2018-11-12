@@ -1,0 +1,11 @@
+.long-label {
+  min-width: 10em;
+}
+
+.medium-label {
+  min-width: 8em;
+}
+
+.small-label {
+  min-width: 7em;
+}

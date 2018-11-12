@@ -1,5 +1,3 @@
-import { PaymentMethod } from '../payment-method';
-
 export class PersonalInfo {
   firstName?: string;
   lastName?: string;
@@ -11,5 +9,4 @@ export class PersonalInfo {
   zip?: number;
   gender?: string;
   age?: number;
-  paymentMethod?: PaymentMethod;
 }

@@ -16,4 +16,5 @@ export class Job {
   tasks?: Task[];
   isAccepted?: Boolean;
   isComplete?: Boolean;
+  rating?: number;
 }

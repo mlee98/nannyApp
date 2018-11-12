@@ -15,6 +15,16 @@ export const TEMP_ACCOUNT: Account = {
   type: 'parent',
 
   // PARENT account info
+  payment: {
+    name: 'Bob Johnson',
+    cardNumber: 234325555221,
+    expiration: '3/21',
+    address: '32 Sunshine Ave',
+    city: 'Dallas',
+    state: 'TX',
+    zip: 75275,
+    automatic: false,
+  },
   children: [
     {
       name: 'Jenny',
@@ -37,7 +47,7 @@ export const TEMP_ACCOUNT: Account = {
   ],
   parentJobs: [
     {
-      id: 2,
+      id: 1,
       isComplete: false,
       familyName: 'Smith',
       nannyName: 'Stokes', nannyPhone: '8179999999',
@@ -54,6 +64,17 @@ export const TEMP_ACCOUNT: Account = {
           location: '1111 Soccer Field Place', day: 'Tues'
         }
       ],
+    },
+    {
+      id: 2,
+      isComplete: true,
+      rating: 5,
+      familyName: 'Jones',
+      nannyName: 'Jessica', nannyPhone: '5123347768',
+      description: 'Make sure kids go to bed by 10',
+      duration: 'Dec 10-11',
+      address: '12 Sunshine Ave', city: 'Dallas', state: 'TX', zip: 75275,
+      tasks: [],
     }
   ],
 
@@ -147,4 +168,5 @@ export const TEMP_ACCOUNT: Account = {
     {id: 4, isAccepted: true, isComplete: false, familyName: 'Brodsffs', nannyName: 'Cage', tasks: []},
     {id: 5, isAccepted: true, isComplete: true, familyName: 'Obama', nannyName: 'Knight', tasks: []}
   ],
+  deposit: {},
 };
