@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { LoginInfo } from '../services/login-info.service';
 
 @Component({
   selector: 'app-header',
@@ -7,11 +8,18 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private loginInfo: LoginInfo
+  ) { }
 
   @Input() accountType: string;
 
+  userId: number;
+
   ngOnInit() {
+    this.loginInfo.currentUserId.subscribe((id) => {
+      this.userId = id;
+    });
   }
 
 }

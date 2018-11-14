@@ -23,7 +23,7 @@
     <li *ngIf="accountType === 'nanny'" class="nav-item">
       <a
         class="nav-link"
-        [routerLink]="['/nanny-jobs/1']"
+        [routerLink]="['/nanny-jobs', userId]"
         routerLinkActive="router-link-active"
       >
         My Jobs
@@ -32,7 +32,7 @@
     <li *ngIf="accountType === 'parent'" class="nav-item">
       <a
         class="nav-link"
-        [routerLink]="['/parent-jobs/1']"
+        [routerLink]="['/parent-jobs', userId]"
         routerLinkActive="router-link-active"
       >
         My Jobs
@@ -41,7 +41,7 @@
     <li class="nav-item">
       <a
         class="nav-link"
-        [routerLink]="['/settings/1']"
+        [routerLink]="['/settings', userId]"
         routerLinkActive="router-link-active"
       >
         My Account
