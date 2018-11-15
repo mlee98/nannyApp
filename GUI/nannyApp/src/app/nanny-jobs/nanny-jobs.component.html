@@ -1,24 +1,23 @@
 <div class="container" *ngIf="jobs && requests && completed">
-  <div class="row align-content-start">
-    <div class="col-md-2 container background-gray">
-      <div class="row">
-        <h1 class="text-truncate">Jobs</h1>
-      </div>
-      <div class="row">
-        <div class="list-group text-truncate mb-5" *ngIf="!jobs.length">
+  <div class="d-flex">
+    <div class="d-flex flex-column">
+      <div class="container mt-3 p-3 bg-light">
+        <div class="d-flex justify-content-center mb-2">
+          <h5>Current Jobs</h5>
+        </div>
+        <div class="d-flex flex-column">
           <button
+            *ngIf="!jobs.length"
             type="button"
             disabled
             class="list-group-item list-group-item-action large-text "
           >
             No Jobs
           </button>
-        </div>
-        <div class="list-group text-truncate">
           <button
             type="button"
             (click)="clickJob(job)"
-            class="list-group-item list-group-item-action large-text mb-3"
+            class="btn btn-outline-info mb-3"
             *ngFor="let job of jobs">
             <div class="text-truncate">
               {{job.familyName}}
@@ -26,24 +25,23 @@
           </button>
         </div>
       </div>
-      <div class="row">
-        <h1 class="text-truncate">Requests</h1>
-      </div>
-      <div class="row">
-        <div class="list-group text-truncate mb-5" *ngIf="!requests.length">
+      <div class="container mt-3 p-3 bg-light">
+        <div class="d-flex justify-content-center mb-2">
+          <h5>Requests</h5>
+        </div>
+        <div class="d-flex flex-column">
           <button
+            *ngIf="!requests.length"
             type="button"
             disabled
-            class="list-group-item list-group-item-action large-text "
+            class="btn btn-outline-info mb-3"
           >
             No Requests
           </button>
-        </div>
-        <div class="list-group text-truncate mb-5" *ngIf="requests.length">
           <button
             type="button"
             (click)="clickRequest(req)"
-            class="list-group-item list-group-item-action large-text "
+            class="btn btn-outline-info mb-3"
             *ngFor="let req of requests">
             <div class="text-truncate">
               {{req.familyName}}
@@ -51,24 +49,23 @@
           </button>
         </div>
       </div>
-      <div class="row">
-        <h1 class="text-truncate">Past Jobs</h1>
-      </div>
-      <div class="row">
-        <div class="list-group text-truncate mb-5" *ngIf="!completed.length">
+      <div class="container mt-3 p-3 bg-light">
+        <div class="d-flex justify-content-center mb-2">
+          <h5>Past Jobs</h5>
+        </div>
+        <div class="list-group text-truncate mb-5">
           <button
+            *ngIf="!completed.length"
             type="button"
             disabled
-            class="list-group-item list-group-item-action large-text "
+            class="btn btn-outline-info mb-3"
           >
             No Completed Jobs
           </button>
-        </div>
-        <div class="list-group text-truncate mb-5" *ngIf="completed.length">
           <button
             type="button"
             (click)="clickRequest(job)"
-            class="list-group-item list-group-item-action large-text "
+            class="btn btn-outline-info mb-3"
             *ngFor="let job of completed">
             <div class="text-truncate">
               {{job.familyName}}
