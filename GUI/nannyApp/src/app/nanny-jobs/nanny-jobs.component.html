@@ -10,7 +10,7 @@
             *ngIf="!jobs.length"
             type="button"
             disabled
-            class="list-group-item list-group-item-action large-text "
+            class="btn btn-outline-secondary mb-3"
           >
             No Jobs
           </button>
@@ -18,7 +18,8 @@
             type="button"
             (click)="clickJob(job)"
             class="btn btn-outline-info mb-3"
-            *ngFor="let job of jobs">
+            *ngFor="let job of jobs"
+          >
             <div class="text-truncate">
               {{job.familyName}}
             </div>
@@ -34,7 +35,7 @@
             *ngIf="!requests.length"
             type="button"
             disabled
-            class="btn btn-outline-info mb-3"
+            class="btn btn-outline-secondary mb-3"
           >
             No Requests
           </button>
@@ -42,7 +43,8 @@
             type="button"
             (click)="clickRequest(req)"
             class="btn btn-outline-info mb-3"
-            *ngFor="let req of requests">
+            *ngFor="let req of requests"
+          >
             <div class="text-truncate">
               {{req.familyName}}
             </div>
@@ -58,15 +60,16 @@
             *ngIf="!completed.length"
             type="button"
             disabled
-            class="btn btn-outline-info mb-3"
+            class="btn btn-outline-secondary mb-3"
           >
-            No Completed Jobs
+            No Past Jobs
           </button>
           <button
             type="button"
             (click)="clickRequest(job)"
             class="btn btn-outline-info mb-3"
-            *ngFor="let job of completed">
+            *ngFor="let job of completed"
+          >
             <div class="text-truncate">
               {{job.familyName}}
             </div>
