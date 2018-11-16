@@ -17,6 +17,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HttpClientModule } from '@angular/common/http';
 import { AccountInfo } from './services/account-info.service';
 import { JobInfo } from './services/job-info.service';
+import { LoginInfo } from './services/login-info.service';
+import { JobManager } from './services/job-manager.service';
 
 
 
@@ -40,7 +42,7 @@ import { JobInfo } from './services/job-info.service';
     HomePageModule,
     HttpClientModule
   ],
-  providers: [AccountInfo, JobInfo],
+  providers: [AccountInfo, JobInfo, LoginInfo, JobManager],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

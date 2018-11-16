@@ -95,6 +95,7 @@
         [tasks]="dispJob.tasks"
         [editable]="false"
         [completeable]="true"
+        (updateTasks)="updateTasks($event)"
       >
       </app-job-schedule>
       <div class="row" *ngIf="!dispJob.isAccepted">

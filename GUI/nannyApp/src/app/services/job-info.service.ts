@@ -9,7 +9,7 @@ import { Job } from '../models';
 })
 export class JobInfo {
 
-  protected endPoint = 'https://c4e8de50-d466-4c4d-8976-655c4f37d9e7.mock.pstmn.io';
+  protected endPoint = 'https://fcd07054-eb96-4bfb-a380-03dd122aebda.mock.pstmn.io';
 
   protected httpOptions = {
     headers: new HttpHeaders({

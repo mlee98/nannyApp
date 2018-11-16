@@ -13,11 +13,11 @@ import { Payment } from '../models/payment';
 })
 export class ParentJobsComponent implements OnInit {
 
-  autoPay: Boolean; // = TEMP_ACCOUNT.payment.automatic;
-  payment: Payment; // = {};
+  autoPay: Boolean = TEMP_ACCOUNT.payment.automatic;
+  payment: Payment = {};
   dispJob: Job;
   noJobs: boolean;
-  children: Child[]; // = TEMP_ACCOUNT.children;
+  children: Child[] = TEMP_ACCOUNT.children;
   ongoing: boolean;
   userId: number;
   tempRating: number;
@@ -30,18 +30,18 @@ export class ParentJobsComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) { }
 
-  jobs: Job[]; // = TEMP_ACCOUNT.parentJobs;
+  jobs: Job[] = TEMP_ACCOUNT.parentJobs;
   current: Job[];
   completed: Job[];
   displayPayment: Boolean = false;
 
   ngOnInit() {
-    // this.dispJob = this.jobs.length ? this.jobs[0] : null;
-    // this.current = this.jobs.filter(job => job.isComplete === false);
-    // this.completed = this.jobs.filter(job => job.isComplete === true);
+    this.dispJob = this.jobs.length ? this.jobs[0] : null;
+    this.current = this.jobs.filter(job => job.isComplete === false);
+    this.completed = this.jobs.filter(job => job.isComplete === true);
 
     this.activatedRoute.params.subscribe((params) => {
-      this.jobInfo.getParentJobsById(params.id).subscribe((result) => {
+      /*this.jobInfo.getParentJobsById(params.id).subscribe((result) => {
         this.jobs = result;
         this.current = result.filter(job => job.isComplete === false);
         this.completed = result.filter(job => job.isComplete === true);
@@ -57,7 +57,8 @@ export class ParentJobsComponent implements OnInit {
             }
           });
         });
-      });
+      });*/
+      this.userId = params.id;
     });
   }
 
@@ -71,26 +72,21 @@ export class ParentJobsComponent implements OnInit {
   }
 
   newJob(job) {
-    this.accountInfo.getAccountById(this.userId).subscribe((result) => {
+    // this.accountInfo.getAccountById(this.userId).subscribe((result) => {
      job.id = this.userId;
-     job.familyName = result.lastName;
-     job.address = result.address;
-     job.city = result.city;
-     job.state = result.state;
-     job.zip = result.zip;
-     job.parentPhone = result.phone;
+     job.familyName = TEMP_ACCOUNT.lastName;
+     job.address = TEMP_ACCOUNT.address;
+     job.city = TEMP_ACCOUNT.city;
+     job.state = TEMP_ACCOUNT.state;
+     job.zip = TEMP_ACCOUNT.zip;
+     job.parentPhone = TEMP_ACCOUNT.phone;
      job.isAccepted = false;
      job.isComplete = false;
      this.pending.push(job);
-     console.log(job);
-    });
+    // });
     /*this.jobInfo.addJob(job).subscribe(() => {
       this.pending.push(job);
     });*/
-  }
-
-  completeJob() {
-
   }
 
   submitRatingAutoPay() {
