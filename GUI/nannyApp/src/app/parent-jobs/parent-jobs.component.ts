@@ -13,11 +13,11 @@ import { Payment } from '../models/payment';
 })
 export class ParentJobsComponent implements OnInit {
 
-  autoPay: Boolean = TEMP_ACCOUNT.payment.automatic;
-  payment: Payment = {};
+  autoPay: Boolean; // = TEMP_ACCOUNT.payment.automatic;
+  payment: Payment; // = {};
   dispJob: Job;
   noJobs: boolean;
-  children: Child[] = TEMP_ACCOUNT.children;
+  children: Child[]; // = TEMP_ACCOUNT.children;
   ongoing: boolean;
   userId: number;
   tempRating: number;
@@ -30,35 +30,35 @@ export class ParentJobsComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) { }
 
-  jobs: Job[] = TEMP_ACCOUNT.parentJobs;
+  jobs: Job[]; // = TEMP_ACCOUNT.parentJobs;
   current: Job[];
   completed: Job[];
   displayPayment: Boolean = false;
 
   ngOnInit() {
-    this.dispJob = this.jobs.length ? this.jobs[0] : null;
-    this.current = this.jobs.filter(job => job.isComplete === false);
-    this.completed = this.jobs.filter(job => job.isComplete === true);
+    // this.dispJob = this.jobs.length ? this.jobs[0] : null;
+    // this.current = this.jobs.filter(job => job.isComplete === false);
+    // this.completed = this.jobs.filter(job => job.isComplete === true);
 
-    // this.activatedRoute.params.subscribe((params) => {
-    //   this.jobInfo.getParentJobsById(params.id).subscribe((result) => {
-    //     this.jobs = result;
-    //     this.current = result.filter(job => job.isComplete === false);
-    //     this.completed = result.filter(job => job.isComplete === true);
-    //     this.dispJob = result.length ? this.jobs[0] : null;
+    this.activatedRoute.params.subscribe((params) => {
+      this.jobInfo.getParentJobsById(params.id).subscribe((result) => {
+        this.jobs = result;
+        this.current = result.filter(job => job.isComplete === false);
+        this.completed = result.filter(job => job.isComplete === true);
+        this.dispJob = result.length ? this.jobs[0] : null;
 
-    //     this.accountInfo.getChildrenById(params.id).subscribe((children) => {
-    //       this.children = children;
-    //       this.accountInfo.getAutomaticPaybyId(params.id).subscribe((payment) => {
-    //         if (payment.automatic === true) {
-    //           this.payment = payment;
-    //         } else {
-    //           this.payment = {};
-    //         }
-    //       });
-    //     });
-    //   });
-    // });
+        this.accountInfo.getChildrenById(params.id).subscribe((children) => {
+          this.children = children;
+          this.accountInfo.getAutomaticPaybyId(params.id).subscribe((payment) => {
+            if (payment.automatic === true) {
+              this.payment = payment;
+            } else {
+              this.payment = {};
+            }
+          });
+        });
+      });
+    });
   }
 
   clickJob(clickedJob) {

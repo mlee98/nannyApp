@@ -1,11 +1,27 @@
 <div class="card mb-3">
-  <div class="card-header bg-success large-text text-light">
-    {{child.name}} - {{child.age}}
-  </div>
-  <div class="card-body bg-light">
-    <b>Allergies:</b> {{child.allergies}}<br>
-    <b>Medications:</b> {{child.medications}}<br>
-    <b>Likes:</b> {{child.likes}}<br>
-    <b>Other:</b> {{child.specialReqs}}
+  <button
+    class="card-header border-0 btn"
+    data-toggle="collapse"
+    attr.data-target="#details-{{child.name}}"
+  >
+    {{child.name}} ({{child.age}} years)
+  </button>
+  <div class="card-body collapse border-top" id="details-{{child.name}}">
+    <div *ngIf="child.allergies">
+      <div class="font-weight-bold">Allergies</div>
+      <div class="pl-1">{{child.allergies}}</div>
+    </div>
+    <div *ngIf="child.medications">
+      <div class="font-weight-bold">Medications</div>
+      <div class="pl-1">{{child.medications}}</div>
+    </div>
+    <div *ngIf="child.likes">
+      <div class="font-weight-bold">Likes</div>
+      <div class="pl-1">{{child.likes}}</div>
+    </div>
+    <div *ngIf="child.specialReqs">
+      <div class="font-weight-bold">Other</div>
+      <div class="pl-1">{{child.specialReqs}}</div>
+    </div>
   </div>
 </div>
