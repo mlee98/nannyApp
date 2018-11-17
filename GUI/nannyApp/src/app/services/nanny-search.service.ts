@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Login } from '../models';
+import { SearchField } from '../models';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginInfo {
-
+export class NannySearch {
   protected endPoint = 'https://fcd07054-eb96-4bfb-a380-03dd122aebda.mock.pstmn.io';
 
   protected httpOptions = {
@@ -21,17 +20,9 @@ export class LoginInfo {
     protected httpClient: HttpClient
   ) {}
 
-  private idSource = new BehaviorSubject('');
-  currentUserId = this.idSource.asObservable();
-
-  changeId(username: string) {
-    this.idSource.next(username);
-  }
-
-
-  login(login: Login): Observable<Login> {
+  search(searchField: SearchField): Observable<Account[]> {
     return this.httpClient
-      .post<Login>(`${this.endPoint}/login`, login, this.httpOptions)
+      .post<Account[]>(`${this.endPoint}/search`, searchField, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 

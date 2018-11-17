@@ -14,11 +14,11 @@ export class HeaderComponent implements OnInit {
 
   @Input() accountType: string;
 
-  userId: number;
+  username: string;
 
   ngOnInit() {
-    this.loginInfo.currentUserId.subscribe((id) => {
-      this.userId = id;
+    this.loginInfo.currentUserId.subscribe((username) => {
+      this.username = username;
     });
   }
 

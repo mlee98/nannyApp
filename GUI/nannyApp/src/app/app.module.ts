@@ -19,6 +19,7 @@ import { AccountInfo } from './services/account-info.service';
 import { JobInfo } from './services/job-info.service';
 import { LoginInfo } from './services/login-info.service';
 import { JobManager } from './services/job-manager.service';
+import { NannySearch } from './services/nanny-search.service';
 
 
 
@@ -42,7 +43,7 @@ import { JobManager } from './services/job-manager.service';
     HomePageModule,
     HttpClientModule
   ],
-  providers: [AccountInfo, JobInfo, LoginInfo, JobManager],
+  providers: [AccountInfo, JobInfo, LoginInfo, JobManager, NannySearch],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

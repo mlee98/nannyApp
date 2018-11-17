@@ -2,6 +2,7 @@ import { Account } from './models';
 
 export const TEMP_ACCOUNT: Account = {
   id: 1,
+  username: 'bobjohn',
   firstName: 'Bob',
   lastName: 'Johnson',
   email: 'bobjohnson@gmail.com',
