@@ -23,21 +23,21 @@ export class AccountInfo {
   ) {}
 
   // Get Requests
-  getAccountById(id: number): Observable<Account> {
+  getAccountByUsername(username: string): Observable<Account> {
     return this.httpClient
-      .get<Account>(`${this.endPoint}/accounts/${id}`, this.httpOptions)
+      .get<Account>(`${this.endPoint}/accounts/${username}`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 
-  getChildrenById(id: number): Observable<Child[]> {
+  getChildrenByUsername(username: string): Observable<Child[]> {
     return this.httpClient
-      .get<Child[]>(`${this.endPoint}/accounts/children/${id}`, this.httpOptions)
+      .get<Child[]>(`${this.endPoint}/accounts/children/${username}`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 
-  getAutomaticPaybyId(id: number): Observable<Payment> {
+  getAutomaticPayByUsername(username: string): Observable<Payment> {
     return this.httpClient
-      .get<Payment>(`${this.endPoint}/accounts/payments/${id}`, this.httpOptions)
+      .get<Payment>(`${this.endPoint}/accounts/payments/${username}`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 

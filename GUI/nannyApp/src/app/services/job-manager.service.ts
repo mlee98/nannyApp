@@ -29,19 +29,19 @@ addJob(newJob: Job): Observable<Job> {
 
 acceptJob(jobId: number): Observable<number> {
   return this.httpClient
-    .put<number>(`${this.endPoint}/jobs/accept/${jobId}`, jobId, this.httpOptions)
+    .put<number>(`${this.endPoint}/jobs/accept`, jobId, this.httpOptions)
     .pipe(catchError(this.handleException));
 }
 
 declineJob(jobId: number): Observable<number> {
   return this.httpClient
-    .put<number>(`${this.endPoint}/jobs/decline/${jobId}`, jobId, this.httpOptions)
+    .put<number>(`${this.endPoint}/jobs/decline`, jobId, this.httpOptions)
     .pipe(catchError(this.handleException));
 }
 
-updateTasks(newTasks: Task[], jobId: number): Observable<Task[]> {
+updateTasks(taskNames: string[], taskDays: string[], jobId: number): Observable<Task[]> {
   return this.httpClient
-    .put<Task[]>(`${this.endPoint}/jobs/update/${jobId}`, newTasks, this.httpOptions)
+    .put<Task[]>(`${this.endPoint}/jobs/update/${jobId}`, {taskNames: taskNames, taskDays: taskDays}, this.httpOptions)
     .pipe(catchError(this.handleException));
 }
 
@@ -53,7 +53,7 @@ submitRating(rating: number, nannyUsername: number): Observable<number> {
 
 completeJob(jobId: number): Observable<number> {
   return this.httpClient
-    .put<number>(`${this.endPoint}/jobs/complete/${jobId}`, jobId, this.httpOptions)
+    .put<number>(`${this.endPoint}/jobs/complete`, jobId, this.httpOptions)
     .pipe(catchError(this.handleException));
 }
 

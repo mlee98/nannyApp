@@ -21,21 +21,9 @@ export class JobInfo {
     protected httpClient: HttpClient
   ) {}
 
-  getNannyJobsById(id: number): Observable<Job[]> {
+  getJobsByUsername(username: string): Observable<Job[]> {
     return this.httpClient
-      .get<Job[]>(`${this.endPoint}/nannyJobs/${id}`, this.httpOptions)
-      .pipe(catchError(this.handleException));
-  }
-
-  getParentJobsById(id: number): Observable<Job[]> {
-    return this.httpClient
-      .get<Job[]>(`${this.endPoint}/parentJobs/${id}`, this.httpOptions)
-      .pipe(catchError(this.handleException));
-  }
-
-  addJob(job: Job): Observable<Job> {
-    return this.httpClient
-      .post<Job>(`${this.endPoint}/parentJobs/new`, job, this.httpOptions)
+      .get<Job[]>(`${this.endPoint}/jobs/${username}`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 
