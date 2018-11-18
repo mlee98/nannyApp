@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Job, Task } from '../models';
 import { TEMP_ACCOUNT } from '../temp-account';
-import { JobInfo } from '../services/job-info.service';
 import { ActivatedRoute } from '@angular/router';
+import { JobManager } from '../services/job-manager.service';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class NannyJobsComponent implements OnInit {
   };
 
   constructor(
-    private jobInfo: JobInfo,
+    private jobManager: JobManager,
     private activatedRoute: ActivatedRoute
   ) { }
 
@@ -28,7 +28,7 @@ export class NannyJobsComponent implements OnInit {
 
   ngOnInit() {
     /*this.activatedRoute.params.subscribe((params) => {
-      this.jobInfo.getNannyJobsById(params.id).subscribe((result) => {
+      this.jobManager.getNannyJobsById(params.id).subscribe((result) => {
         this.requests = result.filter(job => job.isAccepted === false);
         this.jobs = result.filter(job => job.isAccepted && !job.isComplete);
         this.completed = result.filter(job => job.isAccepted && job.isComplete);

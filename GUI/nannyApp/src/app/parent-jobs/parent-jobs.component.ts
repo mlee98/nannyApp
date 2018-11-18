@@ -1,10 +1,10 @@
 import { Job, Child } from '../models';
 import { TEMP_ACCOUNT } from '../temp-account';
-import { JobInfo } from '../services/job-info.service';
 import { AccountInfo } from '../services/account-info.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import { Payment } from '../models/payment';
+import { JobManager } from '../services/job-manager.service';
 
 @Component({
   selector: 'app-parent-jobs',
@@ -25,7 +25,7 @@ export class ParentJobsComponent implements OnInit {
   pending: Job[] = [];
 
   constructor(
-    private jobInfo: JobInfo,
+    private jobManager: JobManager,
     private accountInfo: AccountInfo,
     private activatedRoute: ActivatedRoute
   ) { }
@@ -41,7 +41,7 @@ export class ParentJobsComponent implements OnInit {
     this.completed = this.jobs.filter(job => job.isComplete === true);
 
     this.activatedRoute.params.subscribe((params) => {
-      /*this.jobInfo.getParentJobsById(params.id).subscribe((result) => {
+      /*this.jobManager.getParentJobsById(params.id).subscribe((result) => {
         this.jobs = result;
         this.current = result.filter(job => job.isComplete === false);
         this.completed = result.filter(job => job.isComplete === true);
@@ -84,7 +84,7 @@ export class ParentJobsComponent implements OnInit {
      job.isComplete = false;
      this.pending.push(job);
     // });
-    /*this.jobInfo.addJob(job).subscribe(() => {
+    /*this.jobManager.addJob(job).subscribe(() => {
       this.pending.push(job);
     });*/
   }

@@ -16,7 +16,6 @@ import { HomePageModule } from './home-page/home-page.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AccountInfo } from './services/account-info.service';
-import { JobInfo } from './services/job-info.service';
 import { LoginInfo } from './services/login-info.service';
 import { JobManager } from './services/job-manager.service';
 import { NannySearch } from './services/nanny-search.service';
@@ -43,7 +42,7 @@ import { NannySearch } from './services/nanny-search.service';
     HomePageModule,
     HttpClientModule
   ],
-  providers: [AccountInfo, JobInfo, LoginInfo, JobManager, NannySearch],
+  providers: [AccountInfo, LoginInfo, JobManager, NannySearch],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

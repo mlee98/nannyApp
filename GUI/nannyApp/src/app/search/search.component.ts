@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { SearchField } from '../models';
-import { Router } from '@angular/router';
+import { SearchField, Account, Job } from '../models';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LoginInfo } from '../services/login-info.service';
 import { NannySearch } from '../services/nanny-search.service';
+import { JobManager } from '../services/job-manager.service';
+import { TEMP_ACCOUNT } from '../temp-account';
 
 @Component({
   selector: 'app-search',
@@ -17,17 +19,34 @@ export class SearchComponent implements OnInit {
               {min: 36, max: 45}, {min: 46, max: 50}, {min: 50, max: 100}];
   nannyAge: number;
   gender: number;
-  nannys: Account[];
+  nannys: Account[] = [];
+  jobs: Job[];
+  selectedNanny: number;
+  selectedJob: number;
 
   constructor(
     private loginInfo: LoginInfo,
     private router: Router,
-    private nannySearch: NannySearch
+    private nannySearch: NannySearch,
+    private jobManager: JobManager,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.selectedNanny = 0;
     this.nannyAge = 0;
     this.gender = 0;
+    /*this.activatedRoute.params.subscribe((params) => {
+      this.jobManager.getJobsByUsername(params.username).subscribe((jobs) => {
+        jobs.forEach(job => {
+          if (job.isAccepted === false && job.isComplete === false) {
+            this.jobs.push(job);
+          }
+        });
+      });
+    });*/
+    this.jobs = TEMP_ACCOUNT.parentJobs;
+    this.nannys[0] = TEMP_ACCOUNT;
     this.searchField = {
       gender: 'gender',
       minNannyAge: 0,
@@ -44,6 +63,10 @@ export class SearchComponent implements OnInit {
     /*this.nannySearch.search(this.searchField).subscribe((nannys) => {
       this.nannys = nannys;
     });*/
+  }
+
+  sendRequest() {
+    this.jobManager.submitRequest(this.selectedJob, this.nannys[this.selectedNanny]).subscribe();
   }
 
 }

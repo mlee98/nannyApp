@@ -15,11 +15,21 @@ export class HeaderComponent implements OnInit {
   @Input() accountType: string;
 
   username: string;
+  loggedIn: boolean;
 
   ngOnInit() {
+    this.loggedIn = false;
     this.loginInfo.currentUserId.subscribe((username) => {
       this.username = username;
+      if (this.username !== '') {
+        this.loggedIn = true;
+      }
     });
+  }
+
+  logout() {
+    this.loginInfo.changeId('');
+    this.loggedIn = false;
   }
 
 }

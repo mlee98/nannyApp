@@ -18,6 +18,9 @@ export class LoginComponent implements OnInit {
   userLogin: Login = {};
 
   ngOnInit() {
+    this.loginInfo.currentUserId.subscribe((value) => {
+      console.log(value);
+    });
   }
 
   login() {
@@ -30,7 +33,7 @@ export class LoginComponent implements OnInit {
       }
     });*/
     this.loginInfo.changeId('bobjohn');
-      this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('/home');
   }
 
 }

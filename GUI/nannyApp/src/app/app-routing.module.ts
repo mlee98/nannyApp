@@ -14,10 +14,10 @@ import { ParentJobsComponent } from './parent-jobs/parent-jobs.component';
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'create-account', component: CreateAccountComponent},
-  {path: 'settings/:id', component: SettingsPageComponent},
-  {path: 'nanny-profile/:id', component: NannyProfilePageComponent},
-  {path: 'nanny-jobs/:id', component: NannyJobsComponent},
-  {path: 'parent-jobs/:id', component: ParentJobsComponent},
+  {path: 'settings/:username', component: SettingsPageComponent},
+  {path: 'nanny-profile/:username', component: NannyProfilePageComponent},
+  {path: 'nanny-jobs/:username', component: NannyJobsComponent},
+  {path: 'parent-jobs/:username', component: ParentJobsComponent},
   {path: 'search', component: SearchComponent},
   {path: 'home', component: HomePageComponent}, // default URL (check if logged in?)
   {path: '404', component: PageNotFoundComponent},

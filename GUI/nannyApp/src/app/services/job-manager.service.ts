@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Job, Task } from '../models';
+import { Job, Task, Account } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,12 @@ export class JobManager {
 constructor(
   protected httpClient: HttpClient
 ) { }
+
+getJobsByUsername(username: string): Observable<Job[]> {
+  return this.httpClient
+    .get<Job[]>(`${this.endPoint}/jobs/${username}`, this.httpOptions)
+    .pipe(catchError(this.handleException));
+}
 
 addJob(newJob: Job): Observable<Job> {
   return this.httpClient
@@ -57,6 +63,11 @@ completeJob(jobId: number): Observable<number> {
     .pipe(catchError(this.handleException));
 }
 
+submitRequest(jobId: number, nanny: Account): Observable<number> {
+  return this.httpClient
+    .put<number>(`${this.endPoint}/jobs/submitRequest`, {jobId: jobId, nanny: nanny}, this.httpOptions)
+    .pipe(catchError(this.handleException));
+}
 
 protected handleException(exception: any) {
   const message = `${exception.status} : ${exception.statusText}\r\n${exception.message}`;

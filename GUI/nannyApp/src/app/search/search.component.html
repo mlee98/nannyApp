@@ -58,5 +58,58 @@
         </div>
       </div>
     </div>
+    <div class='col-md-9'>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Child Age Range</th>
+            <th>Experience</th>
+            <th>Zip Code</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let nanny of nannys; let i=index">
+            <th>{{nanny.username}}</th>
+            <td>{{nanny.gender}}</td>
+            <td>{{nanny.age}}</td>
+            <td>{{nanny.minAge}} - {{nanny.maxAge}}</td>
+            <td>{{nanny.yearsExp}} years</td>
+            <td>{{nanny.zip}}</td>
+            <td>
+              <button type="btn" class="btn btn-success" (click)="selectedNanny = i" data-toggle="modal" data-target="#nannyRequest">Request</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="nannyRequest" tabindex="-1" role="dialog" aria-labelledby="nannyRequestLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Send Job Request to {{selectedNanny}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="jobToRequest">Job To Request</label>
+          <select multiple class="form-control" id="jobToRequest" [(ngModel)]="selectedJob">
+            <option *ngFor="let job of jobs" [value]="job.id">{{job.duration}} - {{job.description}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="sendRequest();">Send Request</button>
+      </div>
+    </div>
   </div>
 </div>

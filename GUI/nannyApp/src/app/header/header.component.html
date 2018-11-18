@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between bg-info">
   <ul class="nav">
-    <li class="nav-item">
+    <li *ngIf="loggedIn" class="nav-item">
         <a
         class="nav-link"
         [routerLink]="['/home']"
@@ -11,7 +11,7 @@
     </li>
   </ul>
   <ul class="nav">
-    <li *ngIf="accountType === 'parent'" class="nav-item">
+    <li *ngIf="accountType === 'parent' && loggedIn" class="nav-item">
       <a
         class="nav-link"
         [routerLink]="['/search']"
@@ -20,7 +20,7 @@
         Search Nannys
       </a>
     </li>
-    <li *ngIf="accountType === 'nanny'" class="nav-item">
+    <li *ngIf="accountType === 'nanny' && loggedIn" class="nav-item">
       <a
         class="nav-link"
         [routerLink]="['/nanny-jobs', username]"
@@ -29,7 +29,7 @@
         My Jobs
       </a>
     </li>
-    <li *ngIf="accountType === 'parent'" class="nav-item">
+    <li *ngIf="accountType === 'parent' && loggedIn" class="nav-item">
       <a
         class="nav-link"
         [routerLink]="['/parent-jobs', username]"
@@ -38,7 +38,7 @@
         My Jobs
       </a>
     </li>
-    <li class="nav-item">
+    <li *ngIf="loggedIn" class="nav-item">
       <a
         class="nav-link"
         [routerLink]="['/settings', username]"
@@ -52,6 +52,7 @@
           class="nav-link"
           [routerLink]="['/']"
           routerLinkActive="router-link-active"
+          (click)="logout()"
         >
           Logout
         </a>
