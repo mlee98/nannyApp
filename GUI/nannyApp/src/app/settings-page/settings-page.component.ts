@@ -22,7 +22,7 @@ export class SettingsPageComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       if (params.username) {
         this.accountInfo.getAccountByUsername(params.username).subscribe((result) => {
-          this.account.convert(result);
+          this.account = result;
         });
       } else {
         this.account = {};

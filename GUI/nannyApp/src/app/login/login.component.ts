@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginInfo.currentUserId.subscribe((value) => {
-      console.log(value);
+
     });
   }
 

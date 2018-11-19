@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-import { SearchField } from '../models';
+import { SearchField, Account } from '../models';
 
 @Injectable({
   providedIn: 'root'

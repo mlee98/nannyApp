@@ -52,46 +52,6 @@ export class AccountInfo {
       .pipe(catchError(this.handleException));
   }
 
-  addParent(account: {username: string, password: string, first_name: string, last_name: string,
-    age: number, gender: string, address: string, city: string, state: string, zip: number,
-    email: string, phone_number: string}
-    ): Observable<Account> {
-    return this.httpClient
-      .post<Account>(`${this.endPoint}/parents/new`, account, this.httpOptions)
-      .pipe(catchError(this.handleException));
-  }
-
-  addNanny(account: {username: string, password: string, first_name: string, last_name: string,
-    age: number, gender: string, address: string, city: string, state: string, zip: number,
-    email: string, phone_number: string}
-    ): Observable<Account> {
-    return this.httpClient
-      .post<Account>(`${this.endPoint}/nannys/new`, account, this.httpOptions)
-      .pipe(catchError(this.handleException));
-  }
-
-  addChild(account: {parent_username: string, name: string,
-    age: number, gender: string, likes: string, allergies: string, medications: string, special_requirements: string}
-    ): Observable<Account> {
-    return this.httpClient
-      .post<Account>(`${this.endPoint}/children/new`, account, this.httpOptions)
-      .pipe(catchError(this.handleException));
-  }
-
-  addReference(references: {nanny_username: string, name: string,
-    phone_number: string, email: string}
-    ): Observable<Account> {
-    return this.httpClient
-      .post<Account>(`${this.endPoint}/references/new`, references, this.httpOptions)
-      .pipe(catchError(this.handleException));
-  }
-
-  addLogin(account: {account_type: string, username: string, password: string}): Observable<Account> {
-    return this.httpClient
-      .post<Account>(`${this.endPoint}/login/new`, account, this.httpOptions)
-      .pipe(catchError(this.handleException));
-  }
-
   protected handleException(exception: any) {
     const message = `${exception.status} : ${exception.statusText}\r\n${exception.message}`;
     alert(message);

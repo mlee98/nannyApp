@@ -27,15 +27,15 @@ export class NannyJobsComponent implements OnInit {
   completed: Job[] = TEMP_ACCOUNT.nannyJobs.filter(job => job.isAccepted && job.isComplete);
 
   ngOnInit() {
-    /*this.activatedRoute.params.subscribe((params) => {
-      this.jobManager.getNannyJobsById(params.id).subscribe((result) => {
+    this.activatedRoute.params.subscribe((params) => {
+      this.jobManager.getJobsByUsername(params.id).subscribe((result) => {
         this.requests = result.filter(job => job.isAccepted === false);
         this.jobs = result.filter(job => job.isAccepted && !job.isComplete);
         this.completed = result.filter(job => job.isAccepted && job.isComplete);
         this.dispJob = this.jobs[0];
       });
-    });*/
-    this.dispJob = this.jobs[0];
+    });
+    // this.dispJob = this.jobs[0];
   }
 
   clickJob(clickedJob) {
@@ -47,15 +47,15 @@ export class NannyJobsComponent implements OnInit {
   }
 
   acceptRequest() {
-    for (let i = 0; i < this.requests.length; i++) {
+    /*for (let i = 0; i < this.requests.length; i++) {
       if (this.requests[i].id === this.dispJob.id) {
         this.requests.splice(i, 1);
         break;
       }
     }
     this.dispJob.isAccepted = true;
-    this.jobs.push(this.dispJob);
-    /*this.jobManager.acceptJob(this.dispJob.id).subscribe(() => {
+    this.jobs.push(this.dispJob);*/
+    this.jobManager.acceptJob(this.dispJob.id).subscribe(() => {
       for (let i = 0; i < this.requests.length; i++) {
       if (this.requests[i].id === this.dispJob.id) {
         this.requests.splice(i, 1);
@@ -64,11 +64,11 @@ export class NannyJobsComponent implements OnInit {
     }
       this.dispJob.isAccepted = true;
       this.jobs.push(this.dispJob);
-    });*/
+    });
   }
 
   declineRequest() {
-    /*this.jobManager.declineJob(this.dispJob.id).subscribe(() => {
+    this.jobManager.declineJob(this.dispJob.id).subscribe(() => {
       for (let i = 0; i < this.requests.length; i++) {
         if (this.requests[i].id === this.dispJob.id) {
           this.requests.splice(i, 1);
@@ -80,8 +80,8 @@ export class NannyJobsComponent implements OnInit {
       } else {
         this.dispJob = this.jobs[0];
       }
-    });*/
-    for (let i = 0; i < this.requests.length; i++) {
+    });
+    /*for (let i = 0; i < this.requests.length; i++) {
       if (this.requests[i].id === this.dispJob.id) {
         this.requests.splice(i, 1);
         break;
@@ -91,11 +91,11 @@ export class NannyJobsComponent implements OnInit {
       this.dispJob = this.placeholderJob;
     } else {
       this.dispJob = this.jobs[0];
-    }
+    }*/
   }
 
   updateTasks(updateObj: {taskNames: string[], taskDays: string[]}) {
-    // this.jobManager.updateTasks(updateObj.taskNames, updateObj.taskDays, this.dispJob.id).subscribe();
+    this.jobManager.updateTasks(updateObj.taskNames, updateObj.taskDays, this.dispJob.id).subscribe();
   }
 
 }

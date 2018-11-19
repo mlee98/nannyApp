@@ -36,7 +36,7 @@ export class SearchComponent implements OnInit {
     this.selectedNanny = 0;
     this.nannyAge = 0;
     this.gender = 0;
-    /*this.activatedRoute.params.subscribe((params) => {
+    this.activatedRoute.params.subscribe((params) => {
       this.jobManager.getJobsByUsername(params.username).subscribe((jobs) => {
         jobs.forEach(job => {
           if (job.isAccepted === false && job.isComplete === false) {
@@ -44,9 +44,7 @@ export class SearchComponent implements OnInit {
           }
         });
       });
-    });*/
-    this.jobs = TEMP_ACCOUNT.parentJobs;
-    this.nannys[0] = TEMP_ACCOUNT;
+    });
     this.searchField = {
       gender: 'gender',
       minNannyAge: 0,
@@ -60,9 +58,9 @@ export class SearchComponent implements OnInit {
   search() {
     this.searchField.minNannyAge = this.nannyAges[this.nannyAge].min;
     this.searchField.maxNannyAge = this.nannyAges[this.nannyAge].max;
-    /*this.nannySearch.search(this.searchField).subscribe((nannys) => {
+    this.nannySearch.search(this.searchField).subscribe((nannys) => {
       this.nannys = nannys;
-    });*/
+    });
   }
 
   sendRequest() {
