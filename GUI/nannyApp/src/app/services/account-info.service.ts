@@ -10,7 +10,7 @@ import { Payment } from '../models/payment';
 })
 export class AccountInfo {
 
-  protected endPoint = 'ec2-18-216-55-181.us-east-2.compute.amazonaws.com';
+  protected endPoint = 'ec2-18-216-55-181.us-east-2.compute.amazonaws.com:8080';
 
   protected httpOptions = {
     headers: new HttpHeaders({
@@ -23,9 +23,13 @@ export class AccountInfo {
   ) {}
 
   // Get Requests
-  getAccountByUsername(username: string): Observable<Account> {
+  getAccountByUsername(username: string): Observable<{username: string, password: string, first_name: string, last_name: string,
+    age: number, gender: string, address: string, city: string, state: string, zip: number,
+    email: string, phone_number: string}> {
     return this.httpClient
-      .get<Account>(`${this.endPoint}/accounts/${username}`, this.httpOptions)
+      .get<{username: string, password: string, first_name: string, last_name: string,
+        age: number, gender: string, address: string, city: string, state: string, zip: number,
+        email: string, phone_number: string}>(`${this.endPoint}/accounts/${username}`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 
@@ -44,7 +48,47 @@ export class AccountInfo {
   // Post Requests
   addAccount(account: Account): Observable<Account> {
     return this.httpClient
+      .post<Account>(`${this.endPoint}/accounts/new`, account, this.httpOptions)
+      .pipe(catchError(this.handleException));
+  }
+
+  addParent(account: {username: string, password: string, first_name: string, last_name: string,
+    age: number, gender: string, address: string, city: string, state: string, zip: number,
+    email: string, phone_number: string}
+    ): Observable<Account> {
+    return this.httpClient
       .post<Account>(`${this.endPoint}/parents/new`, account, this.httpOptions)
+      .pipe(catchError(this.handleException));
+  }
+
+  addNanny(account: {username: string, password: string, first_name: string, last_name: string,
+    age: number, gender: string, address: string, city: string, state: string, zip: number,
+    email: string, phone_number: string}
+    ): Observable<Account> {
+    return this.httpClient
+      .post<Account>(`${this.endPoint}/nannys/new`, account, this.httpOptions)
+      .pipe(catchError(this.handleException));
+  }
+
+  addChild(account: {parent_username: string, name: string,
+    age: number, gender: string, likes: string, allergies: string, medications: string, special_requirements: string}
+    ): Observable<Account> {
+    return this.httpClient
+      .post<Account>(`${this.endPoint}/children/new`, account, this.httpOptions)
+      .pipe(catchError(this.handleException));
+  }
+
+  addReference(references: {nanny_username: string, name: string,
+    phone_number: string, email: string}
+    ): Observable<Account> {
+    return this.httpClient
+      .post<Account>(`${this.endPoint}/references/new`, references, this.httpOptions)
+      .pipe(catchError(this.handleException));
+  }
+
+  addLogin(account: {account_type: string, username: string, password: string}): Observable<Account> {
+    return this.httpClient
+      .post<Account>(`${this.endPoint}/login/new`, account, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 

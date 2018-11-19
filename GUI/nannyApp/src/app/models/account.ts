@@ -40,4 +40,21 @@ export class Account {
   parentJobs?: Job[];
   rating?: number;
   deposit?: Deposit;
+
+  convert? (result: {username: string, password: string, first_name: string, last_name: string,
+    age: number, gender: string, address: string, city: string, state: string, zip: number,
+    email: string, phone_number: string}) {
+      this.username = result.username;
+          this.password = result.password;
+          this.firstName = result.first_name;
+          this.lastName = result.last_name;
+          this.age = result.age;
+          this.gender = result.gender;
+          this.address = result.address;
+          this.city = result.city;
+          this.state = result.state;
+          this.zip = result.zip;
+          this.email = result.email;
+          this.phone = result.phone_number;
+    }
 }

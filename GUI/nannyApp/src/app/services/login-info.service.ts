@@ -9,7 +9,7 @@ import { Login } from '../models';
 })
 export class LoginInfo {
 
-  protected endPoint = 'ec2-18-216-55-181.us-east-2.compute.amazonaws.com';
+  protected endPoint = 'ec2-18-216-55-181.us-east-2.compute.amazonaws.com:8080';
 
   protected httpOptions = {
     headers: new HttpHeaders({
