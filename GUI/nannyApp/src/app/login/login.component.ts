@@ -24,16 +24,14 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    /*this.loginInfo.login(this.userLogin).subscribe((result) => {
-      if (result.id === -1) {
+    this.loginInfo.login(this.userLogin).subscribe((result) => {
+      if (result.username !== '') {
         return;
       } else {
-        this.loginInfo.changeId(result.id);
+        this.loginInfo.changeId(result.username);
         this.router.navigateByUrl('/home');
       }
-    });*/
-    this.loginInfo.changeId('bobjohn');
-    this.router.navigateByUrl('/home');
+    });
   }
 
 }

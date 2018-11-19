@@ -55,24 +55,47 @@ export class NannyJobsComponent implements OnInit {
     }
     this.dispJob.isAccepted = true;
     this.jobs.push(this.dispJob);
+    /*this.jobManager.acceptJob(this.dispJob.id).subscribe(() => {
+      for (let i = 0; i < this.requests.length; i++) {
+      if (this.requests[i].id === this.dispJob.id) {
+        this.requests.splice(i, 1);
+        break;
+      }
+    }
+      this.dispJob.isAccepted = true;
+      this.jobs.push(this.dispJob);
+    });*/
   }
 
   declineRequest() {
+    /*this.jobManager.declineJob(this.dispJob.id).subscribe(() => {
+      for (let i = 0; i < this.requests.length; i++) {
+        if (this.requests[i].id === this.dispJob.id) {
+          this.requests.splice(i, 1);
+          break;
+        }
+      }
+      if (this.jobs.length === 0) {
+        this.dispJob = this.placeholderJob;
+      } else {
+        this.dispJob = this.jobs[0];
+      }
+    });*/
     for (let i = 0; i < this.requests.length; i++) {
       if (this.requests[i].id === this.dispJob.id) {
         this.requests.splice(i, 1);
         break;
       }
     }
-    if (this.jobs.length) {
+    if (this.jobs.length === 0) {
       this.dispJob = this.placeholderJob;
     } else {
       this.dispJob = this.jobs[0];
     }
   }
 
-  updateTasks(newTasks: Task[]) {
-    this.dispJob.tasks = newTasks;
+  updateTasks(updateObj: {taskNames: string[], taskDays: string[]}) {
+    // this.jobManager.updateTasks(updateObj.taskNames, updateObj.taskDays, this.dispJob.id).subscribe();
   }
 
 }

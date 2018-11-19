@@ -88,8 +88,8 @@ export class JobScheduleComponent implements OnInit {
     this.newTask = false;
   }
 
-  update() {
-    const temporaryTasks = [];
+  update(name: string, day: string ) {
+    /*const temporaryTasks = [];
     for (let i = 0; i < this.week.Mon.length; i++) {
       temporaryTasks.push(this.week.Mon[i]);
     }
@@ -111,8 +111,8 @@ export class JobScheduleComponent implements OnInit {
     for (let i = 0; i < this.week.Sun.length; i++) {
       temporaryTasks.push(this.week.Sun[i]);
     }
-    this.tasks = temporaryTasks;
-    this.updateTasks.emit(this.tasks);
+    this.tasks = temporaryTasks;*/
+    this.updateTasks.emit({taskNames: [name], taskDays: [day]});
   }
 
 }

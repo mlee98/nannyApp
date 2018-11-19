@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { SearchField } from '../models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NannySearch {
-  protected endPoint = 'https://fcd07054-eb96-4bfb-a380-03dd122aebda.mock.pstmn.io';
+  protected endPoint = 'ec2-18-216-55-181.us-east-2.compute.amazonaws.com:8080/';
 
   protected httpOptions = {
     headers: new HttpHeaders({
@@ -29,7 +29,7 @@ export class NannySearch {
   protected handleException(exception: any) {
     const message = `${exception.status} : ${exception.statusText}\r\n${exception.message}`;
     alert(message);
-    return Observable.throw(exception);
+    return throwError(exception);
   }
 
 }

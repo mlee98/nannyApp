@@ -21,14 +21,14 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let task of showTasks">
+    <tr *ngFor="let task of showTasks; let i = index;">
       <td>{{task.name}}</td>
       <td>{{task.time}}</td>
       <td>{{task.location}}</td>
       <td>{{task.description}}</td>
       <td *ngIf="!editable">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" [id]="task.name" [checked]="task.completed" [disabled]="!completeable" (change)="update()"
+          <input class="form-check-input" type="checkbox" value="" [id]="task.name" [checked]="task.completed" [disabled]="!completeable" (change)="update(task.name,currentDay)"
           [(ngModel)]="task.completed">
         </div>
       </td>

@@ -54,12 +54,9 @@ export class CreateAccountComponent implements OnInit {
         }
       }
     }
-
-    /*this.accountInfo.addAccount(this.account).subscribe(() => {
-      console.log(this.account);
-      this.router.navigateByUrl('/');
-    });*/
     console.log(this.account);
-    this.router.navigateByUrl('/');
+    this.accountInfo.addAccount(this.account).subscribe(() => {
+      this.router.navigateByUrl('/home');
+    });
   }
 }

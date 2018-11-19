@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { Login } from '../models';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { Login } from '../models';
 })
 export class LoginInfo {
 
-  protected endPoint = 'https://fcd07054-eb96-4bfb-a380-03dd122aebda.mock.pstmn.io';
+  protected endPoint = 'ec2-18-216-55-181.us-east-2.compute.amazonaws.com';
 
   protected httpOptions = {
     headers: new HttpHeaders({
@@ -38,7 +38,7 @@ export class LoginInfo {
   protected handleException(exception: any) {
     const message = `${exception.status} : ${exception.statusText}\r\n${exception.message}`;
     alert(message);
-    return Observable.throw(exception);
+    return throwError(exception);
   }
 
 }
