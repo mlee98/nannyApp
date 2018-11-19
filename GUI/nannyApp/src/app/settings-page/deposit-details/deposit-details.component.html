@@ -1,6 +1,6 @@
-<div class="row border border-info mb-5 mt-3">
-  <div class="container d-flex justify-content-between bg-info mb-3">
-    <div class="m-4 text-light">
+<div class="row border mb-5 mt-3">
+  <div class="container d-flex justify-content-between bg-light mb-3 border-bottom">
+    <div class="m-4">
       <h1 class="d-inline mr-4">My Direct Deposit</h1>
     </div>
     <button
@@ -8,7 +8,7 @@
         || !updateDeposit.type || !updateDeposit.accountNumber
         || !updateDeposit.routingNumber)"
       (click)="clickInfo()"
-      class="btn btn-link text-light"
+      class="btn btn-link text-dark"
     >
       {{isEditMode ? 'Save Info' : 'Edit Info'}}
     </button>
