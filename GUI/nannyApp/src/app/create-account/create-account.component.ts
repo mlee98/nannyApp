@@ -25,7 +25,7 @@ export class CreateAccountComponent implements OnInit {
 
   ngOnInit() {
     this.stepHideController = [false, true, true, true];
-    this.loginInfo.type = 'nanny';
+    this.loginInfo.type = '';
     this.account.references = [];
     this.account.children = [];
   }

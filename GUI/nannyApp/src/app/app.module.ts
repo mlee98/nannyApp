@@ -19,6 +19,7 @@ import { AccountInfo } from './services/account-info.service';
 import { LoginInfo } from './services/login-info.service';
 import { JobManager } from './services/job-manager.service';
 import { NannySearch } from './services/nanny-search.service';
+import { IconsModule } from './icons/icons.module';
 
 
 
@@ -40,7 +41,8 @@ import { NannySearch } from './services/nanny-search.service';
     ParentJobsModule,
     RouterModule,
     HomePageModule,
-    HttpClientModule
+    HttpClientModule,
+    IconsModule
   ],
   providers: [AccountInfo, LoginInfo, JobManager, NannySearch],
   bootstrap: [AppComponent]

@@ -29,9 +29,9 @@ export class CreateJobComponent implements OnInit {
     };
   }
 
-  addChild() {
+  addChild(child: Child) {
     for (let i = 0; i < this.children.length; i++) {
-      if (this.children[i].name === this.selectedChildName) {
+      if (this.children[i].name === child.name) {
         this.job.children.push(this.children[i]);
         break;
       }
@@ -46,6 +46,11 @@ export class CreateJobComponent implements OnInit {
       children: [],
       tasks: []
     };
+  }
+
+  jobContains(child: Child) {
+    const arr = this.job.children.filter(c => c.name === child.name && c.age === child.age);
+    return arr.length;
   }
 
 }

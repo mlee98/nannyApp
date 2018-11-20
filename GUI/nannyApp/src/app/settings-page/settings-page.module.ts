@@ -10,13 +10,14 @@ import { NannyProfilePageModule } from '../nanny-profile-page/nanny-profile-page
 import { NannyDetailsComponent } from './nanny-details/nanny-details.component';
 import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 import { DepositDetailsComponent } from './deposit-details/deposit-details.component';
-
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    NannyProfilePageModule
+    NannyProfilePageModule,
+    SharedModule
   ],
   declarations: [
     SettingsPageComponent,

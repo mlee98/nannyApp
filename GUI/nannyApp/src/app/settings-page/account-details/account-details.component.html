@@ -1,7 +1,7 @@
-<div class="row border border-info mb-5 mt-3">
-  <div class="container d-flex justify-content-between bg-info mb-3">
-    <h1 class="m-4 text-light">My Account</h1>
-    <button (click)="clickInfo()" class="btn btn-link text-light" >
+<div class="row border  mb-5 mt-3">
+  <div class="container d-flex justify-content-between bg-light mb-3 border-bottom">
+    <h1 class="m-4">My Account</h1>
+    <button (click)="clickInfo()" class="btn btn-link text-dark" >
       {{ isEditMode ? 'Save Info' : 'Edit Info'}}
     </button>
   </div>
@@ -21,7 +21,7 @@
         <span class="text-dark">{{account.gender}}</span>
       </div>
       <div class="col h5 font-weight-light">Phone:
-        <span class="text-dark">{{account.phone}}</span>
+        <span class="text-dark">{{account.phone | phone}}</span>
       </div>
     </div>
     <div class="row m-2">
