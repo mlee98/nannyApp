@@ -72,5 +72,31 @@ create table deposit_info
     username varchar(100)
 );
   
-  
-  
+create table jobs(
+	job_id int NOT NULL AUTO_INCREMENT,
+	familyName varchar (50),
+	nannyName varchar (50),
+	description varchar(250),
+	address varchar(100),
+	city varchar (50),
+	state varchar (50),
+	zip int,
+	duration varchar(100),
+    nannyPhone varchar(15),
+    parentPhone varchar(15),
+	is_accepted bool,
+	is_complete bool,
+	primary key (job_id),
+    parent_username varchar(100),
+    nanny_username varchar(100)
+);
+
+create table tasks (
+	id int, /*same as parent job ID*/
+	name varchar(50),
+	time varchar(50),
+	day varchar(50),
+	description varchar(250),
+	location varchar(50),
+	completed bool
+);
