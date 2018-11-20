@@ -1,0 +1,11 @@
+.task-name-button:hover {
+  text-decoration: none;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.strikethrough:hover {
+  text-decoration: line-through;
+}

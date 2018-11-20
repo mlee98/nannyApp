@@ -7,12 +7,16 @@ import { AccountCreatePersonalComponent } from './account-create-personal/accoun
 import { AccountCreateNannyComponent } from './account-create-nanny/account-create-nanny.component';
 import { AccountCreateParentComponent } from './account-create-parent/account-create-parent.component';
 import { RouterModule } from '@angular/router';
+import { IconsModule } from '../icons/icons.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    IconsModule,
+    SharedModule
   ],
   declarations: [
     CreateAccountComponent,

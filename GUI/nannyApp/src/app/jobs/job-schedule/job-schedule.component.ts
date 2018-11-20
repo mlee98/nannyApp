@@ -57,6 +57,17 @@ export class JobScheduleComponent implements OnInit {
     this.tempTask = {};
   }
 
+  getFullDay(current: string) {
+    let day = current;
+    if (day === 'Wed') {
+      day += 'nes';
+    } else if (day === 'Sat') {
+      day += 'ur';
+    }
+    day += 'day';
+    return day;
+  }
+
   createWeek(arr: Task[]) {
     this.week = {
       Sun: [],

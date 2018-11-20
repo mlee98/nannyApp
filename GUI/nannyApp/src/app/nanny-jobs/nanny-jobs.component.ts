@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class NannyJobsComponent implements OnInit {
 
+  phoneNum: Number = 5123242233;
   dispJob: Job;
   placeholderJob: {
     id: 0, familyName: 'You currently have no jobs', nannyName: ''

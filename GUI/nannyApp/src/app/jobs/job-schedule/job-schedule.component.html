@@ -1,80 +1,106 @@
-<h4>Schedule - {{currentDay}}</h4>
-<nav aria-label="ScheduleNav">
-  <ul class="pagination mb-0">
-    <li class="page-item"><a class="page-link" (click)="!newTask ? showDay('Sun') : newTask = newTask">Sun</a></li>
-    <li class="page-item"><a class="page-link" (click)="!newTask ? showDay('Mon') : newTask = newTask">Mon</a></li>
-    <li class="page-item"><a class="page-link" (click)="!newTask ? showDay('Tues') : newTask = newTask">Tues</a></li>
-    <li class="page-item"><a class="page-link" (click)="!newTask ? showDay('Wed') : newTask = newTask">Wed</a></li>
-    <li class="page-item"><a class="page-link" (click)="!newTask ? showDay('Thurs') : newTask = newTask">Thurs</a></li>
-    <li class="page-item"><a class="page-link" (click)="!newTask ? showDay('Fri') : newTask = newTask">Fri</a></li>
-    <li class="page-item"><a class="page-link" (click)="!newTask ? showDay('Sat') : newTask = newTask">Sat</a></li>
-  </ul>
-</nav>
-<table class="table mt-0">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Time</th>
-      <th scope="col">Location</th>
-      <th scope="col">Description</th>
-      <th scope="col" *ngIf="!editable">Completed</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let task of showTasks">
-      <td>{{task.name}}</td>
-      <td>{{task.time}}</td>
-      <td>{{task.location}}</td>
-      <td>{{task.description}}</td>
-      <td *ngIf="!editable">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" [id]="task.name" [checked]="task.completed" [disabled]="!completeable" (change)="update()"
-          [(ngModel)]="task.completed">
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<div class="row justify-content-center" *ngIf="editable && !newTask">
-  <button type="button" id="next_btn" class="btn btn-info" (click)="newTask = true">Add Task to {{currentDay}}</button>
-</div>
+<div class="container border">
+  <div class="d-flex justify-content-between mt-3 mb-3">
+      <div class="h4 mt-1 mb-0">{{getFullDay(currentDay)}} Schedule</div>
+      <button
+      *ngIf="editable"
+      [disabled]="newTask"
+      type="button"
+      id="next_btn"
+      class="btn btn-info"
+      (click)="newTask = true"
+    >
+      Add Task
+    </button>
+  </div>
 
-<div class="container" *ngIf="newTask">
-  <div class="row">
-    <div class="col-md-3">
-      <div class="form-group">
-        <label for="task_name" class="large-text">
-          Task
-        </label>
-        <input type="text" id="task_name" class="form-control" placeholder="Task" [(ngModel)]="tempTask.name" />
-      </div>
+  <nav aria-label="ScheduleNav">
+    <ul class="pagination mb-0">
+      <li class="page-item flex-grow-1"><a class="page-link text-center" (click)="!newTask ? showDay('Sun') : newTask = newTask">Sun</a></li>
+      <li class="page-item flex-grow-1"><a class="page-link text-center" (click)="!newTask ? showDay('Mon') : newTask = newTask">Mon</a></li>
+      <li class="page-item flex-grow-1"><a class="page-link text-center" (click)="!newTask ? showDay('Tues') : newTask = newTask">Tues</a></li>
+      <li class="page-item flex-grow-1"><a class="page-link text-center" (click)="!newTask ? showDay('Wed') : newTask = newTask">Wed</a></li>
+      <li class="page-item flex-grow-1"><a class="page-link text-center" (click)="!newTask ? showDay('Thurs') : newTask = newTask">Thurs</a></li>
+      <li class="page-item flex-grow-1"><a class="page-link text-center" (click)="!newTask ? showDay('Fri') : newTask = newTask">Fri</a></li>
+      <li class="page-item flex-grow-1"><a class="page-link text-center" (click)="!newTask ? showDay('Sat') : newTask = newTask">Sat</a></li>
+    </ul>
+  </nav>
+  <div class="container mt-3 mb-3">
+    <div class="text-center" *ngIf="!showTasks.length && !newTask">
+      No tasks set for {{getFullDay(currentDay)}}
     </div>
-    <div class="col-md-3">
-      <div class="form-group">
-        <label for="task_time" class="large-text">
-          Time
-        </label>
-        <input type="text" id="task_time" class="form-control" placeholder="Time" [(ngModel)]="tempTask.time" />
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="form-group">
-        <label for="task_loc" class="large-text">
-          Location
-        </label>
-        <input type="text" id="task_loc" class="form-control" placeholder="Location" [(ngModel)]="tempTask.location" />
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="form-group">
-        <label for="task_loc" class="large-text">
-          Brief Description
-        </label>
-        <input type="text" id="task_loc" class="form-control" placeholder="Description" [(ngModel)]="tempTask.description" />
+    <div *ngFor="let task of showTasks; let i = index">
+      <a
+        class="d-block task-name-button text-info"
+        [ngClass]="{'strikethrough': task.completed}"
+        data-toggle="collapse"
+        href="#taskDetails{{i}}"
+        role="button"
+      >
+        <a class="mr-1 plus-sign">+</a>
+        {{task.name}}
+      </a>
+      <div class="container pl-4 collapse" id="taskDetails{{i}}">
+        <div>{{task.time}} at {{task.location}}</div>
+        <div>{{task.description}}</div>
+        <div class="d-flex align-items-center">
+          <div class="mr-2">Completed</div>
+            <input
+            type="checkbox"
+            value=""
+            [id]="task.name"
+            [checked]="task.completed"
+            [disabled]="!completeable"
+            (change)="update()"
+            [(ngModel)]="task.completed">
+          </div>
       </div>
     </div>
   </div>
-  <div class="row justify-content-center">
-    <button type="button" id="next_btn" class="btn btn-info" (click)="addTask(); update()">Add</button>
+
+  <div class="container" *ngIf="newTask">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="task_name" class="large-text">
+            Task
+          </label>
+          <input type="text" id="task_name" class="form-control" placeholder="Task" [(ngModel)]="tempTask.name" />
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="task_time" class="large-text">
+            Time
+          </label>
+          <input type="text" id="task_time" class="form-control" placeholder="Time" [(ngModel)]="tempTask.time" />
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="task_loc" class="large-text">
+            Location
+          </label>
+          <input type="text" id="task_loc" class="form-control" placeholder="Location" [(ngModel)]="tempTask.location" />
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="task_loc" class="large-text">
+            Brief Description
+          </label>
+          <input type="text" id="task_loc" class="form-control" placeholder="Description" [(ngModel)]="tempTask.description" />
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center mb-3">
+      <button
+        type="button"
+        id="next_btn"
+        class="btn btn-outline-info"
+        (click)="addTask(); update()"
+      >
+        Save
+      </button>
+    </div>
   </div>
 </div>

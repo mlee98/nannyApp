@@ -1,5 +1,7 @@
-<div class="container mt-5 ">
-  <h1 class="text-center mb-5 display-3">Create Your Account</h1>
+<div class="container mt-4 mb-3">
+  <div class="text-center pt-4 mb-4">
+    <app-stroller-icon></app-stroller-icon>
+  </div>
   <app-account-create-login [loginInfo]="loginInfo" [stepHideController]="stepHideController" [hidden]="stepHideController[0]"></app-account-create-login>
   <app-account-create-personal [accType]="loginInfo.type" [personalInfo]="personalInfo" [stepHideController]="stepHideController" [hidden]="stepHideController[1]"></app-account-create-personal>
   <app-account-create-nanny (finished)="generateAccount()" [nannyInfo]="nannyInfo" [stepHideController]="stepHideController" [hidden]="stepHideController[2]"></app-account-create-nanny>

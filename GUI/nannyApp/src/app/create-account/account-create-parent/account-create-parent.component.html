@@ -1,104 +1,140 @@
-<div class="row justify-content-center containter">
-  <div class="row col-md-8 justify-content-center">
-    <div class="col-md-10 pl-1 mb-2">
-      <button type="button" id="back_btn" (click)="back()" class="btn btn-sm btn-secondary" [hidden]="!stepHideController[0]">Back</button>
-    </div>
-    <div class="col-md-2 pr-1 mb-2 clearfix">
-      <button type="button" id="next_btn" (click)="finish()" class="btn btn-sm float-right btn-secondary">Finish</button>
-    </div>
-  </div>
-</div>
 <div class="row justify-content-center">
   <div class="col-md-8">
     <div class="card">
-      <div class="card-header bg-info large-text text-light">
+      <div class="card-header bg-info large-text text-center text-light">
         Children
       </div>
       <div class="card-body bg-light">
         <div class="container">
-          <div class="row">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Age</th>
-                  <th scope="col">Gender</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let child of parentInfo.children">
-                  <td>{{child.name}}</td>
-                  <td>{{child.age}}</td>
-                  <td>{{child.gender}}</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="row flex-column">
+            <div class="mb-2" *ngFor="let child of parentInfo.children">
+              {{child.name}} - {{child.gender}}, {{child.age}} years old
+            </div>
           </div>
           <div class="row justify-content-center" *ngIf="!childForm">
-            <button type="button" id="showRef_btn" (click)="showChildForm()" class="btn btn-secondary">Add
-              Another
-              Child</button>
+            <button
+              type="button"
+              id="showRef_btn"
+              (click)="showChildForm()"
+              class="btn btn-info"
+            >
+              Add Child
+            </button>
           </div>
+          <hr *ngIf="childForm">
           <div class="row" *ngIf="childForm">
             <div class="col-md-4">
               <div class="form-group">
-                <label for="reference_name" class="large-text">
+                <label for="reference_name">
                   Name
                 </label>
-                <input type="text" id="reference_firstname" class="form-control" placeholder="Name" [(ngModel)]='tempChild.name' />
+                <input
+                  type="text"
+                  id="reference_firstname"
+                  class="form-control"
+                  [(ngModel)]='tempChild.name' />
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
-                <label for="child_age" class="large-text">
-                  Age
-                </label>
-                <input type="number" id="child_age" class="form-control" placeholder="Age" [(ngModel)]='tempChild.age' />
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label class="large-text" for="account_state">
+                <label for="account_state">
                   Gender
                 </label>
                 <select id="child_gender" class="form-control" [(ngModel)]='tempChild.gender'>
+                  <option></option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
               </div>
             </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="child_age">
+                  Age
+                </label>
+                <input
+                  type="number"
+                  id="child_age"
+                  class="form-control"
+                  [(ngModel)]='tempChild.age' />
+              </div>
+            </div>
           </div>
-          <div class="row" *ngIf="childForm">
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="child_allergies" class="large-text">Allergies</label>
-                <textarea class="form-control" id="child_allergies" rows="3" [(ngModel)]="tempChild.allergies"></textarea>
-              </div>
+          <div *ngIf="childForm">
+            <div class="form-group">
+              <label for="child_allergies">Allergies</label>
+              <input
+                type="text"
+                class="form-control"
+                id="child_allergies"
+                [(ngModel)]="tempChild.allergies"
+              >
             </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="child_medications" class="large-text">Medications</label>
-                <textarea class="form-control" id="child_medications" rows="3" [(ngModel)]="tempChild.medications"></textarea>
-              </div>
+            <div class="form-group">
+              <label for="child_medications">Medications</label>
+              <input
+                type="text"
+                class="form-control"
+                id="child_medications"
+                [(ngModel)]="tempChild.medications"
+              >
             </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="child_specialReq" class="large-text">Likes</label>
-                <textarea class="form-control" id="child_specialReq" rows="3" [(ngModel)]="tempChild.likes"></textarea>
-              </div>
+            <div class="form-group">
+              <label for="child_specialReq">Likes</label>
+              <input
+                type="text"
+                class="form-control"
+                id="child_specialReq"
+                [(ngModel)]="tempChild.likes"
+              >
             </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="child_specialReq" class="large-text">Other</label>
-                <textarea class="form-control" id="child_specialReq" rows="3" [(ngModel)]="tempChild.specialReqs"></textarea>
-              </div>
+            <div class="form-group">
+              <label for="child_specialReq">Other</label>
+              <textarea
+                class="form-control"
+                id="child_specialReq"
+                rows="2"
+                [(ngModel)]="tempChild.specialReqs"
+              ></textarea>
             </div>
           </div>
           <div class="row justify-content-center" *ngIf="childForm">
-            <button type="button" id="addRef_btn" (click)="addChild()" class="btn btn-secondary">Add</button>
+            <button
+              type="button"
+              id="addRef_btn"
+              (click)="addChild()"
+              class="btn btn-outline-info"
+            >
+              Add
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<div class="row justify-content-center containter mt-2">
+    <div class="row col-md-8 justify-content-center">
+      <div class="col-md-10 pl-1">
+        <button
+          type="button"
+          id="back_btn"
+          (click)="back()"
+          class="btn btn-info"
+          [hidden]="!stepHideController[0]"
+        >
+          Back
+        </button>
+      </div>
+      <div class="col-md-2 pr-1 clearfix">
+        <button
+          type="button"
+          id="next_btn"
+          (click)="finish()"
+          class="btn float-right btn-info"
+        >
+          Finish
+        </button>
+      </div>
+    </div>
+  </div>
