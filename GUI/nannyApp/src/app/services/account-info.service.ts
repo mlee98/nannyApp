@@ -10,7 +10,7 @@ import { Payment } from '../models/payment';
 })
 export class AccountInfo {
 
-  protected endPoint = 'ec2-18-216-55-181.us-east-2.compute.amazonaws.com:8080';
+  protected endPoint = 'http://ec2-18-216-55-181.us-east-2.compute.amazonaws.com:8080';
 
   protected httpOptions = {
     headers: new HttpHeaders({

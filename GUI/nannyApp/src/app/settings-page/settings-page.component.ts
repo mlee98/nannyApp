@@ -19,7 +19,7 @@ export class SettingsPageComponent implements OnInit {
   account: Account;
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe((params) => {
+    /*this.activatedRoute.params.subscribe((params) => {
       if (params.username) {
         this.accountInfo.getAccountByUsername(params.username).subscribe((result) => {
           this.account = result;
@@ -27,8 +27,8 @@ export class SettingsPageComponent implements OnInit {
       } else {
         this.account = {};
       }
-    });
-    // this.account = TEMP_ACCOUNT;
+    });*/
+    this.account = TEMP_ACCOUNT;
   }
 
 }

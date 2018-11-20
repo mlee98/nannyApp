@@ -36,13 +36,9 @@ export class LoginInfo {
       .pipe(catchError(this.handleException));
   }
 
-  test(): Observable<{username: string, password: string, first_name: string, last_name: string,
-    age: string, gender: string, address: string, city: string, state: string,
-    zip: number, email: string, phone_number: string}> {
+  test(): Observable<Account> {
     return this.httpClient
-      .post<{username: string, password: string, first_name: string, last_name: string,
-        age: string, gender: string, address: string, city: string, state: string,
-        zip: number, email: string, phone_number: string}>(`${this.endPoint}/parents`, this.httpOptions)
+      .post<Account>(`${this.endPoint}/parents`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 

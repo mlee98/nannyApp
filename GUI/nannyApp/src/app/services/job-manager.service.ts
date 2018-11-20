@@ -9,7 +9,7 @@ import { Job, Task, Account } from '../models';
 })
 export class JobManager {
 
-  protected endPoint = 'ec2-18-216-55-181.us-east-2.compute.amazonaws.com:8080';
+  protected endPoint = 'http://ec2-18-216-55-181.us-east-2.compute.amazonaws.com:8080';
 
   protected httpOptions = {
     headers: new HttpHeaders({
