@@ -1,46 +1,68 @@
 <?php
-
-use Slim\Http\Request;
-use Slim\Http\Response;
-
-	$app->options('/{routes:.+}', function ($request, $response, $args) {
-    return $response;
-});
-$app->add(function ($req, $res, $next) {
-    $response = $next($req, $res);
-    return $response
-            ->withHeader('Access-Control-Allow-Origin', '*')
-            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-});
-
-//---------------------------------------------------------------------------
-//POST ROUTES
-
-
-
- //insert to login(works)
-    $app->post('/login/new', function ($request, $response) {
-               $input = $request->getParsedBody();
-               $sql = "INSERT INTO login_info (account_type, username, password ) VALUES (:account_type, :username, :password)";
-               $sth = $this->db->prepare($sql);
-               $sth->bindParam("account_type", $input['account_type']);
-               $sth->bindParam("username", $input['username']);
-               $sth->bindParam("password", $input['password']);
-               $sth->execute();
-               return $this->response->withJson($input);
-               });
+    use Slim\Http\Request;
+    use Slim\Http\Response;
+   
     
-    //Insert into parents table(works)
-    $app->post('/parents/new', function ($request, $response) {
+    $app->options('/{routes:.+}', function ($request, $response, $args) {
+                  return $response;
+                  });
+    $app->add(function ($req, $res, $next) {
+              $response = $next($req, $res);
+              return $response
+              ->withHeader('Access-Control-Allow-Origin', '*')
+              ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+              ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+              });
+    
+    //----------------------------------------------------------------------------
+   //GET ALL INFO
+    $app->get('/account/{username}/{type}', function ($request, $response, $args){
+              $username = $request->getAttribute('username');
+              $type = $request->getAttribute('type');
+              $parent = "parent";
+              $sth = $this->dbConn->prepare("SELECT * FROM accounts WHERE username = '$username'" );
+              $sth->execute();
+              $output = $sth->fetchAll();
+              
+              if($type == $parent){
+                  $sth2 = $this->dbConn->prepare("SELECT * FROM child_info WHERE username = '$username'" );
+                  $sth2->execute();
+                  $output2 = $sth2->fetchAll();
+              
+                  $sth3 = $this->dbConn->prepare("SELECT * FROM payment_info WHERE username = '$username'" );
+                  $sth3->execute();
+                  $output3 = $sth3->fetchAll();
+              }
+              else{
+                  $sth2 = $this->dbConn->prepare("SELECT * FROM nanny_info WHERE username = '$username'" );
+                  $sth2->execute();
+                  $output2 = $sth2->fetchAll();
+              
+                  $sth3 = $this->dbConn->prepare("SELECT * FROM deposit_info WHERE username = '$username'" );
+                  $sth3->execute();
+                  $output3 = $sth3->fetchAll();
+              }
+              
+              $finaloutput= array_merge($output, $output2, $output3);
+              return $this->response->withJson($finaloutput);
+              });
+    
+    
+    
+    
+    //----------------------------------------------------------------------------
+    //ACCOUNT
+    
+    
+    $app->post('/account/new', function ($request, $response) {
                $input = $request->getParsedBody();
-               $sql = "INSERT INTO parent_info (username,password,first_name,last_name,age,gender,address,city,state,zip,email,phone_number)
-               VALUES (:username, :password, :first_name, :last_name, :age, :gender, :address, :city, :state, :zip, :email, :phone_number)";
-               $sth = $this->db->prepare($sql);
+               //insert information into accounts table
+               $sql = "INSERT INTO accounts (username, password, firstname, lastname, age, gender, address, city, state, zip, email, phone, type) VALUES (:username, :password, :firstname, :lastname, :age, :gender, :address, :city, :state, :zip, :email, :phone, :type)";
+               $sth = $this->dbConn->prepare($sql);
                $sth->bindParam("username", $input['username']);
                $sth->bindParam("password", $input['password']);
-               $sth->bindParam("first_name", $input['first_name']);
-               $sth->bindParam("last_name", $input['last_name']);
+               $sth->bindParam("firstname", $input['firstname']);
+               $sth->bindParam("lastname", $input['lastname']);
                $sth->bindParam("age", $input['age']);
                $sth->bindParam("gender", $input['gender']);
                $sth->bindParam("address", $input['address']);
@@ -48,376 +70,257 @@ $app->add(function ($req, $res, $next) {
                $sth->bindParam("state", $input['state']);
                $sth->bindParam("zip", $input['zip']);
                $sth->bindParam("email", $input['email']);
-               $sth->bindParam("phone_number", $input['phone_number']);
+               $sth->bindParam("phone", $input['phone']);
+               $sth->bindParam("type", $input['type']);
                $sth->execute();
                return $this->response->withJson($input);
                });
-
     
-    //Insert into Children Table(Works)
+    $app->get('/account', function ($request, $response, $args)
+              {$sth= $this->dbConn->prepare("SELECT * FROM accounts");
+              $sth->execute();
+              $accounts = $sth->fetchAll();
+              return $this->response->withJson($accounts);
+              });
+    
+    
+    
+      //----------------------------------------------------------------------------
+    //CHILDREN
+    
     $app->post('/children/new', function ($request, $response) {
-               $input = $request->getParsedBody();
-               $sql = "INSERT INTO child_info (parent_username,name,gender,age,likes,allergies,medications,special_requirements)
-               VALUES (:parent_username, :name, :gender, :age, :likes, :allergies, :medications, :special_requirements) ";
-               $sth = $this->db->prepare($sql);
-               $sth->bindParam("parent_username", $input['parent_username']);
-               $sth->bindParam("name", $input['name']);
-               $sth->bindParam("gender", $input['gender']);
-               $sth->bindParam("age", $input['age']);
-               $sth->bindParam("likes", $input['likes']);
-               $sth->bindParam("allergies", $input['allergies']);
-               $sth->bindParam("medications", $input['medications']);
-               $sth->bindParam("special_requirements", $input['special_requirements']);
+               $file = file_get_contents("php://input");
+               $data = json_decode($file, true);
+               foreach ($data["string"] as $key => $value) {
+               $name = $value["name"];
+               $gender = $value["gender"];
+               $age = $value["age"];
+               $likes = $value["likes"];
+               $allergies = $value["allergies"];
+               $specialReqs = $value["specialReqs"];
+               $medications = $value["medications"];
+               $username = $value["username"];
+               $sql = "INSERT INTO child_info (name, gender, age, likes, allergies, specialReqs, medications, username) VALUES ('$name', '$gender', '$age', '$likes', '$allergies', '$specialReqs', '$medications', '$username')";
+               $sth = $this->dbConn->prepare($sql);
                $sth->execute();
-               return $this->response->withJson($input);
+               }
+               return $this->response->withJson($name);
                });
     
-	//Insert new Nanny(Works)
-    $app->post('/nannys/new', function ($request, $response) {
-               $input = $request->getParsedBody();
-               $sql = "INSERT INTO nanny_info (username,password,first_name,last_name,age,gender,address,city,state,zip,email,phone_number)
-               VALUES (:username, :password, :first_name, :last_name, :age, :gender, :address, :city, :state, :zip, :email, :phone_number)";
-               $sth = $this->db->prepare($sql);
-               $sth->bindParam("username", $input['username']);
-               $sth->bindParam("password", $input['password']);
-               $sth->bindParam("first_name", $input['first_name']);
-               $sth->bindParam("last_name", $input['last_name']);
-               $sth->bindParam("age", $input['age']);
-               $sth->bindParam("gender", $input['gender']);
-               $sth->bindParam("address", $input['address']);
-               $sth->bindParam("city", $input['city']);
-               $sth->bindParam("state", $input['state']);
-               $sth->bindParam("zip", $input['zip']);
-               $sth->bindParam("email", $input['email']);
-               $sth->bindParam("phone_number", $input['phone_number']);
-               $sth->execute();
-               return $this->response->withJson($input);
-               });
-    
-    //Insert new references(works)
-    $app->post('/references/new', function ($request, $response) {
-               $input = $request->getParsedBody();
-               $sql = "INSERT INTO nanny_references (nanny_username, name, phone_number, email)
-               VALUES (:nanny_username, :name, :phone_number, :email)";
-               $sth = $this->db->prepare($sql);
-               $sth->bindParam("nanny_username", $input['nanny_username']);
-               $sth->bindParam("name", $input['name']);
-               $sth->bindParam("phone_number", $input['phone_number']);
-               $sth->bindParam("email", $input['email']);
-               $sth->execute();
-               return $this->response->withJson($input);
-               });
-    
-	//Insert new skills(works)
-    $app->post('/skills/new', function ($request, $response) {
-               $input = $request->getParsedBody();
-               $sql = "INSERT INTO skills (nanny_username, cpr, can_cook, can_drive, pet_friendly) VALUES (:nanny_username, :cpr, :can_cook, :can_drive, :pet_friendly)";
-               $sth = $this->db->prepare($sql);
-               $sth->bindParam("nanny_username", $input['nanny_username']);
-               $sth->bindParam("cpr", $input['cpr']);
-               $sth->bindParam("can_cook", $input['can_cook']);
-               $sth->bindParam("can_drive", $input['can_drive']);
-               $sth->bindParam("pet_friendly", $input['pet_friendly']);
-               $sth->execute();
-               return $this->response->withJson($input);
-               });
-    
-    
-    //Insert new job(works)
-    $app->post('/jobs/new', function ($request, $response) {
-               $input = $request->getParsedBody();
-               $sql = "INSERT INTO jobs (parent_username, nanny_username, parent_phone, nanny_phone, address, city, state, zip, is_accepted, is_complete)
-               VALUES (:parent_username, :nanny_username, :parent_phone, :nanny_phone, :address, :city, :state, :zip, :is_accepted, :is_complete)";
-               $sth = $this->db->prepare($sql);
-               $sth->bindParam("parent_username", $input['parent_username']);
-               $sth->bindParam("nanny_username", $input['nanny_username']);
-               $sth->bindParam("parent_phone", $input['parent_phone']);
-               $sth->bindParam("nanny_phone", $input['nanny_phone']);
-               $sth->bindParam("address", $input['address']);
-               $sth->bindParam("city", $input['city']);
-               $sth->bindParam("state", $input['state']);
-               $sth->bindParam("zip", $input['zip']);
-               $sth->bindParam("is_accepted", $input['is_accepted']);
-               $sth->bindParam("is_complete", $input['is_complete']);
-               $sth->execute();
-               return $this->response->withJson($input);
-               });
-    
-	//Insert new task(Works)
-    $app->post('/tasks/new', function ($request, $response) {
-               $input = $request->getParsedBody();
-               $sql = "INSERT INTO tasks (job_id, task_name, task_time, task_day, description, location, completed)
-               VALUES (:job_id, :task_name, :task_time, :task_day, :description, :location, :completed)";
-               $sth = $this->db->prepare($sql);
-               $sth->bindParam("job_id", $input['job_id']);
-               $sth->bindParam("task_name", $input['task_name']);
-               $sth->bindParam("task_time", $input['task_time']);
-               $sth->bindParam("task_day", $input['task_day']);
-               $sth->bindParam("description", $input['description']);
-               $sth->bindParam("location", $input['location']);
-               $sth->bindParam("completed", $input['completed']);
-               $sth->execute();
-               return $this->response->withJson($input);
-               });
-    
-    
-   //----------------------------------------------------------------
-   //GET ROUTES
-	
-    
-    //check
-    //Display login
-    $app->get('/login', function ($request, $response, $args)
-              {$sth= $this->db->prepare("SELECT * FROM login_info");
-              $sth->execute();
-              $parent_info = $sth->fetchAll(); return $this->response->withJson($parent_info);
-              });
-    
-    //check
-    //Display parents
-    $app->get('/parents', function ($request, $response, $args)
-              {$sth= $this->db->prepare("SELECT * FROM parent_info");
-              $sth->execute();
-              $parent_info = $sth->fetchAll(); return $this->response->withJson($parent_info);
-              });
-    
-    
-    //Display Children
     $app->get('/children', function ($request, $response, $args)
-              {$sth= $this->db->prepare("SELECT * FROM child_info");
+              {$sth= $this->dbConn->prepare("SELECT * FROM child_info");
               $sth->execute();
               $child_info = $sth->fetchAll(); return $this->response->withJson($child_info);
               });
     
-    //check
-    //Display Nanny Info
-    $app->get('/nannys', function ($request, $response, $args)
-              {$sth= $this->db->prepare("SELECT * FROM nanny_info");
+    $app->get('/children/{username}', function ($request, $response, $args)
+              {
+              $username = $request->getAttribute('username');
+              $sth= $this->dbConn->prepare("SELECT * FROM child_info WHERE username = '$username'");
               $sth->execute();
-              $nanny_info = $sth->fetchAll(); 
-			  return $this->response->withJson($nanny_info);
-              });
-    
-    //check
-    //Display References
-    $app->get('/references', function ($request, $response, $args)
-              {$sth= $this->db->prepare("SELECT * FROM nanny_references");
-              $sth->execute();
-              $nanny_references = $sth->fetchAll(); return $this->response->withJson($nanny_references);
-              });
-    
-    //Display Skills
-    $app->get('/skills', function ($request, $response, $args)
-              {$sth= $this->db->prepare("SELECT * FROM skills");
-              $sth->execute();
-              $skills = $sth->fetchAll(); return $this->response->withJson($skills);
-              });
-    
-    //Display jobs
-    $app->get('/jobs', function ($request, $response, $args)
-              {$sth= $this->db->prepare("SELECT * FROM jobs");
-              $sth->execute();
-              $skills = $sth->fetchAll(); return $this->response->withJson($skills);
-              });
-    
-    //Display tasks
-    $app->get('/tasks', function ($request, $response, $args)
-              {$sth= $this->db->prepare("SELECT * FROM tasks");
-              $sth->execute();
-              $skills = $sth->fetchAll(); return $this->response->withJson($skills);
-              });
-    
-	//Show all children associated with a parent
-	$app->get('/accounts/children/[{username}]', function ($request, $response, $args) 
-		{$sth = $this->db->prepare("Select * From child_info where parent_username=:username");
-		 $sth->bindParam("username", $args['username']);
-		 $sth->execute();
-		 $user = $sth->fetchObject();
-		 return $this->response->withJson($user);
-		 });
-		 
-	//Show if user has autopay enabled
-	$app->get('/accounts/payments/[{username}]', function ($request, $response, $args) 
-		{$sth = $this->db->prepare("select automatic from payment_info where payment_info.username = :username");
-		 $sth->bindParam("username", $args['username']);
-		 $sth->execute();
-		 $user = $sth->fetchObject();
-		 return $this->response->withJson($user);
-		 });
-	
-	//Display parents with specific username and display all their info
-	$app->get('/accounts/parents/[{username}]', function ($request, $response, $args) 
-		{$sth = $this->db->prepare("Select * From parent_info Join child_info on parent_info.username = child_info.parent_username 
-		Join payment_info on child_info.parent_username = payment_info.username where parent_info.username=:username;");
-		 $sth->bindParam("username", $args['username']);
-		 $sth->execute();
-		 $user = $sth->fetchObject();
-		 return $this->response->withJson($user);
-		 });
-		 
-	//Display nannys with specific username and display all their info
-	$app->get('/accounts/nannys/[{username}]', function ($request, $response, $args) 
-		{$sth = $this->db->prepare("Select * From nanny_info Join skills on nanny_info.username = skills.nanny_username Join nanny_references on 
-		skills.nanny_username = nanny_references.nanny_username where nanny_info.username=:username");
-		 $sth->bindParam("username", $args['username']);
-		 $sth->execute();
-		 $user = $sth->fetchObject();
-		 return $this->response->withJson($user);
-		 });
-	
-	
-	//display nannys in certain zipcode
-    $app->get('/nannys/{zip}', function ($request, $response, $args){
-              $zip = $request->getAttribute('zip');
-              $sth = $this->db->prepare("SELECT * FROM nanny_info WHERE zip = $zip" );
-              $sth->execute();  
-              $zip = $sth->fetchAll();
-              return $this->response->withJson($zip);
-              });
-    
-    //display nannys of a certain age
-    $app->get('/nannys/age_range/{lower}/{upper}', function ($request, $response, $args){
-              $lower = $request->getAttribute('lower');
-              $upper = $request->getAttribute('upper');
-              $sth = $this->db->prepare("SELECT * FROM nanny_info WHERE age between $lower AND $upper" );
-              $sth->execute();
-              $nanny_info = $sth->fetchAll();
-              return $this->response->withJson($nanny_info);
-              });
-	
-    
-	//---------------------------------------
-	//PUT ROUTES
-	
-	
-    //updates parent_info
-    $app->put('/parents/update', function ($request, $response) {
-              $input = $request->getParsedBody();
-              $sql = "update parent_info set first_name = :first_name, last_name = :last_name, age= :age, gender = :gender, address = :address, city = :city, state = :state, zip= :zip, email= :email, phone_number =:phone_number where username = :username";
-              $sth = $this->db->prepare($sql);
-              $sth->bindParam("username", $input['username']);
-              $sth->bindParam("first_name", $input['first_name']);
-              $sth->bindParam("last_name", $input['last_name']);
-              $sth->bindParam("age", $input['age']);
-              $sth->bindParam("gender", $input['gender']);
-              $sth->bindParam("address", $input['address']);
-              $sth->bindParam("city", $input['city']);
-              $sth->bindParam("state", $input['state']);
-              $sth->bindParam("zip", $input['zip']);
-              $sth->bindParam("email", $input['email']);
-              $sth->bindParam("phone_number", $input['phone_number']);
-              $sth->execute();
-              return $this->response->withJson($input);
-              });
-    
-    //updates nanny_info
-    $app->put('/nannys/update', function ($request, $response) {
-              $input = $request->getParsedBody();
-              $sql = "update nanny_info set first_name = :first_name, last_name = :last_name, age= :age, gender = :gender, address = :address, city = :city, state = :state, zip= :zip, email= :email, phone_number =:phone_number where username = :username";
-              $sth = $this->db->prepare($sql);
-              $sth->bindParam("username", $input['username']);
-              $sth->bindParam("first_name", $input['first_name']);
-              $sth->bindParam("last_name", $input['last_name']);
-              $sth->bindParam("age", $input['age']);
-              $sth->bindParam("gender", $input['gender']);
-              $sth->bindParam("address", $input['address']);
-              $sth->bindParam("city", $input['city']);
-              $sth->bindParam("state", $input['state']);
-              $sth->bindParam("zip", $input['zip']);
-              $sth->bindParam("email", $input['email']);
-              $sth->bindParam("phone_number", $input['phone_number']);
-              $sth->execute();
-              return $this->response->withJson($input);
+              $child_info = $sth->fetchAll(); return $this->response->withJson($child_info);
               });
     
     
-    //updates child_info
-    $app->put('/children/update', function ($request, $response) {
-              $input = $request->getParsedBody();
-              $sql = "update child_info set name = :name, age= :age, gender = :gender, likes = :likes, allergies = :allergies, medications = :medications, special_requirements = :special_requirements where parent_username = :parent_username";
-              $sth = $this->db->prepare($sql);
-              $sth->bindParam("parent_username", $input['parent_username']);
-              $sth->bindParam("name", $input['name']);
-              $sth->bindParam("gender", $input['gender']);
-              $sth->bindParam("age", $input['age']);
-              $sth->bindParam("likes", $input['likes']);
-              $sth->bindParam("allergies", $input['allergies']);
-              $sth->bindParam("medications", $input['medications']);
-              $sth->bindParam("special_requirements", $input['special_requirements']);
-              $sth->execute();
-              return $this->response->withJson($input);
-              });
     
-    
-    //changes password (definitely need a better method for this)
-    $app->put('/login/change_password', function ($request, $response) {
+      //----------------------------------------------------------------------------
+    //NANNY_INFO
+    $app->post('/nanny_info/new', function ($request, $response) {
                $input = $request->getParsedBody();
-               $sql = "update login_info set password = :password where username = :username ";
-               $sth = $this->db->prepare($sql);
+              $sql = "INSERT INTO nanny_info (yearsExp, minAge, maxAge, minWage, cpr, pet_friendly, can_drive, can_cook, bio, username) VALUES (:yearsExp, :minAge, :maxAge, :minWage, :cpr, :pet_friendly, :can_drive, :can_cook, :bio, :username)";
+               $sth = $this->dbConn->prepare($sql);
+               $sth->bindParam("yearsExp", $input['yearsExp']);
+               $sth->bindParam("cpr", $input['cpr']);
+               $sth->bindParam("can_cook", $input['can_cook']);
+               $sth->bindParam("can_drive", $input['can_drive']);
+               $sth->bindParam("pet_friendly", $input['pet_friendly']);
+               $sth->bindParam("minAge", $input['minAge']);
+               $sth->bindParam("maxAge", $input['maxAge']);
+               $sth->bindParam("minWage", $input['minWage']);
+               $sth->bindParam("bio", $input['bio']);
                $sth->bindParam("username", $input['username']);
-               $sth->bindParam("password", $input['password']);
                $sth->execute();
                return $this->response->withJson($input);
                });
     
    
-    //deletes from parent_info
-    $app->delete('/parents/delete', function ($request, $response) {
-                 $input = $request->getParsedBody();
-                  $sql = "DELETE FROM parent_info WHERE username = :username";
-                 $sth = $this->db->prepare($sql);
-                 $sth->bindParam("username", $input['username']);
-                 $sth->execute();
-                 return $this->response->withJson($input);
-                 });
+    $app->get('/nanny_info', function ($request, $response, $args)
+              {$sth= $this->dbConn->prepare("SELECT * FROM nanny_info");
+              $sth->execute();
+              $nanny_info = $sth->fetchAll();
+              return $this->response->withJson($nanny_info);
+              });
     
-    //deletes from nanny_info
-    $app->delete('/nannys/delete', function ($request, $response) {
-                 $input = $request->getParsedBody();
-                 $sql = "DELETE FROM nanny_info WHERE username = :username";
-                 $sth = $this->db->prepare($sql);
-                 $sth->bindParam("username", $input['username']);
-                 $sth->execute();
-                 return $this->response->withJson($input);
-                 });
+    $app->get('/nanny_info/{gender}/{minNannyAge}/{maxNannyAge}/{minChildAge}/{maxChildAge}/{experience}/{zip}', function ($request, $response, $args)
+              {
+              $gender = $request->getAttribute('gender');
+              $minNannyAge = $request->getAttribute('minNannyAge');
+              $maxNannyAge = $request->getAttribute('maxNannyAge');
+              $minChildAge = $request->getAttribute('minChildAge');
+              $maxChildAge = $request->getAttribute('maxChildAge');
+              $experience = $request->getAttribute('experience');
+              $zip = $request->getAttribute('zip');
+              $sth= $this->dbConn->prepare("SELECT a.username FROM nanny_info n join accounts a on n.username = a.username where a.age between $minNannyAge and $maxNannyAge AND n.minAge <= $minChildAge and n.maxAge >= $maxChildAge and a.gender='$gender' and n.yearsExp >= $experience and a.zip = $zip ");
+              $sth->execute();
+              $nanny_info = $sth->fetchAll();
+              return $this->response->withJson($nanny_info);
+              });
     
-    //deletes from children_info
-    $app->delete('/children/delete', function ($request, $response) {
-                 $input = $request->getParsedBody();
-                 $sql = "DELETE FROM child_info WHERE parent_username = :parent_username";
-                 $sth = $this->db->prepare($sql);
-                 $sth->bindParam("parent_username", $input['parent_username']);
-                 $sth->execute();
-                 return $this->response->withJson($input);
-                 });
     
-    //deletes from login_info
-    $app->delete('/login/delete', function ($request, $response) {
-                 $input = $request->getParsedBody();
-                 $sql = "DELETE FROM login_info WHERE username = :username";
-                 $sth = $this->db->prepare($sql);
-                 $sth->bindParam("username", $input['username']);
-                 $sth->execute();
-                 return $this->response->withJson($input);
-                 });
-				 
-	//deletes from nanny_references
-    $app->delete('/references/delete', function ($request, $response) {
-                 $input = $request->getParsedBody();
-                 $sql = "DELETE FROM nanny_references WHERE username = :username";
-                 $sth = $this->db->prepare($sql);
-                 $sth->bindParam("username", $input['username']);
-                 $sth->execute();
-                 return $this->response->withJson($input);
-                 });
-				 
-	//deletes from skills
-    $app->delete('/skills/delete', function ($request, $response) {
-                 $input = $request->getParsedBody();
-                 $sql = "DELETE FROM skills WHERE username = :username";
-                 $sth = $this->db->prepare($sql);
-                 $sth->bindParam("username", $input['username']);
-                 $sth->execute();
-                 return $this->response->withJson($input);
-                 });
-				 
+    
+    
+    
+    
+     //----------------------------------------------------------------------------
+    //NANNY_REFERENCES
+    
+    $app->post('/nanny_references/new', function ($request, $response) {
+               $file = file_get_contents("php://input");
+               $data = json_decode($file, true);
+               foreach ($data["string"] as $key => $value) {
+               $name = $value["name"];
+               $email = $value["email"];
+               $phone_number = $value["phone_number"];
+               $username = $value["username"];
+               $sql = "INSERT INTO nanny_references (name, email, phone_number, username) VALUES ('$name', '$email', '$phone_number', '$username')";
+               print_r($data);
+               $sth = $this->dbConn->prepare($sql);
+               $sth->execute();
+               }
+               return $this->response->withJson($name);
+               });
+    
+    $app->get('/nanny_references', function ($request, $response, $args)
+              {$sth= $this->dbConn->prepare("SELECT * FROM nanny_references");
+              $sth->execute();
+              $nanny_references = $sth->fetchAll();
+              return $this->response->withJson($nanny_references);
+              });
+    
+    
+    
+    
+    
+      //----------------------------------------------------------------------------
+    //PAYMENT_INFO
+    $app->post('/payment_info/new', function ($request, $response) {
+               $input = $request->getParsedBody();
+               $sql = "INSERT INTO payment_info (name, address, city, state, zip, cardNumber, expiration, automatic, username) VALUES (:name, :address, :city, :state, :zip, :cardNumber, :expiration, :automatic, :username)";
+               $sth = $this->dbConn->prepare($sql);
+               $sth->bindParam("name", $input['name']);
+               $sth->bindParam("cardNumber", $input['cardNumber']);
+               $sth->bindParam("expiration", $input['expiration']);
+               $sth->bindParam("address", $input['address']);
+               $sth->bindParam("city", $input['city']);
+               $sth->bindParam("state", $input['state']);
+               $sth->bindParam("zip", $input['zip']);
+               $sth->bindParam("automatic", $input['automatic']);
+               $sth->bindParam("username", $input['username']);
+               $sth->execute();
+               return $this->response->withJson($input);
+               });
+               
+    $app->get('/payment_info', function ($request, $response, $args)
+              {$sth= $this->dbConn->prepare("SELECT * FROM payment_info");
+              $sth->execute();
+              $accounts = $sth->fetchAll();
+              return $this->response->withJson($accounts);
+              });
+   
+    $app->get('/accounts/payment/{username}', function ($request, $response, $args)
+              {
+              $username = $request->getAttribute('username');
+              $sth= $this->dbConn->prepare("SELECT automatic FROM payment_info where username = '$username'");
+              $sth->execute();
+              $accounts = $sth->fetchAll();
+              return $this->response->withJson($accounts);
+              });
+    
+    
+    
+      //----------------------------------------------------------------------------
+   
+    
+//DEPOSIT_INFO
+
+    $app->post('/deposit_info/new', function ($request, $response) {
+               $input = $request->getParsedBody();
+               $sql = "INSERT INTO deposit_info (name, accountNumber, type, routingNumber, username) VALUES (:name, :accountNumber, :type, :routingNumber, :username)";
+               $sth = $this->dbConn->prepare($sql);
+               $sth->bindParam("name", $input['name']);
+                $sth->bindParam("accountNumber", $input['accountNumber']);
+                $sth->bindParam("routingNumber", $input['routingNumber']);
+                $sth->bindParam("type", $input['type']);
+               $sth->bindParam("username", $input['username']);
+               $sth->execute();
+               return $this->response->withJson($input);
+               });
+    
+    $app->get('/deposit_info', function ($request, $response, $args)
+              {$sth= $this->dbConn->prepare("SELECT * FROM deposit_info");
+              $sth->execute();
+              $accounts = $sth->fetchAll();
+              return $this->response->withJson($accounts);
+              });
+  
+    
+ //----------------------------------------------------------------------------
+   
+    
+    
+  
+
+    
+
+  
+    
+    //Display jobs
+    $app->get('/jobs', function ($request, $response, $args)
+              {$sth= $this->dbConn->prepare("SELECT * FROM jobs");
+              $sth->execute();
+              $jobs = $sth->fetchAll(); return $this->response->withJson($jobs);
+              });
+    
+    //Display tasks
+    $app->get('/tasks', function ($request, $response, $args)
+              {$sth= $this->dbConn->prepare("SELECT * FROM tasks");
+              $sth->execute();
+              $tasks = $sth->fetchAll(); return $this->response->withJson($tasks);
+              });
+    
+    //display nannys in certain zipcode
+    $app->get('/nannys/zip/{zip}', function ($request, $response, $args){
+              $zip = $request->getAttribute('zip');
+              $sth = $this->dbConn->prepare("SELECT * FROM nanny_info WHERE zip = $zip" );
+              $sth->execute();
+              $zip = $sth->fetchAll();
+              return $this->response->withJson($zip);
+              });
+    
+    
+    
+    
+    
+    
+    
+    
+    //display nannys of a certain age
+    $app->get('/nannys/age_range/{lower}/{upper}', function ($request, $response, $args){
+              $lower = $request->getAttribute('lower');
+              $upper = $request->getAttribute('upper');
+              $sth = $this->dbConn->prepare("SELECT * FROM nanny_info WHERE age between $lower AND $upper" );
+              $sth->execute();
+              $nanny_info = $sth->fetchAll();
+              return $this->response->withJson($nanny_info);
+              });
+    
+    
+    
+    
+    
+    
+
+    
+   
+    
+   
