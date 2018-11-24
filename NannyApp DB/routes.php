@@ -84,6 +84,26 @@
               });
     
     
+    $app->put('/account/update/{username}', function ($request, $response) {
+             $username = $request->getAttribute('username');
+              $input = $request->getParsedBody();
+              $sql = "update accounts set first_name = :first_name, last_name = :last_name, age= :age, gender = :gender, address = :address, city = :city, state = :state, zip= :zip, email= :email, phone =:phone where username = :'$username''";
+              $sth = $this->dbConn->prepare($sql);
+              $sth->bindParam("first_name", $input['first_name']);
+              $sth->bindParam("last_name", $input['last_name']);
+              $sth->bindParam("age", $input['age']);
+              $sth->bindParam("gender", $input['gender']);
+              $sth->bindParam("address", $input['address']);
+              $sth->bindParam("city", $input['city']);
+              $sth->bindParam("state", $input['state']);
+              $sth->bindParam("zip", $input['zip']);
+              $sth->bindParam("email", $input['email']);
+              $sth->bindParam("phone", $input['phone']);
+              $sth->execute();
+              return $this->response->withJson($input);
+              });
+
+    
     
       //----------------------------------------------------------------------------
     //CHILDREN
@@ -91,7 +111,7 @@
     $app->post('/children/new', function ($request, $response) {
                $file = file_get_contents("php://input");
                $data = json_decode($file, true);
-               foreach ($data["string"] as $key => $value) {
+               foreach ($data["children"] as $key => $value) {
                $name = $value["name"];
                $gender = $value["gender"];
                $age = $value["age"];
@@ -177,7 +197,7 @@
     $app->post('/nanny_references/new', function ($request, $response) {
                $file = file_get_contents("php://input");
                $data = json_decode($file, true);
-               foreach ($data["string"] as $key => $value) {
+               foreach ($data["references"] as $key => $value) {
                $name = $value["name"];
                $email = $value["email"];
                $phone_number = $value["phone_number"];
