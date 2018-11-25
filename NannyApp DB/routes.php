@@ -54,9 +54,14 @@
     //ACCOUNT
     
     
+
+    
+    
     $app->post('/account/new', function ($request, $response) {
                $input = $request->getParsedBody();
                //insert information into accounts table
+               $type = $input['type'];
+               $username = $input ['username'];
                $sql = "INSERT INTO accounts (username, password, firstname, lastname, age, gender, address, city, state, zip, email, phone, type) VALUES (:username, :password, :firstname, :lastname, :age, :gender, :address, :city, :state, :zip, :email, :phone, :type)";
                $sth = $this->dbConn->prepare($sql);
                $sth->bindParam("username", $input['username']);
@@ -73,8 +78,71 @@
                $sth->bindParam("phone", $input['phone']);
                $sth->bindParam("type", $input['type']);
                $sth->execute();
-               return $this->response->withJson($input);
+               
+               $parent = "parent";
+               if($type == $parent){
+               
+                    $payment = $input['payment'];
+                    $name= ($payment['name']);
+                    $address = $payment['address'];
+                    $city = $payment['city'];
+                    $state = $payment['state'];
+                    $zip =$payment['zip'];
+                    $cardNumber= $payment['cardNumber'];
+                    $expiration=$payment['expiration'];
+                    $automatic=$payment['automatic'];
+                    $sql2 = "insert into payment_info (name, address, city, state, zip, cardNumber, expiration, automatic, username) values ('$name','$address', '$city', '$state', $zip, $cardNumber, '$expiration', '$automatic', '$username')";
+                    $sth2 = $this->dbConn->prepare($sql2);
+                    $sth2->execute();
+               
+                    $children = $input['children'];
+                    foreach ($children as $key => $value) {
+                        $name = $value["name"];
+                        $gender = $value["gender"];
+                        $age = $value["age"];
+                        $likes = $value["likes"];
+                        $allergies = $value["allergies"];
+                        $specialReqs = $value["specialReqs"];
+                        $medications = $value["medications"];
+               
+                        $sql3 = "INSERT INTO child_info (name, gender, age, likes, allergies, specialReqs, medications, username) VALUES ('$name', '$gender', '$age', '$likes', '$allergies', '$specialReqs', '$medications', '$username')";
+                        $sth3 = $this->dbConn->prepare($sql3);
+                        $sth3->execute();
+                    }
+               }
+               else{
+                    $deposit = $input['deposit'];
+                    $name = $deposit['name'];
+                    $type2 = $deposit['type'];
+                    $accountNumber = $deposit['accountNumber'];
+                    $routingNumber = $deposit['routingNumber'];
+               
+                    $sql2 = "insert into deposit_info (name, type, accountNumber, routingNumber, username) values ('$name', '$type', $accountNumber, $routingNumber, '$username')";
+                    $sth2 = $this->dbConn->prepare($sql2);
+                    $sth2->execute();
+               
+                    $references = $input['references'];
+                    foreach ($references as $key => $value) {
+                        $name2 = $value["name"];
+                        $email = $value["email"];
+                        $phone = $value["phone_number"];
+               
+                        $sql3 = "INSERT INTO nanny_references (name, email, phone_number, username) VALUES ('$name2', '$email', $phone, '$username')";
+                        $sth3 = $this->dbConn->prepare($sql3);
+                        $sth3->execute();
+               }
+               
+               
+               
+               
+               
+               }
+               
+               
                });
+    
+    
+    
     
     $app->get('/account', function ($request, $response, $args)
               {$sth= $this->dbConn->prepare("SELECT * FROM accounts");
@@ -370,7 +438,7 @@
 
     
 //----------------------------------------------------------------------------
-    $app->post('/jobs/submitRequest', function ($request, $response) {
+    /*$app->post('/jobs/submitRequest', function ($request, $response) {
                $input = $request->getParsedBody();
                $accept = "0";
                $sql = "INSERT INTO job_requests (job_id, nannyUsername, isAccepted) values (:job_id, :nannyUsername, $accept);
@@ -380,7 +448,7 @@
                $sth->execute();
                
                
-               }
+     });*/
   
     
     //Display jobs
