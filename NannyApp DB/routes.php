@@ -186,7 +186,7 @@
               $sth= $this->dbConn->prepare("SELECT a.username FROM nanny_info n join accounts a on n.username = a.username where a.age between $minNannyAge and $maxNannyAge AND n.minAge <= $minChildAge and n.maxAge >= $maxChildAge and a.gender='$gender' and n.yearsExp >= $experience and a.zip = $zip ");
               $sth->execute();
               $nanny_info = $sth->fetchAll();
-              print_r($nanny_info);
+              //print_r($nanny_info);
               return $this->response->withJson($nanny_info);
               });
     
