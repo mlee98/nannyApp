@@ -106,7 +106,8 @@
                     }
                }
                else{
-                   $sql2 = "INSERT INTO nanny_info (yearsExp, minAge, maxAge, minWage, cpr, pet_friendly, can_drive, can_cook, bio, username) VALUES (:yearsExp, :minAge, :maxAge, :minWage, :cpr, :pet_friendly, :can_drive, :can_cook, :bio, '$username')";
+               $zero = 0;
+                   $sql2 = "INSERT INTO nanny_info (yearsExp, minAge, maxAge, minWage, cpr, pet_friendly, can_drive, can_cook, bio, jobs_completed, total_points, rating, username) VALUES (:yearsExp, :minAge, :maxAge, :minWage, :cpr, :pet_friendly, :can_drive, :can_cook, :bio, $zero,  $zero, $zero '$username')";
                    $sth2 = $this->dbConn->prepare($sql2);
                    $sth2->bindParam("yearsExp", $input['yearsExp']);
                    $sth2->bindParam("cpr", $input['cpr']);
@@ -185,6 +186,7 @@
               $sth= $this->dbConn->prepare("SELECT a.username FROM nanny_info n join accounts a on n.username = a.username where a.age between $minNannyAge and $maxNannyAge AND n.minAge <= $minChildAge and n.maxAge >= $maxChildAge and a.gender='$gender' and n.yearsExp >= $experience and a.zip = $zip ");
               $sth->execute();
               $nanny_info = $sth->fetchAll();
+              print_r($nanny_info);
               return $this->response->withJson($nanny_info);
               });
     
@@ -368,7 +370,26 @@
               $sth->execute();
              // return $this->response->withJson($jobId);
               });
-
+    
+    
+    $app->put('/jobs/ratings/{username}', function ($request, $response, $args) {
+              $username = $request->getAttribute('username');
+              $input = $request->getParsedBody();
+              $rating = $input ['rating'];
+              $sql = "update nanny_info set jobs_completed = jobs_completed +1 where username = '$username'";
+              $sth = $this->dbConn->prepare($sql);
+              $sth->bindParam("rating", $input['rating']);
+              $sth->execute();
+              
+              $sql2 = "update nanny_info set total_points = total_points + $rating where username = '$username'";
+              $sth2 = $this->dbConn->prepare($sql2);
+              $sth2->execute();
+              
+              $sql3 = "update nanny_info set rating = nanny_info.total_points/ nanny_info.jobs_completed where username = '$username';"
+              $sth3 = $this->dbConn->prepare($sql3);
+              $sth3->execute();
+              // return $this->response->withJson($jobId);
+              });
 
     
   
