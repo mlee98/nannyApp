@@ -377,7 +377,7 @@
     $app->get('/jobs/parent/{username}', function ($request, $response, $args)
               {
               $username = $request->getAttribute('username');
-              $sth= $this->dbConn->prepare("SELECT * FROM jobs where parentName = '$username'");
+              $sth= $this->dbConn->prepare("SELECT * FROM jobs where familyName = '$username' ");
               $sth->execute();
               $jobs = $sth->fetchAll();
               return $this->response->withJson($jobs);
