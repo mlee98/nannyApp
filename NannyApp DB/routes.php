@@ -174,6 +174,7 @@
               return $this->response->withJson($nanny_info);
               });
     
+    //working
     $app->get('/search/{gender}/{minNannyAge}/{maxNannyAge}/{minChildAge}/{maxChildAge}/{experience}/{zip}', function ($request, $response, $args)
               {
               $gender = $request->getAttribute('gender');
@@ -186,7 +187,6 @@
               $sth= $this->dbConn->prepare("SELECT a.username FROM nanny_info n join accounts a on n.username = a.username where a.age between $minNannyAge and $maxNannyAge AND n.minAge <= $minChildAge and n.maxAge >= $maxChildAge and a.gender='$gender' and n.yearsExp >= $experience and a.zip = $zip ");
               $sth->execute();
               $nanny_info = $sth->fetchAll();
-              //print_r($nanny_info);
               return $this->response->withJson($nanny_info);
               });
     
@@ -372,6 +372,8 @@
               });
     
     
+    
+    
     $app->put('/jobs/ratings/{username}', function ($request, $response, $args) {
               $username = $request->getAttribute('username');
               $input = $request->getParsedBody();
@@ -385,7 +387,7 @@
               $sth2 = $this->dbConn->prepare($sql2);
               $sth2->execute();
               
-              $sql3 = "update nanny_info set rating = nanny_info.total_points/ nanny_info.jobs_completed where username = '$username';"
+              $sql3 = "update nanny_info set rating = nanny_info.total_points/ nanny_info.jobs_completed where username = '$username'";
               $sth3 = $this->dbConn->prepare($sql3);
               $sth3->execute();
               // return $this->response->withJson($jobId);
@@ -459,20 +461,21 @@
               });
     
     
-$app->post('/login', function ($request, $response) {
+   $app->post('/login', function ($request, $response) {
                $input = $request->getParsedBody();
-			   $username = $input ['username'];
-               $password = $input['password'];   
+               $username = $input ['username'];
+               $password = $input['password'];
                $sql = "SELECT type FROM accounts WHERE username='$username' AND password='$password' ";
-			   $type = "nanny";
-               $sth = $this->db->prepare($sql);
-               $sth->execute();    
-			   return $this->response->withJson($type);			   
-               });    
+               $sth = $this->dbConn->prepare($sql);
+               $sth->execute();
+               $type = $sth->fetchAll();
+               foreach ($type as $value){
+                    $t = $value['type'];
+               }
+               return $this->response->withJson($t);
+               });
     
     
-    
-
     
    
     
