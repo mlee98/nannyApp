@@ -459,7 +459,16 @@
               });
     
     
-    
+$app->post('/login', function ($request, $response) {
+               $input = $request->getParsedBody();
+			   $username = $input ['username'];
+               $password = $input['password'];   
+               $sql = "SELECT type FROM accounts WHERE username='$username' AND password='$password' ";
+			   $type = "nanny";
+               $sth = $this->db->prepare($sql);
+               $sth->execute();    
+			   return $this->response->withJson($type);			   
+               });    
     
     
     
