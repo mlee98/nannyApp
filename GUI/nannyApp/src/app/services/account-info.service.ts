@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-import { Account, Child } from '../models';
+import { Account, Child, NannyDetails } from '../models';
 import { Payment } from '../models/payment';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { Payment } from '../models/payment';
 })
 export class AccountInfo {
 
-  protected endPoint = 'http://ec2-18-216-55-181.us-east-2.compute.amazonaws.com:8080';
+  protected endPoint = 'http://ec2-13-59-234-151.us-east-2.compute.amazonaws.com:8080';
 
   protected httpOptions = {
     headers: new HttpHeaders({
@@ -23,13 +23,9 @@ export class AccountInfo {
   ) {}
 
   // Get Requests
-  getAccountByUsername(username: string): Observable<{username: string, password: string, first_name: string, last_name: string,
-    age: number, gender: string, address: string, city: string, state: string, zip: number,
-    email: string, phone_number: string}> {
+  getAccountByUsername(username: string): Observable<Account> {
     return this.httpClient
-      .get<{username: string, password: string, first_name: string, last_name: string,
-        age: number, gender: string, address: string, city: string, state: string, zip: number,
-        email: string, phone_number: string}>(`${this.endPoint}/accounts/${username}`, this.httpOptions)
+      .get<Account>(`${this.endPoint}/accounts/${username}`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 
@@ -48,7 +44,19 @@ export class AccountInfo {
   // Post Requests
   addAccount(account: Account): Observable<Account> {
     return this.httpClient
-      .post<Account>(`${this.endPoint}/accounts/new`, account, this.httpOptions)
+      .post<Account>(`${this.endPoint}/account/new`, account, this.httpOptions)
+      .pipe(catchError(this.handleException));
+  }
+
+  addNanny_Info(nannyStuff: NannyDetails): Observable<NannyDetails> {
+    return this.httpClient
+      .post<NannyDetails>(`${this.endPoint}/nanny_info/new`, nannyStuff, this.httpOptions)
+      .pipe(catchError(this.handleException));
+  }
+
+  addChild(child: Child): Observable<Child> {
+    return this.httpClient
+      .post<Child>(`${this.endPoint}/children/new`, child, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 

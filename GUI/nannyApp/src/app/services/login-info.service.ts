@@ -25,20 +25,21 @@ export class LoginInfo {
   private idSource = new BehaviorSubject('');
   currentUserId = this.idSource.asObservable();
 
+  private typeSource = new BehaviorSubject('');
+  currentUserType = this.typeSource.asObservable();
+
   changeId(username: string) {
     this.idSource.next(username);
+  }
+
+  changeType(type: string) {
+    this.typeSource.next(type);
   }
 
 
   login(login: Login): Observable<Login> {
     return this.httpClient
       .post<Login>(`${this.endPoint}/login`, login, this.httpOptions)
-      .pipe(catchError(this.handleException));
-  }
-
-  test(): Observable<Account> {
-    return this.httpClient
-      .post<Account>(`${this.endPoint}/parents`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 

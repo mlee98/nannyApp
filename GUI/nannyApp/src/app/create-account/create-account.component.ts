@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Account, LoginInfo, NannyInfo, ParentInfo, PersonalInfo } from '../models';
+import { Account, LoginInfo, NannyInfo, ParentInfo, PersonalInfo, NannyDetails } from '../models';
 import { Router } from '@angular/router';
 import { AccountInfo } from '../services/account-info.service';
 
@@ -17,6 +17,17 @@ export class CreateAccountComponent implements OnInit {
   personalInfo: PersonalInfo = {};
   nannyInfo: NannyInfo = { references: [] };
   parentInfo: ParentInfo = { children: [] };
+  nannyDeets: NannyDetails = { yearsExp: 0,
+    minAge: 0,
+    maxAge: 0,
+    minWage: 0,
+    maxWage: 0,
+    cpr: false,
+    petFriendly: false,
+    canDrive: false,
+    canCook: false,
+    bio: '',
+    rating: 0};
 
   constructor(
     private router: Router,
@@ -45,6 +56,10 @@ export class CreateAccountComponent implements OnInit {
       for (const attribute in this.nannyInfo) {
         if (true) {
           this.account[attribute] = this.nannyInfo[attribute];
+          this.account.canCook = this.nannyInfo.canCook;
+          this.account.canDrive = this.nannyInfo.canDrive;
+          this.account.petFriendly = this.nannyInfo.petFriendly;
+          this.account.cpr = this.nannyInfo.cpr;
         }
       }
     } else {
@@ -54,8 +69,24 @@ export class CreateAccountComponent implements OnInit {
         }
       }
     }
-    this.accountInfo.addAccount(this.account).subscribe(() => {
-      this.router.navigateByUrl('/home');
-    });
+
+    if (this.account.type === 'parent') {
+      this.accountInfo.addAccount(this.account).subscribe(() => {
+        this.router.navigateByUrl('/');
+      });
+    } else {
+      if (this.account.type === 'nanny') {
+        this.accountInfo.addAccount(this.account).subscribe(() => {
+          for (const prop in this.nannyDeets) {
+            if (true) {
+              this.nannyDeets[prop] = this.account[prop];
+            }
+          }
+          this.accountInfo.addNanny_Info(this.nannyDeets).subscribe(() => {
+            this.router.navigateByUrl('/');
+          });
+        });
+      }
+    }
   }
 }

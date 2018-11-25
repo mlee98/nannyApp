@@ -29,22 +29,12 @@
               name="account_password"
               [(ngModel)]='loginInfo.password' />
           </div>
-          <div class="form-group">
-            <label for="confirm_password">
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              id="confirm_pasword"
-              class="form-control"
-              name="confirm_password" />
-          </div>
           <div class="d-flex justify-content-center align-items-center mt-3">
             <div class="text-right mr-2">I am a</div>
             <div >
               <select
-                id="account_state"
-                name="account_state"
+                id="account_type"
+                name="account_type"
                 class="form-control"
                 [(ngModel)]='loginInfo.type'
               >

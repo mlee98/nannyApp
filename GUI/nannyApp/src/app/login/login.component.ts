@@ -16,21 +16,23 @@ export class LoginComponent implements OnInit {
   ) { }
 
   userLogin: Login = {};
+  validLogin: boolean;
 
   ngOnInit() {
+    this.validLogin = true;
     this.loginInfo.currentUserId.subscribe((value) => {
-
     });
   }
 
   login() {
-    this.loginInfo.test().subscribe((result) => {
-      console.log(result);
-      if (result.username !== '') {
+    this.loginInfo.login(this.userLogin).subscribe((result) => {
+      if (result.type === 'invalid') {
+        this.validLogin = false;
         return;
       } else {
-        this.loginInfo.changeId(result.username);
-        this.router.navigateByUrl('/home');
+        this.loginInfo.changeId(this.userLogin.username);
+        this.loginInfo.changeType(result.type);
+        this.router.navigateByUrl(`${result.type}-jobs/${this.userLogin.username}`);
       }
     });
     // this.loginInfo.changeId('random_parent123');
