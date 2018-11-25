@@ -106,7 +106,8 @@
                     }
                }
                else{
-                   $sql2 = "INSERT INTO nanny_info (yearsExp, minAge, maxAge, minWage, cpr, pet_friendly, can_drive, can_cook, bio, username) VALUES (:yearsExp, :minAge, :maxAge, :minWage, :cpr, :pet_friendly, :can_drive, :can_cook, :bio, '$username')";
+               $zero = 0;
+                   $sql2 = "INSERT INTO nanny_info (yearsExp, minAge, maxAge, minWage, cpr, pet_friendly, can_drive, can_cook, bio, jobs_completed, total_points, rating, username) VALUES (:yearsExp, :minAge, :maxAge, :minWage, :cpr, :pet_friendly, :can_drive, :can_cook, :bio, $zero,  $zero, $zero '$username')";
                    $sth2 = $this->dbConn->prepare($sql2);
                    $sth2->bindParam("yearsExp", $input['yearsExp']);
                    $sth2->bindParam("cpr", $input['cpr']);
@@ -173,18 +174,16 @@
               return $this->response->withJson($nanny_info);
               });
     
-    $app->get('/search', function ($request, $response, $args)
+    //working
+    $app->get('/search/{gender}/{minNannyAge}/{maxNannyAge}/{minChildAge}/{maxChildAge}/{experience}/{zip}', function ($request, $response, $args)
               {
-              
-              $input = $request->getParsedBody();
-              $SearchField = $input['SearchField'];
-              $gender = $SearchField['gender'];
-              $minNannyAge = $SearchField['minNannyAge'];
-              $maxNannyAge = $SearchField['maxNannyAge'];
-              $minChildAge = $SearchField['minChildAge'];
-              $maxChildAge =$SearchField['maxChildAge'];
-              $experience =$SearchField['experience'];
-              $zip = $SearchField['zip']
+              $gender = $request->getAttribute('gender');
+              $minNannyAge = $request->getAttribute('minNannyAge');
+              $maxNannyAge = $request->getAttribute('maxNannyAge');
+              $minChildAge = $request->getAttribute('minChildAge');
+              $maxChildAge = $request->getAttribute('maxChildAge');
+              $experience = $request->getAttribute('experience');
+              $zip = $request->getAttribute('zip');
               $sth= $this->dbConn->prepare("SELECT a.username FROM nanny_info n join accounts a on n.username = a.username where a.age between $minNannyAge and $maxNannyAge AND n.minAge <= $minChildAge and n.maxAge >= $maxChildAge and a.gender='$gender' and n.yearsExp >= $experience and a.zip = $zip ");
               $sth->execute();
               $nanny_info = $sth->fetchAll();
@@ -371,7 +370,28 @@
               $sth->execute();
              // return $this->response->withJson($jobId);
               });
-
+    
+    
+    
+    
+    $app->put('/jobs/ratings/{username}', function ($request, $response, $args) {
+              $username = $request->getAttribute('username');
+              $input = $request->getParsedBody();
+              $rating = $input ['rating'];
+              $sql = "update nanny_info set jobs_completed = jobs_completed +1 where username = '$username'";
+              $sth = $this->dbConn->prepare($sql);
+              $sth->bindParam("rating", $input['rating']);
+              $sth->execute();
+              
+              $sql2 = "update nanny_info set total_points = total_points + $rating where username = '$username'";
+              $sth2 = $this->dbConn->prepare($sql2);
+              $sth2->execute();
+              
+              $sql3 = "update nanny_info set rating = nanny_info.total_points/ nanny_info.jobs_completed where username = '$username'";
+              $sth3 = $this->dbConn->prepare($sql3);
+              $sth3->execute();
+              // return $this->response->withJson($jobId);
+              });
 
     
   
@@ -441,11 +461,21 @@
               });
     
     
+   $app->post('/login', function ($request, $response) {
+               $input = $request->getParsedBody();
+               $username = $input ['username'];
+               $password = $input['password'];
+               $sql = "SELECT type FROM accounts WHERE username='$username' AND password='$password' ";
+               $sth = $this->dbConn->prepare($sql);
+               $sth->execute();
+               $type = $sth->fetchAll();
+               foreach ($type as $value){
+                    $t = $value['type'];
+               }
+               return $this->response->withJson($t);
+               });
     
     
-    
-    
-
     
    
     
