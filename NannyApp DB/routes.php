@@ -173,17 +173,15 @@
               return $this->response->withJson($nanny_info);
               });
     
-    $app->get('/search', function ($request, $response, $args)
+    $app->get('/search/{gender}/{minNannyAge}/{maxNannyAge}/{minChildAge}/{maxChildAge}/{experience}/{zip}', function ($request, $response, $args)
               {
-              $input = $request->getParsedBody();
-              $SearchField = $input['SearchField'];
-              $gender = $SearchField['gender'];
-              $minNannyAge = $SearchField['minNannyAge'];
-              $maxNannyAge = $SearchField['maxNannyAge'];
-              $minChildAge = $SearchField['minChildAge'];
-              $maxChildAge =$SearchField['maxChildAge'];
-              $experience =$SearchField['experience'];
-              $zip = $SearchField['zip'];
+              $gender = $request->getAttribute('gender');
+              $minNannyAge = $request->getAttribute('minNannyAge');
+              $maxNannyAge = $request->getAttribute('maxNannyAge');
+              $minChildAge = $request->getAttribute('minChildAge');
+              $maxChildAge = $request->getAttribute('maxChildAge');
+              $experience = $request->getAttribute('experience');
+              $zip = $request->getAttribute('zip');
               $sth= $this->dbConn->prepare("SELECT a.username FROM nanny_info n join accounts a on n.username = a.username where a.age between $minNannyAge and $maxNannyAge AND n.minAge <= $minChildAge and n.maxAge >= $maxChildAge and a.gender='$gender' and n.yearsExp >= $experience and a.zip = $zip ");
               $sth->execute();
               $nanny_info = $sth->fetchAll();
