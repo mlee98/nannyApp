@@ -40,19 +40,14 @@ export class JobScheduleComponent implements OnInit {
 
   @Output() updateTasks = new EventEmitter();
 
-  _tasks: Task[];
-
   @Input()
-  set tasks(arr: Task[]) {
-    this._tasks = arr;
-    this.createWeek(arr);
-  }
+  tasks: Task[];
 
   constructor() { }
 
   ngOnInit() {
     this.newTask = false;
-    this.createWeek(this._tasks);
+    this.createWeek(this.tasks);
     this.tempTask = {};
   }
 
@@ -78,9 +73,9 @@ export class JobScheduleComponent implements OnInit {
       Sat: []
     };
     if (!this.editable) {
-      arr.forEach(element => {
-        this.week[element.day].push(element);
-      });
+      for (let i = 0; i < arr.length; i++) {
+        this.week[arr[i].day].push(arr[i]);
+      }
     }
     this.currentDay = 'Sun';
     this.showTasks = this.week.Sun;
@@ -94,6 +89,7 @@ export class JobScheduleComponent implements OnInit {
   addTask() {
     this.tempTask.day = this.currentDay;
     this.week[this.tempTask.day].push(this.tempTask);
+    this.tasks.push(this.tempTask);
     this.tempTask = {};
     this.newTask = false;
   }

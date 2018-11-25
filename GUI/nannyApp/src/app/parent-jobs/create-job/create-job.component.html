@@ -53,31 +53,11 @@
               </textarea>
             </div>
           </div>
-          <div class="col-md-3 pl-2 pr-4">
-            <div class="large-text mb-2">Children</div>
-            <div class="d-flex flex-column">
-              <button
-                *ngFor="let child of job.children"
-                class="btn btn-outline-info mb-2"
-                disabled
-              >
-                {{child.name}}
-              </button>
-              <button
-                *ngFor="let child of children"
-                class="btn btn-info mb-2"
-                [hidden]="jobContains(child)"
-                (click)="addChild(child)"
-              >
-                + {{child.name}}
-              </button>
-            </div>
-          </div>
         </div>
         <app-job-schedule
           [editable]="true"
           [tasks]="job.tasks"
-          (updateTasks)="job.tasks = $event"
+          (updateTasks)="job.uTasks = $event"
           [completeable]="false"
         >
         </app-job-schedule>
@@ -95,7 +75,7 @@
           type="button"
           class="btn btn-info"
           (click)="createJob()"
-          [disabled]="!job.duration || !job.children || !job.description || !job.tasks.length"
+          [disabled]="!job.duration || !job.description || (job.tasks.length === 0)"
           data-dismiss="modal"
         >
           Create Job

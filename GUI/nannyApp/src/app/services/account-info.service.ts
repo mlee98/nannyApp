@@ -23,9 +23,9 @@ export class AccountInfo {
   ) {}
 
   // Get Requests
-  getAccountByUsername(username: string): Observable<Account> {
+  getAccountByUsername(username: string, type: string): Observable<Account> {
     return this.httpClient
-      .get<Account>(`${this.endPoint}/accounts/${username}`, this.httpOptions)
+      .get<Account>(`${this.endPoint}/account/${username}/${type}`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 

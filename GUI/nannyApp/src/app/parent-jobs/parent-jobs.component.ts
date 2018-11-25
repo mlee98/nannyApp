@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import { Payment } from '../models/payment';
 import { JobManager } from '../services/job-manager.service';
+import { LoginInfo } from '../services/login-info.service';
 
 @Component({
   selector: 'app-parent-jobs',
@@ -13,13 +14,13 @@ import { JobManager } from '../services/job-manager.service';
 })
 export class ParentJobsComponent implements OnInit {
 
-  autoPay: Boolean = TEMP_ACCOUNT.payment.automatic;
+  autoPay: Boolean; // = TEMP_ACCOUNT.payment.automatic;
   payment: Payment = {};
   dispJob: Job;
   noJobs: boolean;
-  children: Child[] = TEMP_ACCOUNT.children;
+  children: Child[]; // = TEMP_ACCOUNT.children;
   ongoing: boolean;
-  userId: number;
+  username: string;
   tempRating: number;
   tempJob: Job = {};
   pending: Job[] = [];
@@ -27,38 +28,41 @@ export class ParentJobsComponent implements OnInit {
   constructor(
     private jobManager: JobManager,
     private accountInfo: AccountInfo,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private loginInfo: LoginInfo
   ) { }
 
-  jobs: Job[] = TEMP_ACCOUNT.parentJobs;
+  jobs: Job[]; // = TEMP_ACCOUNT.parentJobs;
   current: Job[];
   completed: Job[];
   displayPayment: Boolean = false;
 
   ngOnInit() {
+    this.jobs = [];
     this.dispJob = this.jobs.length ? this.jobs[0] : null;
     this.current = this.jobs.filter(job => job.isComplete === false);
     this.completed = this.jobs.filter(job => job.isComplete === true);
 
     this.activatedRoute.params.subscribe((params) => {
-      /*this.jobManager.getParentJobsById(params.id).subscribe((result) => {
+      this.username = params.username;
+      this.jobManager.getJobsByUsername(params.username).subscribe((result) => {
         this.jobs = result;
         this.current = result.filter(job => job.isComplete === false);
         this.completed = result.filter(job => job.isComplete === true);
         this.dispJob = result.length ? this.jobs[0] : null;
 
-        this.accountInfo.getChildrenById(params.id).subscribe((children) => {
+        this.accountInfo.getChildrenByUsername(params.username).subscribe((children) => {
           this.children = children;
-          this.accountInfo.getAutomaticPaybyId(params.id).subscribe((payment) => {
+          /*this.accountInfo.getAutomaticPayByUsername(params.username).subscribe((payment) => {
             if (payment.automatic === true) {
               this.payment = payment;
             } else {
               this.payment = {};
             }
-          });
+          });*/
+          this.payment = {};
         });
-      });*/
-      this.userId = params.id;
+      });
     });
   }
 
@@ -72,21 +76,21 @@ export class ParentJobsComponent implements OnInit {
   }
 
   newJob(job) {
-    // this.accountInfo.getAccountById(this.userId).subscribe((result) => {
-     job.id = this.userId;
-     job.familyName = TEMP_ACCOUNT.lastName;
-     job.address = TEMP_ACCOUNT.address;
-     job.city = TEMP_ACCOUNT.city;
-     job.state = TEMP_ACCOUNT.state;
-     job.zip = TEMP_ACCOUNT.zip;
-     job.parentPhone = TEMP_ACCOUNT.phone;
-     job.isAccepted = false;
-     job.isComplete = false;
-     this.pending.push(job);
-    // });
-    /*this.jobManager.addJob(job).subscribe(() => {
+    this.accountInfo.getAccountByUsername(this.username, 'parent').subscribe((tempAcc) => {
+      job.id = this.username;
+      job.familyName = tempAcc.lastName;
+      job.address = tempAcc.address;
+      job.city = tempAcc.city;
+      job.state = tempAcc.state;
+      job.zip = tempAcc.zip;
+      job.parentPhone = tempAcc.phone;
+      job.isAccepted = false;
+      job.isComplete = false;
       this.pending.push(job);
-    });*/
+      console.log(job);
+      this.jobManager.addJob(job).subscribe(() => {
+      });
+    });
   }
 
   submitRatingAutoPay() {
@@ -138,7 +142,7 @@ export class ParentJobsComponent implements OnInit {
     this.completed.push(this.dispJob);
     this.current = this.jobs.filter(job => job.isComplete === false);
     // this.displayPayment = false; // shows weird transition on close modal
-                                    // just don't show multiple clicks of "Complete" and it's fine
+    // just don't show multiple clicks of "Complete" and it's fine
   }
 
 }

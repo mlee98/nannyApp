@@ -9,7 +9,7 @@ import { Job, Task, Account } from '../models';
 })
 export class JobManager {
 
-  protected endPoint = 'http://ec2-18-216-55-181.us-east-2.compute.amazonaws.com:8080';
+  protected endPoint = 'http://ec2-13-59-234-151.us-east-2.compute.amazonaws.com:8080';
 
   protected httpOptions = {
     headers: new HttpHeaders({
@@ -35,13 +35,13 @@ addJob(newJob: Job): Observable<Job> {
 
 acceptJob(jobId: number): Observable<number> {
   return this.httpClient
-    .put<number>(`${this.endPoint}/jobs/accept`, jobId, this.httpOptions)
+    .put<number>(`${this.endPoint}/jobs/accept/${jobId}`, jobId, this.httpOptions)
     .pipe(catchError(this.handleException));
 }
 
 declineJob(jobId: number): Observable<number> {
   return this.httpClient
-    .put<number>(`${this.endPoint}/jobs/decline`, jobId, this.httpOptions)
+    .put<number>(`${this.endPoint}/jobs/decline/${jobId}`, jobId, this.httpOptions)
     .pipe(catchError(this.handleException));
 }
 

@@ -23,20 +23,20 @@ export class NannyJobsComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) { }
 
-  requests: Job[] = TEMP_ACCOUNT.nannyJobs.filter(job => job.isAccepted === false);
-  jobs: Job[] = TEMP_ACCOUNT.nannyJobs.filter(job => job.isAccepted && !job.isComplete);
-  completed: Job[] = TEMP_ACCOUNT.nannyJobs.filter(job => job.isAccepted && job.isComplete);
+  requests: Job[]; // = TEMP_ACCOUNT.nannyJobs.filter(job => job.isAccepted === false);
+  jobs: Job[]; // = TEMP_ACCOUNT.nannyJobs.filter(job => job.isAccepted && !job.isComplete);
+  completed: Job[]; // = TEMP_ACCOUNT.nannyJobs.filter(job => job.isAccepted && job.isComplete);
 
   ngOnInit() {
-    /*this.activatedRoute.params.subscribe((params) => {
+    this.activatedRoute.params.subscribe((params) => {
       this.jobManager.getJobsByUsername(params.id).subscribe((result) => {
         this.requests = result.filter(job => job.isAccepted === false);
         this.jobs = result.filter(job => job.isAccepted && !job.isComplete);
         this.completed = result.filter(job => job.isAccepted && job.isComplete);
         this.dispJob = this.jobs[0];
       });
-    });*/
-    this.dispJob = this.jobs[0];
+    });
+    // this.dispJob = this.jobs[0];
   }
 
   clickJob(clickedJob) {

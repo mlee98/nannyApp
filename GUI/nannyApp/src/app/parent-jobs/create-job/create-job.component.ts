@@ -15,6 +15,7 @@ export class CreateJobComponent implements OnInit {
 
   reset: boolean;
   job: Job;
+  uTasks: {taskNames: string[], taskDays: string[]};
 
   selectedChildName: '';
 
@@ -39,7 +40,7 @@ export class CreateJobComponent implements OnInit {
   }
 
   createJob() {
-    this.job.nannyName = 'Bob';
+    this.job.nannyName = 'Pending';
     this.newJob.emit(this.job);
     this.job = {
       duration: '',
