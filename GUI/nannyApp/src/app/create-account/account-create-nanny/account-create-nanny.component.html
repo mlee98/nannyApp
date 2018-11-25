@@ -142,7 +142,7 @@
           <div class="pb-2">
             <div class="large-text text-center mb-3">References</div>
             <div class="mb-2 pl-2" *ngFor="let ref of nannyInfo.references">
-              {{ref.name}} - {{ref.email}}, {{ref.phone | phone}}
+              {{ref.name}} - {{ref.email}}, {{ref.phone_number | phone}}
             </div>
           </div>
           <div class="d-flex justify-content-center" *ngIf="!referenceForm">
@@ -192,7 +192,7 @@
                   id="reference_phone"
                   name="reference_phone"
                   class="form-control"
-                  [(ngModel)]='tempRef.phone' />
+                  [(ngModel)]='tempRef.phone_number' />
               </div>
             </div>
           </div>

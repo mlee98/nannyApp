@@ -36,6 +36,10 @@ export class LoginInfo {
     this.typeSource.next(type);
   }
 
+  getType() {
+    return this.typeSource.getValue();
+  }
+
 
   login(login: Login): Observable<Login> {
     return this.httpClient

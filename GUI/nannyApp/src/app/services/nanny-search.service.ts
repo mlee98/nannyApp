@@ -22,7 +22,8 @@ export class NannySearch {
 
   search(searchField: SearchField): Observable<Account[]> {
     return this.httpClient
-      .post<Account[]>(`${this.endPoint}/search`, searchField, this.httpOptions)
+      .get<Account[]>(`${this.endPoint}/search/${searchField.gender}/${searchField.minNannyAge}/${searchField.maxNannyAge}
+      /${searchField.minChildAge}/${searchField.maxChildAge}/${searchField.experience}/${searchField.zip}`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 

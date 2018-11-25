@@ -69,24 +69,8 @@ export class CreateAccountComponent implements OnInit {
         }
       }
     }
-
-    if (this.account.type === 'parent') {
-      this.accountInfo.addAccount(this.account).subscribe(() => {
-        this.router.navigateByUrl('/');
-      });
-    } else {
-      if (this.account.type === 'nanny') {
-        this.accountInfo.addAccount(this.account).subscribe(() => {
-          for (const prop in this.nannyDeets) {
-            if (true) {
-              this.nannyDeets[prop] = this.account[prop];
-            }
-          }
-          this.accountInfo.addNanny_Info(this.nannyDeets).subscribe(() => {
-            this.router.navigateByUrl('/');
-          });
-        });
-      }
-    }
+    this.accountInfo.addAccount(this.account).subscribe(() => {
+      this.router.navigateByUrl('/');
+    });
   }
 }

@@ -45,7 +45,7 @@ export class ParentJobsComponent implements OnInit {
 
     this.activatedRoute.params.subscribe((params) => {
       this.username = params.username;
-      this.jobManager.getJobsByUsername(params.username).subscribe((result) => {
+      this.jobManager.getJobsByUsername(params.username, 'parent').subscribe((result) => {
         this.jobs = result;
         this.current = result.filter(job => job.isComplete === false);
         this.completed = result.filter(job => job.isComplete === true);
@@ -87,7 +87,6 @@ export class ParentJobsComponent implements OnInit {
       job.isAccepted = false;
       job.isComplete = false;
       this.pending.push(job);
-      console.log(job);
       this.jobManager.addJob(job).subscribe(() => {
       });
     });

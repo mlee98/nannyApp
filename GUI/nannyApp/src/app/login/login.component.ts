@@ -26,13 +26,18 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loginInfo.login(this.userLogin).subscribe((result) => {
-      if (result.type === 'invalid') {
+      console.log(result);
+      let tempType = result.type;
+      console.log(tempType);
+      if (result === 'invalid') {
         this.validLogin = false;
         return;
       } else {
         this.loginInfo.changeId(this.userLogin.username);
-        this.loginInfo.changeType(result.type);
-        this.router.navigateByUrl(`${result.type}-jobs/${this.userLogin.username}`);
+        this.loginInfo.changeType(tempType);
+        console.log(this.loginInfo.getType());
+        console.log(`${result}-jobs/${this.userLogin.username}`);
+        this.router.navigateByUrl(`${result}-jobs/${this.userLogin.username}`);
       }
     });
     // this.loginInfo.changeId('random_parent123');

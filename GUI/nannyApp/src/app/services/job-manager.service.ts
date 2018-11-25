@@ -21,9 +21,9 @@ constructor(
   protected httpClient: HttpClient
 ) { }
 
-getJobsByUsername(username: string): Observable<Job[]> {
+getJobsByUsername(username: string, type: string): Observable<Job[]> {
   return this.httpClient
-    .get<Job[]>(`${this.endPoint}/jobs/${username}`, this.httpOptions)
+    .get<Job[]>(`${this.endPoint}/jobs/${type}/${username}`, this.httpOptions)
     .pipe(catchError(this.handleException));
 }
 

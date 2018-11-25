@@ -97,12 +97,12 @@ export const TEMP_ACCOUNT: Account = {
   references: [
     {
       name: 'Ryan Reynolds',
-      phone: '5124687344',
+      phone_number: '5124687344',
       email: 'rreynolds@gmail.com',
     },
     {
       name: 'Hilary Duff',
-      phone: '2146723541',
+      phone_number: '2146723541',
       email: 'hilaryduff@gmail.com',
     }
   ],

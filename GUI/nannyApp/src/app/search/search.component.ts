@@ -37,7 +37,7 @@ export class SearchComponent implements OnInit {
     this.nannyAge = 0;
     this.gender = 0;
     this.activatedRoute.params.subscribe((params) => {
-      this.jobManager.getJobsByUsername(params.username).subscribe((jobs) => {
+      this.jobManager.getJobsByUsername(params.username, 'parent').subscribe((jobs) => {
         jobs.forEach(job => {
           if (job.isAccepted === false && job.isComplete === false) {
             this.jobs.push(job);
@@ -48,7 +48,7 @@ export class SearchComponent implements OnInit {
     this.searchField = {
       gender: 'gender',
       minNannyAge: 0,
-      maxNannyAge: 0,
+      maxNannyAge: 99,
       minChildAge: 0,
       maxChildAge: 17,
       experience: 0
