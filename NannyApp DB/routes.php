@@ -15,16 +15,14 @@
               });
     
     //----------------------------------------------------------------------------
-   //GET ALL INFO
-    $app->get('/account/{username}/{type}', function ($request, $response, $args){
+   //get account by username
+    $app->get('/account/{username}', function ($request, $response, $args){
               $username = $request->getAttribute('username');
-              $type = $request->getAttribute('type');
-              $parent = "parent";
               $sth = $this->dbConn->prepare("SELECT * FROM accounts WHERE username = '$username'" );
               $sth->execute();
               $output = $sth->fetchAll();
               
-              if($type == $parent){
+
                   $sth2 = $this->dbConn->prepare("SELECT * FROM child_info WHERE username = '$username'" );
                   $sth2->execute();
                   $output2 = $sth2->fetchAll();
@@ -32,34 +30,45 @@
                   $sth3 = $this->dbConn->prepare("SELECT * FROM payment_info WHERE username = '$username'" );
                   $sth3->execute();
                   $output3 = $sth3->fetchAll();
-              }
-              else{
-                  $sth2 = $this->dbConn->prepare("SELECT * FROM nanny_info WHERE username = '$username'" );
-                  $sth2->execute();
-                  $output2 = $sth2->fetchAll();
+
+                  $sth4 = $this->dbConn->prepare("SELECT * FROM nanny_info WHERE username = '$username'" );
+                  $sth4->execute();
+                  $output4 = $sth4->fetchAll();
               
-                  $sth3 = $this->dbConn->prepare("SELECT * FROM deposit_info WHERE username = '$username'" );
-                  $sth3->execute();
-                  $output3 = $sth3->fetchAll();
-              }
+                  $sth5 = $this->dbConn->prepare("SELECT * FROM deposit_info WHERE username = '$username'" );
+                  $sth5->execute();
+                  $output5 = $sth5->fetchAll();
               
-              $finaloutput= array_merge($output, $output2, $output3);
+              $finaloutput= array_merge($output, $output2, $output3, $output4, $output5);
               return $this->response->withJson($finaloutput);
               });
     
     
+    //get children by username
+    $app->get('/children/{username}', function ($request, $response, $args)
+              {
+              $username = $request->getAttribute('username');
+              $sth= $this->dbConn->prepare("SELECT * FROM child_info WHERE username = '$username'");
+              $sth->execute();
+              $child_info = $sth->fetchAll();
+              return $this->response->withJson($child_info);
+              });
     
     
-    //----------------------------------------------------------------------------
-    //ACCOUNT
-    
-    
+    //get automatic pay by username
+    $app->get('/accounts/payment/{username}', function ($request, $response, $args)
+              {
+              $username = $request->getAttribute('username');
+              $sth= $this->dbConn->prepare("SELECT automatic FROM payment_info where username = '$username'");
+              $sth->execute();
+              $accounts = $sth->fetchAll();
+              return $this->response->withJson($accounts);
+              });
 
     
-    
+    //add account
     $app->post('/account/new', function ($request, $response) {
                $input = $request->getParsedBody();
-               //insert information into accounts table
                $type = $input['type'];
                $username = $input ['username'];
                $sql = "INSERT INTO accounts (username, password, firstname, lastname, age, gender, address, city, state, zip, email, phone, type) VALUES (:username, :password, :firstname, :lastname, :age, :gender, :address, :city, :state, :zip, :email, :phone, :type)";
@@ -81,20 +90,6 @@
                
                $parent = "parent";
                if($type == $parent){
-               
-                    $payment = $input['payment'];
-                    $name= ($payment['name']);
-                    $address = $payment['address'];
-                    $city = $payment['city'];
-                    $state = $payment['state'];
-                    $zip =$payment['zip'];
-                    $cardNumber= $payment['cardNumber'];
-                    $expiration=$payment['expiration'];
-                    $automatic=$payment['automatic'];
-                    $sql2 = "insert into payment_info (name, address, city, state, zip, cardNumber, expiration, automatic, username) values ('$name','$address', '$city', '$state', $zip, $cardNumber, '$expiration', '$automatic', '$username')";
-                    $sth2 = $this->dbConn->prepare($sql2);
-                    $sth2->execute();
-               
                     $children = $input['children'];
                     foreach ($children as $key => $value) {
                         $name = $value["name"];
@@ -111,15 +106,18 @@
                     }
                }
                else{
-                    $deposit = $input['deposit'];
-                    $name = $deposit['name'];
-                    $type2 = $deposit['type'];
-                    $accountNumber = $deposit['accountNumber'];
-                    $routingNumber = $deposit['routingNumber'];
-               
-                    $sql2 = "insert into deposit_info (name, type, accountNumber, routingNumber, username) values ('$name', '$type', $accountNumber, $routingNumber, '$username')";
-                    $sth2 = $this->dbConn->prepare($sql2);
-                    $sth2->execute();
+                   $sql2 = "INSERT INTO nanny_info (yearsExp, minAge, maxAge, minWage, cpr, pet_friendly, can_drive, can_cook, bio, username) VALUES (:yearsExp, :minAge, :maxAge, :minWage, :cpr, :pet_friendly, :can_drive, :can_cook, :bio, '$username')";
+                   $sth2 = $this->dbConn->prepare($sql2);
+                   $sth2->bindParam("yearsExp", $input['yearsExp']);
+                   $sth2->bindParam("cpr", $input['cpr']);
+                   $sth2->bindParam("can_cook", $input['can_cook']);
+                   $sth2->bindParam("can_drive", $input['can_drive']);
+                   $sth2->bindParam("pet_friendly", $input['pet_friendly']);
+                   $sth2->bindParam("minAge", $input['minAge']);
+                   $sth2->bindParam("maxAge", $input['maxAge']);
+                   $sth2->bindParam("minWage", $input['minWage']);
+                   $sth2->bindParam("bio", $input['bio']);
+                   $sth2->execute();
                
                     $references = $input['references'];
                     foreach ($references as $key => $value) {
@@ -130,27 +128,21 @@
                         $sql3 = "INSERT INTO nanny_references (name, email, phone_number, username) VALUES ('$name2', '$email', $phone, '$username')";
                         $sth3 = $this->dbConn->prepare($sql3);
                         $sth3->execute();
+                    }
                }
-               
-               
-               
-               
-               
-               }
-               
-               
-               });
+               return $this->response->withJson($username);
+        });
     
     
     
     
-    $app->get('/account', function ($request, $response, $args)
+   $app->get('/account', function ($request, $response, $args)
               {$sth= $this->dbConn->prepare("SELECT * FROM accounts");
               $sth->execute();
               $accounts = $sth->fetchAll();
               return $this->response->withJson($accounts);
               });
-    
+    /*
     
     $app->put('/account/update/{username}', function ($request, $response) {
              $username = $request->getAttribute('username');
@@ -169,14 +161,14 @@
               $sth->bindParam("phone", $input['phone']);
               $sth->execute();
               return $this->response->withJson($input);
-              });
+              });*/
 
     
     
       //----------------------------------------------------------------------------
     //CHILDREN
     
-    $app->post('/children/new', function ($request, $response) {
+    /*$app->post('/children/new', function ($request, $response) {
                $file = file_get_contents("php://input");
                $data = json_decode($file, true);
                foreach ($data["children"] as $key => $value) {
@@ -199,22 +191,17 @@
               {$sth= $this->dbConn->prepare("SELECT * FROM child_info");
               $sth->execute();
               $child_info = $sth->fetchAll(); return $this->response->withJson($child_info);
-              });
+              });*/
     
-    $app->get('/children/{username}', function ($request, $response, $args)
-              {
-              $username = $request->getAttribute('username');
-              $sth= $this->dbConn->prepare("SELECT * FROM child_info WHERE username = '$username'");
-              $sth->execute();
-              $child_info = $sth->fetchAll();
-              return $this->response->withJson($child_info);
-              });
+  
     
     
     
       //----------------------------------------------------------------------------
     //NANNY_INFO
-    $app->post('/nanny_info/new', function ($request, $response) {
+    
+    
+    /*$app->post('/nanny_info/new', function ($request, $response) {
                $input = $request->getParsedBody();
               $sql = "INSERT INTO nanny_info (yearsExp, minAge, maxAge, minWage, cpr, pet_friendly, can_drive, can_cook, bio, username) VALUES (:yearsExp, :minAge, :maxAge, :minWage, :cpr, :pet_friendly, :can_drive, :can_cook, :bio, :username)";
                $sth = $this->dbConn->prepare($sql);
@@ -232,7 +219,7 @@
                return $this->response->withJson($input);
                });
     
-   
+   */
     $app->get('/nanny_info', function ($request, $response, $args)
               {$sth= $this->dbConn->prepare("SELECT * FROM nanny_info");
               $sth->execute();
@@ -263,7 +250,7 @@
      //----------------------------------------------------------------------------
     //NANNY_REFERENCES
     
-    $app->post('/nanny_references/new', function ($request, $response) {
+    /*$app->post('/nanny_references/new', function ($request, $response) {
                $file = file_get_contents("php://input");
                $data = json_decode($file, true);
                foreach ($data["references"] as $key => $value) {
@@ -277,7 +264,7 @@
                $sth->execute();
                }
                return $this->response->withJson($name);
-               });
+               });*/
     
     $app->get('/nanny_references', function ($request, $response, $args)
               {$sth= $this->dbConn->prepare("SELECT * FROM nanny_references");
@@ -316,14 +303,6 @@
               return $this->response->withJson($accounts);
               });
    
-    $app->get('/accounts/payment/{username}', function ($request, $response, $args)
-              {
-              $username = $request->getAttribute('username');
-              $sth= $this->dbConn->prepare("SELECT automatic FROM payment_info where username = '$username'");
-              $sth->execute();
-              $accounts = $sth->fetchAll();
-              return $this->response->withJson($accounts);
-              });
     
     
     
@@ -358,7 +337,8 @@
     
     $app->post('/job/new', function ($request, $response) {
                $input = $request->getParsedBody();
-               $familyName = $input["parentName"];
+               $familyName = $input["familyName"];
+               //$nannyName = $input["nannyName"];
                $description = $input["description"];
                $sql = "INSERT INTO jobs (familyName, nannyName, description, address, city, state, zip, duration, nannyPhone, parentPhone, isAccepted, isComplete) VALUES ('$familyName', '$nannyName', '$description', :address, :city, :state, :zip, :duration, :nannyPhone, :parentPhone, :isAccepted, :isComplete)";
                $sql = "INSERT INTO jobs (familyName, description, address, city, state, zip, duration, nannyPhone, parentPhone, isAccepted, isComplete) VALUES ('$familyName', '$description', :address, :city, :state, :zip, :duration, :nannyPhone, :parentPhone, :isAccepted, :isComplete)";
@@ -377,44 +357,60 @@
                $sth2 = $this->dbConn->prepare($sql2);
                 $sth2->execute();
                $jobid = $sth2->fetchAll();
-               print_r ($jobid);
                foreach ($jobid as $value) {
-                $id = $value["job_id"];
+                    $id = $value["job_id"];
                }
                $tasks = $input['tasks'];
                foreach ($tasks as $value) {
-               $name = $value["name"];
-               $time = $value["time"];
-               $day = $value["day"];
-               $location = $value["location"];
-               $description= $value["description"];
-               $completed = $value["completed"];
-               $sql2 = "insert into tasks (id, name, time, day, description, location, completed) values ($id, '$name', '$time', '$day', '$location', '$description', '$completed')";
-               $sth2 = $this->dbConn->prepare($sql2);
-               $sth2->execute();
+                    $name = $value["name"];
+                    $time = $value["time"];
+                    $day = $value["day"];
+                    $location = $value["location"];
+                    $description= $value["description"];
+                    $completed = $value["completed"];
+                    $sql2 = "insert into tasks (id, name, time, day, description, location, completed) values ($id, '$name', '$time', '$day', '$location', '$description', '$completed')";
+                    $sth2 = $this->dbConn->prepare($sql2);
+                    $sth2->execute();
                }
                return $this->response->withJson($id);//returning the id
               
+               });
+    
+    
+    $app->post('/jobs/submitRequest', function ($request, $response) {
+               $input = $request->getParsedBody();
+               $accept = "0";
+               $sql = "INSERT INTO job_requests (job_id, nannyUsername, isAccepted) values (:job_id, :nannyUsername, $accept)";
+               $sth = $this->dbConn->prepare($sql);
+               $sth->bindParam("job_id", $input['job_id']);
+               $sth->bindParam("nannyUsername", $input['nannyUsername']);
+               $sth->execute();
+               
                });
   
     
     
     
-    $app->put('/jobs/accept', function ($request, $response, $args) {
+    $app->put('/jobs/accept/{username}', function ($request, $response, $args) {
+              $username = $request->getAttribute('username');
               $input = $request->getParsedBody();
               $accept = "1";
               $jobId = $input['job_id'];
-              $sql = "update jobs set isAccepted = $accept where job_id = :job_id";
+              $sql = "update jobs set isAccepted = $accept where job_id = :job_id ";
               $sth = $this->dbConn->prepare($sql);
               $sth->bindParam("job_id", $input['job_id']);
               $sth->execute();
+              
+              
+              $sql2 = "update "
               $sth2 = $this->dbConn->prepare($sql2);
               return $this->response->withJson($jobId);
               });
 
     
-    $app->put('/jobs/decline', function ($request, $response, $args) {
+    $app->put('/jobs/decline/{username}', function ($request, $response, $args) {
               $input = $request->getParsedBody();
+               $username = $request->getAttribute('username');
               $accept = "0";
               $jobId = $input['job_id'];
               $sql = "update jobs set isAccepted = $accept where job_id = :job_id";
@@ -438,17 +434,7 @@
 
     
 //----------------------------------------------------------------------------
-    /*$app->post('/jobs/submitRequest', function ($request, $response) {
-               $input = $request->getParsedBody();
-               $accept = "0";
-               $sql = "INSERT INTO job_requests (job_id, nannyUsername, isAccepted) values (:job_id, :nannyUsername, $accept);
-               $sth = $this->dbConn->prepare($sql);
-               $sth->bindParam("job_id", $input['job_id']);
-               $sth->bindParam("nannyUsername", $input['nannyUsername']);
-               $sth->execute();
-               
-               
-     });*/
+    
   
     
     //Display jobs
@@ -474,6 +460,8 @@
               $zip = $sth->fetchAll();
               return $this->response->withJson($zip);
               });
+    
+    
     
     
     
