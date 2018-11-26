@@ -372,8 +372,6 @@
               });
     
     
-    
-    
     $app->put('/jobs/ratings/{username}', function ($request, $response, $args) {
               $username = $request->getAttribute('username');
               $input = $request->getParsedBody();
@@ -428,7 +426,9 @@
               });
     
     //----------------------------------------------------------------------------
+
     
+    //“Tasks”:[{“name”:”task1”, “day”: “day1”}, {“name”:”task2”, “day”:”day2}]
     
 
     
@@ -443,12 +443,7 @@
     
     
     
-    
-    
-    
-    
-    
-    
+
     
     //display nannys of a certain age
     $app->get('/nannys/age_range/{lower}/{upper}', function ($request, $response, $args){
@@ -474,6 +469,22 @@
                }
                return $this->response->withJson($t);
                });
+    
+    
+    $app->put('/jobs/update/{job_id}', function ($request, $response, $args) {
+              $job_id = $request->getAttribute('job_id');
+              $input = $request->getParsedBody();
+              $complete = "1";
+              echo $complete;
+              $task= $input['task'];
+              $name = $task['name'];
+              echo $name;
+              $day = $task['day'];
+              echo $day;
+              $sql = "update tasks set completed = '$complete' where name = '$name' and day = '$day' and id = $job_id";
+              $sth = $this->dbConn->prepare($sql);
+              $sth->execute();
+              });
     
     
     
