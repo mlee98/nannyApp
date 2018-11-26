@@ -471,6 +471,9 @@
                $sth->execute();
                    
      });
+	 
+	 
+	 
   
 	/*Display tasks for a job id*/
 	 $app->get('/tasks/{job_id}', function ($request, $response, $args)
@@ -539,6 +542,8 @@
               $nanny_info = $sth->fetchAll();
               return $this->response->withJson($nanny_info);
               });
+			  
+	
  
 				 
 	//get account by username
