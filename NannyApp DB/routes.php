@@ -286,6 +286,7 @@
                foreach ($jobid as $value) {
                     $id = $value["job_id"];
                }
+               $completed = "0";
                $tasks = $input['tasks'];
                foreach ($tasks as $value) {
                     $name = $value["name"];
@@ -293,7 +294,7 @@
                     $day = $value["day"];
                     $location = $value["location"];
                     $description= $value["description"];
-                    $completed = $value["completed"];
+                   // $completed = $value["completed"];
                     $sql2 = "insert into tasks (id, name, time, day, description, location, completed) values ($id, '$name', '$time', '$day', '$location', '$description', '$completed')";
                     $sth2 = $this->dbConn->prepare($sql2);
                     $sth2->execute();
