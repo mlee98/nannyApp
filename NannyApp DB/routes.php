@@ -281,18 +281,16 @@
     $app->post('/job/new', function ($request, $response) {
                $input = $request->getParsedBody();
                $familyName = $input["familyName"];
-               $nannyName = $input["nannyName"];
                $description = $input["description"];
                $isComplete = "0";
                $isAccepted = "0";
-               $sql = "INSERT INTO jobs (familyName, nannyName, description, address, city, state, zip, duration, nannyPhone, parentPhone, isAccepted, isComplete) VALUES ('$familyName', '$nannyName', '$description', :address, :city, :state, :zip, :duration, :nannyPhone, :parentPhone, '$isAccepted', '$isComplete')";
+               $sql = "INSERT INTO jobs (familyName, description, address, city, state, zip, duration, parentPhone, isAccepted, isComplete) VALUES ('$familyName', '$description', :address, :city, :state, :zip, :duration, :parentPhone, '$isAccepted', '$isComplete')";
                $sth = $this->dbConn->prepare($sql);
                $sth->bindParam("address", $input['address']);
                $sth->bindParam("city", $input['city']);
                $sth->bindParam("state", $input['state']);
                $sth->bindParam("zip", $input['zip']);
                $sth->bindParam("duration", $input['duration']);
-               $sth->bindParam("nannyPhone", $input['nannyPhone']);
                $sth->bindParam("parentPhone", $input['parentPhone']);
                $sth->execute();
                $sql2 = "select job_id from jobs where familyName = '$familyName' and description = '$description'";
@@ -303,35 +301,37 @@
                     $id = $value["job_id"];
                }
                $completed = "0";
-               $tasks = $input['tasks'];
-               foreach ($tasks as $value) {
+               $tasks = $input["tasks"];
+               print_r($tasks);
+              foreach ($tasks as $value) {
                     $name = $value["name"];
                     $time = $value["time"];
                     $day = $value["day"];
                     $location = $value["location"];
                     $description= $value["description"];
-                   // $completed = $value["completed"];
-                    $sql2 = "insert into tasks (id, name, time, day, description, location, completed) values ($id, '$name', '$time', '$day', '$location', '$description', '$completed')";
-                    $sth2 = $this->dbConn->prepare($sql2);
-                    $sth2->execute();
+                    $sql3 = "insert into tasks (id, name, time, day, description, location, completed) values ($id, '$name', '$time', '$day', '$location', '$description', '$completed')";
+                    $sth3 = $this->dbConn->prepare($sql3);
+                    $sth3->execute();
                }
                return $this->response->withJson($id);//returning the id
               
                });
     
+    
+    
+    
+    
     //this add the job_id, nanny username and isAccepted into the job_requests table
-    $app->post('/jobs/submitRequest', function ($request, $response) {
+    $app->put('/jobs/submitRequest', function ($request, $response) {
                $input = $request->getParsedBody();
-               $accept = "0";
-               $sql = "INSERT INTO job_requests (job_id, nannyUsername, isAccepted) values (:job_id, :nannyUsername, $accept)";
+               $sql = "update jobs set nannyName = :nannyName where job_id = job_id ";
                $sth = $this->dbConn->prepare($sql);
                $sth->bindParam("job_id", $input['job_id']);
-               $sth->bindParam("nannyUsername", $input['nannyUsername']);
+               $sth->bindParam("nannyName", $input['nannyName']);
                $sth->execute();
-               
                });
   
-    
+  
     
     //when a job is accepted, the nanny username and nanny phone number is added to the job
     //also all the requests for this job are deleted from the job_requests table (since the job has been filled and the requests aren't needed anymore)
@@ -339,27 +339,15 @@
               $job_id = $request->getAttribute('job_id');
               $input = $request->getParsedBody();
               $accept = "1";
-              $jobId = $input['job_id'];
               $sql = "update jobs set isAccepted = $accept where job_id = $job_id ";
               $sth = $this->dbConn->prepare($sql);
-
               $sth->execute();
-              $sql2 = "update jobs set nannyName = :nannyName, nannyPhone =:nannyPhone where job_id = '$job_id'";
+              
+              $sql2 = "update jobs set nannyPhone = :nannyPhone where job_id = '$job_id'";
               $sth2 = $this->dbConn->prepare($sql2);
               $sth2->execute();
-              $sth2->bindParam("nannyName", $input['nannyName']);
               $sth2->bindParam("nannyPhone", $input['nannyPhone']);
-              
-              $sql3 = "delete from job_requests where job_id = '$job_id'";
-              $sth3 = $this->dbConn->prepare($sql3);
-              $sth3->execute();
-              
-              $sql4 = "update jobs set isAccepted = '$accept' where job_id = '$job_id' ";
-              $sth4 = $this->dbConn->prepare($sql4);
-              $sth4->execute();
-              
-              
-              return $this->response->withJson($jobId);
+              return $this->response->withJson($job_id);
               });
 
     
@@ -367,12 +355,11 @@
     $app->put('/jobs/decline/{job_id}', function ($request, $response, $args) {
               $job_id = $request->getAttribute('job_id');
               $input = $request->getParsedBody();
-              $jobId = $input['job_id'];
-              $sql = "delete from job_requests set where job_id = '$job_id' and nannyName = :nannyName ";
+              $pending = "pending";
+              $sql = "update jobs set nannyName= '$pending' where job_id = $job_id";
               $sth = $this->dbConn->prepare($sql);
-              $sth->bindParam("nannyName", $input['nannyName']);
               $sth->execute();
-              return $this->response->withJson($jobId);
+              return $this->response->withJson($job_id);
               });
     
     
@@ -438,6 +425,7 @@
               $sth= $this->dbConn->prepare("SELECT * FROM tasks where id = $job_id");
               $sth->execute();
               $tasks = $sth->fetchAll();
+              print_r($tasks);
               return $this->response->withJson($tasks);
               });
     
