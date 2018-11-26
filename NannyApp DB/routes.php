@@ -26,7 +26,6 @@
                   $sth2 = $this->dbConn->prepare("SELECT * FROM child_info WHERE username = '$username'" );
                   $sth2->execute();
                   $output2 = $sth2->fetchAll();
-             // print_r($output2);
               
                   $sth3 = $this->dbConn->prepare("SELECT * FROM payment_info WHERE username = '$username'" );
                   $sth3->execute();
@@ -201,7 +200,7 @@
               $maxChildAge = $request->getAttribute('maxChildAge');
               $experience = $request->getAttribute('experience');
               $zip = $request->getAttribute('zip');
-              $sth= $this->dbConn->prepare("SELECT a.username FROM nanny_info n join accounts a on n.username = a.username where a.age between $minNannyAge and $maxNannyAge AND n.minAge <= $minChildAge and n.maxAge >= $maxChildAge and a.gender='$gender' and n.yearsExp >= $experience and a.zip = $zip ");
+              $sth= $this->dbConn->prepare("SELECT a.username, a.age, a.gender, a.zip, n.minAge, n.maxAge, n.yearsExp FROM nanny_info n join accounts a on n.username = a.username where a.age between $minNannyAge and $maxNannyAge AND n.minAge <= $minChildAge and n.maxAge >= $maxChildAge and a.gender='$gender' and n.yearsExp >= $experience and a.zip = $zip ");
               $sth->execute();
               $nanny_info = $sth->fetchAll();
               return $this->response->withJson($nanny_info);
