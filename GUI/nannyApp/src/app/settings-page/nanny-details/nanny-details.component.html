@@ -4,11 +4,11 @@
       <h1 class="d-inline mr-4">My Profile</h1>
       <h5 *ngIf="!isEditMode" class="d-inline">What Parents See</h5>
     </div>
-    <button
+    <!-- <button
       class="btn btn-link text-dark"
       (click)="onClickInfo()">
       {{ this.isEditMode ? 'Save Info' : 'Edit Info'}}
-    </button>
+    </button>-->
   </div>
   <div class="container m-4">
     <app-nanny-profile [hidden]="this.isEditMode" [account]="account"></app-nanny-profile>

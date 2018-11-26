@@ -69,6 +69,7 @@ export class CreateAccountComponent implements OnInit {
         }
       }
     }
+    console.log(this.account);
     this.accountInfo.addAccount(this.account).subscribe(() => {
       this.router.navigateByUrl('/');
     });

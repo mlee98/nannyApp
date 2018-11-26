@@ -11,7 +11,7 @@
     </li>
   </ul>
   <ul class="nav">
-    <li *ngIf="accountType === 'parent' && loggedIn" class="nav-item">
+    <li *ngIf="type === 'parent' && loggedIn" class="nav-item">
       <a
         class="nav-link"
         [routerLink]="['/search']"
@@ -20,7 +20,7 @@
         Search Nannys
       </a>
     </li>
-    <li *ngIf="accountType === 'nanny' && loggedIn" class="nav-item">
+    <li *ngIf="type === 'nanny' && loggedIn" class="nav-item">
       <a
         class="nav-link"
         [routerLink]="['/nanny-jobs', username]"
@@ -29,7 +29,7 @@
         My Jobs
       </a>
     </li>
-    <li *ngIf="accountType === 'parent' && loggedIn" class="nav-item">
+    <li *ngIf="type === 'parent' && loggedIn" class="nav-item">
       <a
         class="nav-link"
         [routerLink]="['/parent-jobs', username]"

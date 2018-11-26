@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginInfo } from '../services/login-info.service';
 
 @Component({
@@ -12,10 +12,9 @@ export class HeaderComponent implements OnInit {
     private loginInfo: LoginInfo
   ) { }
 
-  @Input() accountType: string;
-
   username: string;
   loggedIn: boolean;
+  type: string;
 
   ngOnInit() {
     this.loggedIn = false;
@@ -24,6 +23,9 @@ export class HeaderComponent implements OnInit {
       if (this.username !== '') {
         this.loggedIn = true;
       }
+      this.loginInfo.currentUserType.subscribe((type) => {
+        this.type = type;
+      });
     });
   }
 

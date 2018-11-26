@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
   showHeader: Boolean = true;
 
   ngOnInit() {
-    this.account = TEMP_ACCOUNT;
   }
 
   checkShowHeader(event) {

@@ -21,9 +21,11 @@ export class NannySearch {
   ) {}
 
   search(searchField: SearchField): Observable<Account[]> {
+    const tempRoute = `${this.endPoint}/search/${searchField.gender}` +
+    `/${searchField.minNannyAge}/${searchField.maxNannyAge}/${searchField.minChildAge}` +
+    `/${searchField.maxChildAge}/${searchField.experience}/${searchField.zip}`;
     return this.httpClient
-      .get<Account[]>(`${this.endPoint}/search/${searchField.gender}/${searchField.minNannyAge}/${searchField.maxNannyAge}
-      /${searchField.minChildAge}/${searchField.maxChildAge}/${searchField.experience}/${searchField.zip}`, this.httpOptions)
+      .get<Account[]>(tempRoute, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 

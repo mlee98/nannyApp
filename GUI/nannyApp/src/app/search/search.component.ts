@@ -58,6 +58,9 @@ export class SearchComponent implements OnInit {
   search() {
     this.searchField.minNannyAge = this.nannyAges[this.nannyAge].min;
     this.searchField.maxNannyAge = this.nannyAges[this.nannyAge].max;
+    if (this.searchField.zip === null) {
+      this.searchField.zip = 0;
+    }
     this.nannySearch.search(this.searchField).subscribe((nannys) => {
       console.log(nannys);
       this.nannys = nannys;

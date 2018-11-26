@@ -48,9 +48,9 @@ export class AccountInfo {
       .pipe(catchError(this.handleException));
   }
 
-  addNanny_Info(nannyStuff: NannyDetails): Observable<NannyDetails> {
+  getNannyInfo(username: string): Observable<NannyDetails> {
     return this.httpClient
-      .post<NannyDetails>(`${this.endPoint}/nanny_info/new`, nannyStuff, this.httpOptions)
+      .get<NannyDetails>(`${this.endPoint}/nanny_info/${username}`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 

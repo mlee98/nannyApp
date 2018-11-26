@@ -5,14 +5,14 @@
 
   <!-- show if nanny account -->
   <div *ngIf="account.type === 'nanny'">
-    <app-deposit-details [deposit]="account.deposit"></app-deposit-details>
+    <app-deposit-details [deposit]="account.deposit" *ngIf="account.deposit"></app-deposit-details>
     <app-nanny-details [account]="account"></app-nanny-details>
   </div>
 
 
   <!-- show if parent account -->
-  <div *ngIf="account.type === 'parent'">
-    <app-payment-details [payment]="account.payment"></app-payment-details>
+  <div *ngIf="account.type === 'parent' && account.children">
+    <app-payment-details [payment]="account.payment" *ngIf="account.payment"></app-payment-details>
     <div class="row">
       <div class="container pr-0 pl-0">
         <app-child-details-container [account]="account"></app-child-details-container>
