@@ -26,17 +26,11 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loginInfo.login(this.userLogin).subscribe((result) => {
-      console.log(result);
-      let tempType = result.type;
-      console.log(tempType);
-      if (result === 'invalid') {
+      if (result === null) {
         this.validLogin = false;
-        return;
       } else {
         this.loginInfo.changeId(this.userLogin.username);
-        this.loginInfo.changeType(tempType);
-        console.log(this.loginInfo.getType());
-        console.log(`${result}-jobs/${this.userLogin.username}`);
+        this.loginInfo.changeType(result);
         this.router.navigateByUrl(`${result}-jobs/${this.userLogin.username}`);
       }
     });

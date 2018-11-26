@@ -10,7 +10,7 @@ import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
 })
 export class LoginInfo {
 
-  protected endPoint = 'http://ec2-13-59-234-151.us-east-2.compute.amazonaws.com:8080';
+  protected endPoint = 'http://ec2-18-222-217-188.us-east-2.compute.amazonaws.com:8080';
 
   protected httpOptions = {
     headers: new HttpHeaders({
@@ -41,9 +41,9 @@ export class LoginInfo {
   }
 
 
-  login(login: Login): Observable<Login> {
+  login(login: Login): Observable<string> {
     return this.httpClient
-      .post<Login>(`${this.endPoint}/login`, login, this.httpOptions)
+      .post<string>(`${this.endPoint}/login`, login, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 

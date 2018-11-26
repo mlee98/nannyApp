@@ -56,9 +56,9 @@ export class NannyJobsComponent implements OnInit {
     }
     this.dispJob.isAccepted = true;
     this.jobs.push(this.dispJob);*/
-    this.jobManager.acceptJob(this.dispJob.id).subscribe(() => {
+    this.jobManager.acceptJob(this.dispJob.job_id).subscribe(() => {
       for (let i = 0; i < this.requests.length; i++) {
-      if (this.requests[i].id === this.dispJob.id) {
+      if (this.requests[i].job_id === this.dispJob.job_id) {
         this.requests.splice(i, 1);
         break;
       }
@@ -69,9 +69,9 @@ export class NannyJobsComponent implements OnInit {
   }
 
   declineRequest() {
-    this.jobManager.declineJob(this.dispJob.id).subscribe(() => {
+    this.jobManager.declineJob(this.dispJob.job_id).subscribe(() => {
       for (let i = 0; i < this.requests.length; i++) {
-        if (this.requests[i].id === this.dispJob.id) {
+        if (this.requests[i].job_id === this.dispJob.job_id) {
           this.requests.splice(i, 1);
           break;
         }
@@ -95,8 +95,8 @@ export class NannyJobsComponent implements OnInit {
     }*/
   }
 
-  updateTasks(updateObj: {taskNames: string[], taskDays: string[]}) {
-    this.jobManager.updateTasks(updateObj.taskNames, updateObj.taskDays, this.dispJob.id).subscribe();
+  updateTasks(task) {
+    this.jobManager.updateTasks(this.dispJob.job_id, task).subscribe();
   }
 
 }

@@ -38,54 +38,46 @@ export class ParentJobsComponent implements OnInit {
   displayPayment: Boolean = false;
 
   ngOnInit() {
-    this.jobs = [];
-    this.dispJob = this.jobs.length ? this.jobs[0] : null;
-    this.current = this.jobs.filter(job => job.isComplete === false);
-    this.completed = this.jobs.filter(job => job.isComplete === true);
-
     this.activatedRoute.params.subscribe((params) => {
       this.username = params.username;
-      this.jobManager.getJobsByUsername(params.username, 'parent').subscribe((result) => {
+      this.jobManager.getJobsByUsername(this.username, 'parent').subscribe((result) => {
         this.jobs = result;
-        this.current = result.filter(job => job.isComplete === false);
-        this.completed = result.filter(job => job.isComplete === true);
+        this.current = this.jobs.filter(job => job.isComplete == false);
+        this.completed = result.filter(job => job.isComplete == true);
         this.dispJob = result.length ? this.jobs[0] : null;
-
         this.accountInfo.getChildrenByUsername(params.username).subscribe((children) => {
           this.children = children;
-          /*this.accountInfo.getAutomaticPayByUsername(params.username).subscribe((payment) => {
-            if (payment.automatic === true) {
-              this.payment = payment;
-            } else {
-              this.payment = {};
-            }
-          });*/
           this.payment = {};
+          if (this.dispJob !== null) {
+            this.jobManager.getTasksByJobId(this.dispJob.job_id).subscribe((tasks) => {
+              this.dispJob.tasks = tasks;
+            });
+          }
         });
       });
     });
   }
 
   clickJob(clickedJob) {
-    this.dispJob = clickedJob;
-    if (this.dispJob.isAccepted === true) {
-      this.ongoing = true;
-    } else {
-      this.ongoing = false;
-    }
+    this.jobManager.getTasksByJobId(clickedJob.job_id).subscribe((result) => {
+      this.dispJob = clickedJob;
+      if (this.dispJob.isAccepted === true) {
+        this.ongoing = true;
+      } else {
+        this.ongoing = false;
+      }
+      this.dispJob.tasks = result;
+    });
   }
 
-  newJob(job) {
+  newJob(job: Job) {
     this.accountInfo.getAccountByUsername(this.username, 'parent').subscribe((tempAcc) => {
-      job.id = this.username;
-      job.familyName = tempAcc.lastName;
-      job.address = tempAcc.address;
-      job.city = tempAcc.city;
-      job.state = tempAcc.state;
-      job.zip = tempAcc.zip;
-      job.parentPhone = tempAcc.phone;
-      job.isAccepted = false;
-      job.isComplete = false;
+      job.familyName = this.username;
+      job.address = tempAcc[0].address;
+      job.city = tempAcc[0].city;
+      job.state = tempAcc[0].state;
+      job.zip = tempAcc[0].zip;
+      job.parentPhone = tempAcc[0].phone;
       this.pending.push(job);
       this.jobManager.addJob(job).subscribe(() => {
       });

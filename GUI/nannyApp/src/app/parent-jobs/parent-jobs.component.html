@@ -99,10 +99,10 @@
         </div>
         <p class="mt-3">{{dispJob.description}}</p>
       </div>
-      <app-job-schedule [tasks]="dispJob.tasks" [editable]="false" [completeable]="false" *ngIf="dispJob">
+      <app-job-schedule [tasks]="dispJob.tasks" [editable]="false" [completeable]="false" *ngIf="dispJob.tasks">
       </app-job-schedule>
     </div>
-    <div class="col-md-3 mt-2">
+    <div class="col-md-3 mt-2" *ngIf="dispJob">
       <app-child-card *ngFor="let child of children" [child]="child">
       </app-child-card>
     </div>

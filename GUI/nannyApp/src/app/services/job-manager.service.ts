@@ -9,7 +9,7 @@ import { Job, Task, Account } from '../models';
 })
 export class JobManager {
 
-  protected endPoint = 'http://ec2-13-59-234-151.us-east-2.compute.amazonaws.com:8080';
+  protected endPoint = 'http://ec2-18-222-217-188.us-east-2.compute.amazonaws.com:8080';
 
   protected httpOptions = {
     headers: new HttpHeaders({
@@ -27,9 +27,15 @@ getJobsByUsername(username: string, type: string): Observable<Job[]> {
     .pipe(catchError(this.handleException));
 }
 
+getTasksByJobId(jobId: number): Observable<Job[]> {
+  return this.httpClient
+    .get<Job[]>(`${this.endPoint}/tasks/${jobId}`, this.httpOptions)
+    .pipe(catchError(this.handleException));
+}
+
 addJob(newJob: Job): Observable<Job> {
   return this.httpClient
-    .post<Job>(`${this.endPoint}/jobs/new`, newJob, this.httpOptions)
+    .post<Job>(`${this.endPoint}/job/new`, newJob, this.httpOptions)
     .pipe(catchError(this.handleException));
 }
 
@@ -45,9 +51,9 @@ declineJob(jobId: number): Observable<number> {
     .pipe(catchError(this.handleException));
 }
 
-updateTasks(taskNames: string[], taskDays: string[], jobId: number): Observable<Task[]> {
+updateTasks(jobId: number, task: Task): Observable<Task[]> {
   return this.httpClient
-    .put<Task[]>(`${this.endPoint}/jobs/update/${jobId}`, {taskNames: taskNames, taskDays: taskDays}, this.httpOptions)
+    .put<Task[]>(`${this.endPoint}/jobs/update/${jobId}`, task, this.httpOptions)
     .pipe(catchError(this.handleException));
 }
 

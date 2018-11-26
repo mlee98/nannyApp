@@ -15,7 +15,6 @@ export class CreateJobComponent implements OnInit {
 
   reset: boolean;
   job: Job;
-  uTasks: {taskNames: string[], taskDays: string[]};
 
   selectedChildName: '';
 

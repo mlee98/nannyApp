@@ -48,7 +48,7 @@ export const TEMP_ACCOUNT: Account = {
   ],
   parentJobs: [
     {
-      id: 1,
+      job_id: 1,
       isComplete: false,
       familyName: 'Smith',
       nannyName: 'Stokes', nannyPhone: '8179999999',
@@ -67,7 +67,7 @@ export const TEMP_ACCOUNT: Account = {
       ],
     },
     {
-      id: 2,
+      job_id: 2,
       isComplete: true,
       rating: 5,
       familyName: 'Jones',
@@ -108,7 +108,7 @@ export const TEMP_ACCOUNT: Account = {
   ],
   nannyJobs: [
     {
-      id: 1, isAccepted: false, isComplete: false,
+      job_id: 1, isAccepted: false, isComplete: false,
       familyName: 'Lee',
       nannyName: 'Stokes',
       parentPhone: '9998887766',
@@ -136,7 +136,7 @@ export const TEMP_ACCOUNT: Account = {
       ]
     },
     {
-      id: 2,
+      job_id: 2,
       isAccepted: true,
       isComplete: false,
       familyName: 'Smith',
@@ -165,9 +165,9 @@ export const TEMP_ACCOUNT: Account = {
         }
       ]
     },
-    {id: 3, isAccepted: true, isComplete: false, familyName: 'Jones', nannyName: 'Dillard', tasks: []},
-    {id: 4, isAccepted: true, isComplete: false, familyName: 'Brodsffs', nannyName: 'Cage', tasks: []},
-    {id: 5, isAccepted: true, isComplete: true, familyName: 'Obama', nannyName: 'Knight', tasks: []}
+    {job_id: 3, isAccepted: true, isComplete: false, familyName: 'Jones', nannyName: 'Dillard', tasks: []},
+    {job_id: 4, isAccepted: true, isComplete: false, familyName: 'Brodsffs', nannyName: 'Cage', tasks: []},
+    {job_id: 5, isAccepted: true, isComplete: true, familyName: 'Obama', nannyName: 'Knight', tasks: []}
   ],
   deposit: {},
 };

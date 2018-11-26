@@ -8,7 +8,7 @@ import { SearchField, Account } from '../models';
   providedIn: 'root'
 })
 export class NannySearch {
-  protected endPoint = 'http://ec2-13-59-234-151.us-east-2.compute.amazonaws.com:8080';
+  protected endPoint = 'http://ec2-18-222-217-188.us-east-2.compute.amazonaws.com:8080';
 
   protected httpOptions = {
     headers: new HttpHeaders({

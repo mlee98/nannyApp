@@ -46,8 +46,19 @@ export class JobScheduleComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    for (let i = 0; i < this.tasks.length; i++) {
+      if (this.tasks[i].completed == false) {
+        this.tasks[i].completed = false;
+      } else {
+        this.tasks[i].completed = true;
+      }
+    }
+
     this.newTask = false;
-    this.createWeek(this.tasks);
+    if (this.tasks !== null) {
+      this.createWeek(this.tasks);
+    }
+    this.showTasks = [];
     this.tempTask = {};
   }
 
@@ -94,31 +105,8 @@ export class JobScheduleComponent implements OnInit {
     this.newTask = false;
   }
 
-  update(name: string, day: string ) {
-    /*const temporaryTasks = [];
-    for (let i = 0; i < this.week.Mon.length; i++) {
-      temporaryTasks.push(this.week.Mon[i]);
-    }
-    for (let i = 0; i < this.week.Tues.length; i++) {
-      temporaryTasks.push(this.week.Tues[i]);
-    }
-    for (let i = 0; i < this.week.Wed.length; i++) {
-      temporaryTasks.push(this.week.Wed[i]);
-    }
-    for (let i = 0; i < this.week.Thurs.length; i++) {
-      temporaryTasks.push(this.week.Thurs[i]);
-    }
-    for (let i = 0; i < this.week.Fri.length; i++) {
-      temporaryTasks.push(this.week.Fri[i]);
-    }
-    for (let i = 0; i < this.week.Sat.length; i++) {
-      temporaryTasks.push(this.week.Sat[i]);
-    }
-    for (let i = 0; i < this.week.Sun.length; i++) {
-      temporaryTasks.push(this.week.Sun[i]);
-    }
-    this.tasks = temporaryTasks;*/
-    this.updateTasks.emit({taskNames: [name], taskDays: [day]});
+  update(task: Task) {
+    this.updateTasks.emit(task);
   }
 
 }

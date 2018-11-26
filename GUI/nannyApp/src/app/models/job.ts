@@ -1,7 +1,7 @@
 import { Task } from './task';
 import { Child } from './child';
 export class Job {
-  id?: number;
+  job_id?: number;
   familyName?: string;
   nannyName?: string;
   description?: string;
