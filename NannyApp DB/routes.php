@@ -267,7 +267,9 @@
                $familyName = $input["familyName"];
                $nannyName = $input["nannyName"];
                $description = $input["description"];
-               $sql = "INSERT INTO jobs (familyName, nannyName, description, address, city, state, zip, duration, nannyPhone, parentPhone, isAccepted, isComplete) VALUES ('$familyName', '$nannyName', '$description', :address, :city, :state, :zip, :duration, :nannyPhone, :parentPhone, :isAccepted, :isComplete)";
+               $isComplete = "0";
+               $isAccepted = "0";
+               $sql = "INSERT INTO jobs (familyName, nannyName, description, address, city, state, zip, duration, nannyPhone, parentPhone, isAccepted, isComplete) VALUES ('$familyName', '$nannyName', '$description', :address, :city, :state, :zip, :duration, :nannyPhone, :parentPhone, '$isAccepted', '$isComplete')";
                $sth = $this->dbConn->prepare($sql);
                $sth->bindParam("address", $input['address']);
                $sth->bindParam("city", $input['city']);
@@ -276,8 +278,6 @@
                $sth->bindParam("duration", $input['duration']);
                $sth->bindParam("nannyPhone", $input['nannyPhone']);
                $sth->bindParam("parentPhone", $input['parentPhone']);
-               $sth->bindParam("isAccepted", $input['isAccepted']);
-               $sth->bindParam("isComplete", $input['isComplete']);
                $sth->execute();
                $sql2 = "select job_id from jobs where familyName = '$familyName' and description = '$description'";
                $sth2 = $this->dbConn->prepare($sql2);
