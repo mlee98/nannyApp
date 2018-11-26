@@ -12,7 +12,6 @@ import { JobManager } from '../services/job-manager.service';
 })
 export class NannyJobsComponent implements OnInit {
 
-  phoneNum: Number = 5123242233;
   dispJob: Job;
   placeholderJob: {
     id: 0, familyName: 'You currently have no jobs', nannyName: ''
@@ -30,7 +29,7 @@ export class NannyJobsComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
       this.jobManager.getJobsByUsername(params.username, 'nanny').subscribe((result) => {
-        this.requests = result.filter(job => job.isAccepted === false);
+        this.requests = result.filter(job => job.isAccepted == false);
         this.jobs = result.filter(job => job.isAccepted && !job.isComplete);
         this.completed = result.filter(job => job.isAccepted && job.isComplete);
         this.dispJob = this.jobs[0];
@@ -40,11 +39,17 @@ export class NannyJobsComponent implements OnInit {
   }
 
   clickJob(clickedJob) {
-    this.dispJob = clickedJob;
+    this.jobManager.getTasksByJobId(clickedJob.job_id).subscribe((tasks) => {
+      this.dispJob = clickedJob;
+      this.dispJob.tasks = tasks;
+    });
   }
 
   clickRequest(clickedReq) {
-    this.dispJob = clickedReq;
+    this.jobManager.getTasksByJobId(clickedReq.job_id).subscribe((tasks) => {
+      this.dispJob = clickedReq;
+      this.dispJob.tasks = tasks;
+    });
   }
 
   acceptRequest() {
