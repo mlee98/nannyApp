@@ -324,7 +324,7 @@
     //this add the job_id, nanny username and isAccepted into the job_requests table
     $app->put('/jobs/submitRequest', function ($request, $response) {
                $input = $request->getParsedBody();
-               $sql = "update jobs set nannyName = :nannyName where job_id = job_id ";
+               $sql = "update jobs set nannyName = :nannyName where job_id = :job_id ";
                $sth = $this->dbConn->prepare($sql);
                $sth->bindParam("job_id", $input['job_id']);
                $sth->bindParam("nannyName", $input['nannyName']);
