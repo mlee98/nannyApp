@@ -26,6 +26,7 @@
                   $sth2 = $this->dbConn->prepare("SELECT * FROM child_info WHERE username = '$username'" );
                   $sth2->execute();
                   $output2 = $sth2->fetchAll();
+             // print_r($output2);
               
                   $sth3 = $this->dbConn->prepare("SELECT * FROM payment_info WHERE username = '$username'" );
                   $sth3->execute();
@@ -106,18 +107,21 @@
                     }
                }
                else{
-               $zero = 0;
-                   $sql2 = "INSERT INTO nanny_info (yearsExp, minAge, maxAge, minWage, cpr, pet_friendly, can_drive, can_cook, bio, jobs_completed, total_points, rating, username) VALUES (:yearsExp, :minAge, :maxAge, :minWage, :cpr, :pet_friendly, :can_drive, :can_cook, :bio, $zero,  $zero, $zero '$username')";
+                   $zero = 0;
+                    $yearsExp = $input['yearsExp'];
+                    $cpr = $input['cpr'];
+                    $can_cook = $input['can_cook'];
+                    $can_drive = $input['can_drive'];
+                    $pet_friendly = $input['pet_friendly'];
+                    $minAge = $input['minAge'];
+                    $maxAge = $input['minWage'];
+                    $minWage = $input['minWage'];
+                    $bio = $input['bio'];
+                    $sql2 = "INSERT INTO nanny_info (yearsExp, minAge, maxAge, minWage, username, cpr, can_cook, can_drive, pet_friendly, bio, rating, jobs_completed, total_points) values ($yearsExp, $minAge, $maxAge, $minWage, '$username', '$cpr', '$can_cook', '$can_drive', '$pet_friendly', '$bio', 0, 0, 0)";
                    $sth2 = $this->dbConn->prepare($sql2);
-                   $sth2->bindParam("yearsExp", $input['yearsExp']);
-                   $sth2->bindParam("cpr", $input['cpr']);
-                   $sth2->bindParam("can_cook", $input['can_cook']);
-                   $sth2->bindParam("can_drive", $input['can_drive']);
-                   $sth2->bindParam("pet_friendly", $input['pet_friendly']);
-                   $sth2->bindParam("minAge", $input['minAge']);
-                   $sth2->bindParam("maxAge", $input['maxAge']);
-                   $sth2->bindParam("minWage", $input['minWage']);
-                   $sth2->bindParam("bio", $input['bio']);
+               
+               
+               
                    $sth2->execute();
                
                     $references = $input['references'];
@@ -173,6 +177,19 @@
               $nanny_info = $sth->fetchAll();
               return $this->response->withJson($nanny_info);
               });
+    
+    
+    
+    $app->get('/nanny_info/{username}', function ($request, $response, $args)
+              {
+               $username = $request->getAttribute('username');
+              $sth= $this->dbConn->prepare("SELECT * FROM nanny_info where username = '$username'");
+              $sth->execute();
+              $nanny_info = $sth->fetchAll();
+              return $this->response->withJson($nanny_info);
+              });
+    
+    
     
     //working
     $app->get('/search/{gender}/{minNannyAge}/{maxNannyAge}/{minChildAge}/{maxChildAge}/{experience}/{zip}', function ($request, $response, $args)
