@@ -459,17 +459,18 @@
               });
     
 //----------------------------------------------------------------------------
-    /*$app->post('/jobs/submitRequest', function ($request, $response) {
+    $app->post('/jobs/submitRequest', function ($request, $response, $args) {
+		
                $input = $request->getParsedBody();
-               $accept = "0";
-               $sql = "INSERT INTO job_requests (job_id, nannyUsername, isAccepted) values (:job_id, :nannyUsername, $accept);
+              /* $accept = "0";
+               $sql = "INSERT INTO jobs (job_id, nannyName, isAccepted) values (:job_id, :nannyName, '$accept')"; */
+			   $sql = "UPDATE jobs SET nannyName=:nannyName where job_id=:job_id";
                $sth = $this->db->prepare($sql);
                $sth->bindParam("job_id", $input['job_id']);
-               $sth->bindParam("nannyUsername", $input['nannyUsername']);
+               $sth->bindParam("nannyName", $input['nannyName']);
                $sth->execute();
-               
-               
-     });*/
+                   
+     });
   
 	/*Display tasks for a job id*/
 	 $app->get('/tasks/{job_id}', function ($request, $response, $args)
@@ -533,7 +534,7 @@
               $maxChildAge = $request->getAttribute('maxChildAge');
               $experience = $request->getAttribute('experience');
               $zip = $request->getAttribute('zip');
-              $sth= $this->db->prepare("SELECT a.username FROM nanny_info n join accounts a on n.username = a.username where a.age between $minNannyAge and $maxNannyAge AND n.minAge <= $minChildAge and n.maxAge >= $maxChildAge and a.gender='$gender' and n.yearsExp >= $experience and a.zip = $zip ");
+              $sth= $this->db->prepare("SELECT a.username, a.age, a.gender, a.zip, n.minAge, n.maxAge, n.yearsExp FROM nanny_info n join accounts a on n.username = a.username where a.age between $minNannyAge and $maxNannyAge AND n.minAge <= $minChildAge and n.maxAge >= $maxChildAge and a.gender='$gender' and n.yearsExp >= $experience and a.zip = $zip ");
               $sth->execute();
               $nanny_info = $sth->fetchAll();
               return $this->response->withJson($nanny_info);
