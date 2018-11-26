@@ -69,9 +69,9 @@ completeJob(jobId: number): Observable<number> {
     .pipe(catchError(this.handleException));
 }
 
-submitRequest(jobId: number, nanny: Account): Observable<number> {
+submitRequest(jobId: number, nanny: string): Observable<number> {
   return this.httpClient
-    .put<number>(`${this.endPoint}/jobs/submitRequest`, {jobId: jobId, nanny: nanny}, this.httpOptions)
+    .put<number>(`${this.endPoint}/jobs/submitRequest`, {job_id: jobId, nannyUsername: nanny}, this.httpOptions)
     .pipe(catchError(this.handleException));
 }
 

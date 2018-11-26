@@ -66,8 +66,8 @@ export class NannyJobsComponent implements OnInit {
       if (this.requests[i].job_id === this.dispJob.job_id) {
         this.requests.splice(i, 1);
         break;
+        }
       }
-    }
       this.dispJob.isAccepted = true;
       this.jobs.push(this.dispJob);
     });

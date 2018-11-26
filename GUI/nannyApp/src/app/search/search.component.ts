@@ -68,7 +68,7 @@ export class SearchComponent implements OnInit {
   }
 
   sendRequest() {
-    this.jobManager.submitRequest(this.selectedJob, this.nannys[this.selectedNanny]).subscribe();
+    this.jobManager.submitRequest(this.selectedJob, this.nannys[this.selectedNanny].username).subscribe();
   }
 
 }
