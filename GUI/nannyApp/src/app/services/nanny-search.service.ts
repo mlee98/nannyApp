@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-import { SearchField, Account } from '../models';
+import { SearchField, Account, NannyInfo } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +20,12 @@ export class NannySearch {
     protected httpClient: HttpClient
   ) {}
 
-  search(searchField: SearchField): Observable<Account[]> {
-    const tempRoute = `${this.endPoint}/search/${searchField.gender}` +
-    `/${searchField.minNannyAge}/${searchField.maxNannyAge}/${searchField.minChildAge}` +
-    `/${searchField.maxChildAge}/${searchField.experience}/${searchField.zip}`;
+  search(searchField: SearchField): Observable<NannyInfo[]> {
+    let tempRoute = `${this.endPoint}/search/${searchField.gender}/${searchField.minNannyAge}/${searchField.maxNannyAge}`;
+    tempRoute += `/${searchField.minChildAge}/${searchField.maxChildAge}/${searchField.experience}/${searchField.zip}`;
+    console.log(tempRoute);
     return this.httpClient
-      .get<Account[]>(tempRoute, this.httpOptions)
+      .get<NannyInfo[]>(tempRoute, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 

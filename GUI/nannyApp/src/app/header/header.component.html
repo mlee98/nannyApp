@@ -3,8 +3,6 @@
     <li *ngIf="loggedIn" class="nav-item">
         <a
         class="nav-link"
-        [routerLink]="['/nanny-jobs', username]"
-        routerLinkActive="router-link-active"
       >
         <app-stroller-small-icon></app-stroller-small-icon>
       </a>
@@ -38,7 +36,7 @@
         My Jobs
       </a>
     </li>
-    <li *ngIf="loggedIn" class="nav-item">
+    <!--<li *ngIf="loggedIn" class="nav-item">
       <a
         class="nav-link"
         [routerLink]="['/settings', username]"
@@ -46,7 +44,7 @@
       >
         My Account
       </a>
-    </li>
+    </li>-->
     <li class="nav-item">
         <a
           class="nav-link"

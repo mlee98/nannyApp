@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Account } from '../models';
-import { TEMP_ACCOUNT } from '../temp-account';
 import { AccountInfo } from '../services/account-info.service';
 import { ActivatedRoute } from '@angular/router';
 import { LoginInfo } from '../services/login-info.service';
@@ -24,14 +23,18 @@ export class SettingsPageComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       if (params.username) {
         this.accountInfo.getAccountByUsername(params.username, this.loginInfo.getType()).subscribe((result) => {
-          console.log(result);
-          this.account = result[0];
+          this.account = result;
           if (this.account.type === 'parent') {
             this.accountInfo.getChildrenByUsername(params.username).subscribe((childResult) => {
               this.account.children = childResult;
             });
           } else {
             this.accountInfo.getNannyInfo(params.username).subscribe((infoResult) => {
+              for (const prop in infoResult) {
+                if (true) {
+                  this.account[prop] = infoResult[prop];
+                }
+              }
             });
           }
         });

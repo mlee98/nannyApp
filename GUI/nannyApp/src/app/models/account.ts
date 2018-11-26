@@ -30,10 +30,10 @@ export class Account {
   maxAge?: number;
   minWage?: number;
   maxWage?: number;
-  cpr?: boolean;
-  petFriendly?: boolean;
-  canDrive?: boolean;
-  canCook?: boolean;
+  cpr?: number;
+  pet_friendly?: number;
+  can_drive?: number;
+  can_cook?: number;
   bio?: string;
   references?: NannyReference[];
   nannyJobs?: Job[];

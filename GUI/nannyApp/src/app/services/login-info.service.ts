@@ -40,6 +40,10 @@ export class LoginInfo {
     return this.typeSource.getValue();
   }
 
+  getusername() {
+    return this.idSource.getValue();
+  }
+
 
   login(login: Login): Observable<string> {
     return this.httpClient

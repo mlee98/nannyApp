@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Account } from './models/account';
 import { Router } from '@angular/router';
-import { TEMP_ACCOUNT } from './temp-account';
 
 @Component({
   selector: 'app-root',

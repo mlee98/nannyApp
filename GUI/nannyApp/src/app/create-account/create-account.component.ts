@@ -23,9 +23,9 @@ export class CreateAccountComponent implements OnInit {
     minWage: 0,
     maxWage: 0,
     cpr: false,
-    petFriendly: false,
-    canDrive: false,
-    canCook: false,
+    pet_friendly: false,
+    can_drive: false,
+    can_cook: false,
     bio: '',
     rating: 0};
 
@@ -53,14 +53,27 @@ export class CreateAccountComponent implements OnInit {
       }
     }
     if (this.account.type === 'nanny') {
-      for (const attribute in this.nannyInfo) {
-        if (true) {
-          this.account[attribute] = this.nannyInfo[attribute];
-          this.account.canCook = this.nannyInfo.canCook;
-          this.account.canDrive = this.nannyInfo.canDrive;
-          this.account.petFriendly = this.nannyInfo.petFriendly;
-          this.account.cpr = this.nannyInfo.cpr;
-        }
+      this.account.can_cook = this.nannyInfo.canCook ? 1 : 0;
+      this.account.can_drive = this.nannyInfo.canDrive ? 1 : 0;
+      this.account.pet_friendly = this.nannyInfo.petFriendly ? 1 : 0;
+      this.account.cpr = this.nannyInfo.cpr ? 1 : 0;
+      this.account.yearsExp = this.nannyInfo.yearsExp;
+      this.account.references = this.nannyInfo.references;
+      this.account.minAge = this.nannyInfo.minAge;
+      this.account.maxAge = this.nannyInfo.maxAge;
+      this.account.bio = this.nannyInfo.bio;
+      this.account.minWage = this.nannyInfo.minWage;
+      if (!this.nannyInfo.canCook) {
+        this.account.can_cook = 0;
+      }
+      if (!this.nannyInfo.canDrive) {
+        this.account.can_drive = 0;
+      }
+      if (!this.nannyInfo.petFriendly) {
+        this.account.pet_friendly = 0;
+      }
+      if (!this.nannyInfo.cpr) {
+        this.account.cpr = 0;
       }
     } else {
       for (const attribute in this.parentInfo) {
@@ -69,7 +82,7 @@ export class CreateAccountComponent implements OnInit {
         }
       }
     }
-    console.log(this.account);
+    console.log(JSON.stringify(this.account));
     this.accountInfo.addAccount(this.account).subscribe(() => {
       this.router.navigateByUrl('/');
     });

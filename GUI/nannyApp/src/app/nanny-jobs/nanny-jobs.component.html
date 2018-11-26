@@ -97,14 +97,14 @@
         <p class="mt-3">{{dispJob.description}}</p>
       </div>
       <app-job-schedule
-        *ngIf='dispJob.isAccepted && jobs.length'
+        *ngIf='dispJob.isAccepted == true && dispJob.tasks'
         [tasks]="dispJob.tasks"
         [editable]="false"
         [completeable]="true"
         (updateTasks)="updateTasks($event)"
       >
       </app-job-schedule>
-      <div class="row" *ngIf="!dispJob.isAccepted">
+      <div class="row" *ngIf="dispJob.isAccepted == false">
         <div class="col-md-2">
           <button
             type="button"

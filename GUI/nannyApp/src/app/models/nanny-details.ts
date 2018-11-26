@@ -5,9 +5,9 @@ export class NannyDetails {
   minWage?: number;
   maxWage?: number;
   cpr?: boolean;
-  petFriendly?: boolean;
-  canDrive?: boolean;
-  canCook?: boolean;
+  pet_friendly?: boolean;
+  can_drive?: boolean;
+  can_cook?: boolean;
   bio?: string;
   rating?: number;
 }

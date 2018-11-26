@@ -10,5 +10,6 @@ export * from './payment';
 export * from './search-field';
 export * from './task';
 export * from './create-account-models';
+export * from './bestNanny';
 // end:ng42.barrel
 

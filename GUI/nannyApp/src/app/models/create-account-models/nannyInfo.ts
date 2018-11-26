@@ -11,4 +11,5 @@ export class NannyInfo {
   canCook?: boolean;
   bio?: string;
   references?: NannyReference[];
+  username?: string;
 }

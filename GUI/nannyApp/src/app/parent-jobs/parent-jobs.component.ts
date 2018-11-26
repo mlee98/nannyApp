@@ -1,5 +1,4 @@
 import { Job, Child } from '../models';
-import { TEMP_ACCOUNT } from '../temp-account';
 import { AccountInfo } from '../services/account-info.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
@@ -78,8 +77,9 @@ export class ParentJobsComponent implements OnInit {
       job.state = tempAcc[0].state;
       job.zip = tempAcc[0].zip;
       job.parentPhone = tempAcc[0].phone;
-      this.pending.push(job);
-      this.jobManager.addJob(job).subscribe(() => {
+      this.jobManager.addJob(job).subscribe((id) => {
+        job.job_id = id;
+        this.pending.push(job);
       });
     });
   }
@@ -134,6 +134,14 @@ export class ParentJobsComponent implements OnInit {
     this.current = this.jobs.filter(job => job.isComplete === false);
     // this.displayPayment = false; // shows weird transition on close modal
     // just don't show multiple clicks of "Complete" and it's fine
+  }
+
+  complete() {
+    this.jobManager.completeJob(this.dispJob.job_id).subscribe(() => {
+      this.dispJob.isComplete = true;
+      this.completed.push(this.dispJob);
+      this.current = this.jobs.filter(job => job.isComplete == false);
+    });
   }
 
 }
