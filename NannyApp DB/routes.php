@@ -265,10 +265,9 @@
     $app->post('/job/new', function ($request, $response) {
                $input = $request->getParsedBody();
                $familyName = $input["familyName"];
-               //$nannyName = $input["nannyName"];
+               $nannyName = $input["nannyName"];
                $description = $input["description"];
                $sql = "INSERT INTO jobs (familyName, nannyName, description, address, city, state, zip, duration, nannyPhone, parentPhone, isAccepted, isComplete) VALUES ('$familyName', '$nannyName', '$description', :address, :city, :state, :zip, :duration, :nannyPhone, :parentPhone, :isAccepted, :isComplete)";
-               $sql = "INSERT INTO jobs (familyName, description, address, city, state, zip, duration, nannyPhone, parentPhone, isAccepted, isComplete) VALUES ('$familyName', '$description', :address, :city, :state, :zip, :duration, :nannyPhone, :parentPhone, :isAccepted, :isComplete)";
                $sth = $this->dbConn->prepare($sql);
                $sth->bindParam("address", $input['address']);
                $sth->bindParam("city", $input['city']);
@@ -278,7 +277,7 @@
                $sth->bindParam("nannyPhone", $input['nannyPhone']);
                $sth->bindParam("parentPhone", $input['parentPhone']);
                $sth->bindParam("isAccepted", $input['isAccepted']);
-                $sth->bindParam("isComplete", $input['isComplete']);
+               $sth->bindParam("isComplete", $input['isComplete']);
                $sth->execute();
                $sql2 = "select job_id from jobs where familyName = '$familyName' and description = '$description'";
                $sth2 = $this->dbConn->prepare($sql2);
@@ -419,7 +418,7 @@
     $app->get('/tasks/{job_id}', function ($request, $response, $args)
               {
               $job_id = $request->getAttribute('job_id');
-              $sth= $this->dbConn->prepare("SELECT * FROM tasks where id = '$id'");
+              $sth= $this->dbConn->prepare("SELECT * FROM tasks where id = $job_id");
               $sth->execute();
               $tasks = $sth->fetchAll();
               return $this->response->withJson($tasks);
@@ -427,8 +426,6 @@
     
     //----------------------------------------------------------------------------
 
-    
-    //“Tasks”:[{“name”:”task1”, “day”: “day1”}, {“name”:”task2”, “day”:”day2}]
     
 
     
