@@ -50,7 +50,6 @@
             [id]="task.name"
             [checked]="task.completed"
             [disabled]="!completeable"
-            (change)="update(task)"
             [(ngModel)]="task.completed">
           </div>
       </div>

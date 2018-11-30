@@ -39,9 +39,9 @@ addJob(newJob: Job): Observable<number> {
     .pipe(catchError(this.handleException));
 }
 
-acceptJob(jobId: number, nannyPhone: string): Observable<number> {
+acceptJob(job_id: number, nannyPhone: string): Observable<number> {
   return this.httpClient
-    .put<number>(`${this.endPoint}/jobs/accept/${jobId}`, { nannyPhone: nannyPhone } , this.httpOptions)
+    .put<number>(`${this.endPoint}/jobs/accept/${job_id}`, {nannyPhone: '8178885958'} , this.httpOptions)
     .pipe(catchError(this.handleException));
 }
 
