@@ -1,0 +1,109 @@
+/*Copy and paste these SQL instructions to create the database that we used for this project*/
+
+create database nannyApplication;
+
+use nannyApplication;
+
+create table accounts
+(
+	firstName varchar(50),
+    lastName varchar(50),
+	email varchar(100),
+    phone varchar(15),
+    address varchar(50),
+    city varchar(50),
+    state varchar(50),
+    zip int,
+    gender varchar(50),
+	age int,
+    username varchar(50),
+    password varchar(50),
+    type varchar(60)
+);
+    
+create table payment_info
+(
+	name varchar(60),
+    address varchar(100),
+    city varchar(100),
+    state varchar(100),
+    zip int,
+    cardNumber varchar(50),
+    expiration varchar(50),
+    automatic bool,
+    username varchar(100)
+);
+
+create table child_info
+(
+    name varchar(50),
+    gender varchar(50),
+    age int,
+    likes varchar(250),
+    allergies varchar(250),
+    medications varchar(250),
+    specialReqs varchar(250),
+    username varchar(50)
+);
+
+create table nanny_info
+(
+	yearsExp int,
+    minAge int,
+    maxAge int,
+    minWage int,
+    cpr bool,
+    pet_friendly bool,
+    can_drive bool,
+    can_cook bool,
+    bio varchar(250),
+    rating int,
+    username varchar(50),
+    jobs_completed int,
+    total_points int
+);
+    
+create table nanny_references
+(
+	
+	name varchar(50),
+    email varchar(50),
+	phone_number varchar(15),
+    username varchar(50)
+);
+  
+create table deposit_info
+(
+	name varchar(60),
+    type varchar(60),
+    accountNumber varchar(50),
+    routingNumber varchar(50),
+    username varchar(100)
+);
+
+create table jobs(
+	job_id int NOT NULL AUTO_INCREMENT,
+	familyName varchar (50),
+	nannyName varchar (50),
+	description varchar(250),
+	address varchar(100),
+	city varchar (50),
+	state varchar (50),
+	zip int,
+	duration varchar(100),
+    nannyPhone varchar(15),
+    parentPhone varchar(15),
+	isAccepted bool,
+	isComplete bool,
+    primary key (job_id)
+);
+
+create table tasks (
+	id int, /*same as parent job ID*/
+	name varchar(50),
+	time varchar(50),
+	day varchar(50),
+	description varchar(250),
+	location varchar(50),
+	completed bool
+);
